@@ -1,4 +1,6 @@
 # Byte-compiled / optimized / DLL files
+.env.ollama
+.idea/misc.xml
 .code2llm_cache/__init___1780827619827182084_772.pkl
 .code2llm_cache/pyproject_1780827620439188998_2641.pkl
 .code2llm_cache/__init___1780820973447988900_772.pkl

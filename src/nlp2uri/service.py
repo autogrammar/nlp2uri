@@ -226,3 +226,33 @@ class NLP2URIService:
 
     def read_getv_var(self, uri: str) -> dict[str, Any]:
         return get_getv_var_value(uri)
+
+    def resolve_env(
+        self,
+        prompt: str,
+        *,
+        dest: str | None = None,
+    ) -> dict[str, Any]:
+        from nlp2uri.systemmap.env_uri import resolve_prompt_to_env_uri
+
+        if resolve_prompt_to_env_uri is None:
+            return {"source": "env", "uri": None, "error": "uri2env not installed"}
+        matches = resolve_prompt_to_env_uri(prompt, dest=dest)
+        if not matches:
+            return {"source": "env", "uri": None, "matches": []}
+        top = matches[0]
+        return {
+            "source": "env",
+            "uri": top.uri,
+            "confidence": top.confidence,
+            "match_reason": top.match_reason,
+            "matches": [item.to_dict() for item in matches],
+        }
+
+    def materialize_env(self, uri: str, *, dest: str | None = None) -> dict[str, Any]:
+        from nlp2uri.systemmap.env_uri import materialize_uri
+
+        if materialize_uri is None:
+            return {"ok": False, "error": "uri2env not installed"}
+        result = materialize_uri(uri, dest=dest)
+        return result.to_dict()
