@@ -15,7 +15,9 @@ from nlp2uri.host.endpoint import build_endpoint_actions, is_endpoint_uri
 from nlp2uri.systemmap.compile import compile_system_map_uri, is_system_map_uri
 from nlp2uri.systemmap.env_uri import compile_env_uri, is_env_uri
 from nlp2uri.systemmap.getv_uri import compile_getv_uri, is_getv_uri
+from nlp2uri.systemmap.gillm_uri import compile_gillm_uri, is_gillm_uri
 from nlp2uri.systemmap.hillm_uri import compile_hillm_uri, is_hillm_uri
+from nlp2uri.systemmap.tillm_uri import compile_tillm_uri, is_tillm_uri
 
 
 _OPEN_URI_SCHEMES = frozenset(
@@ -67,9 +69,13 @@ def compile_uri_to_actions(
         return compile_env_uri(uri, host)
 
     if is_hillm_uri(uri):
-        if compile_hillm_uri is None:
-            raise ValueError("hillm:// requires uri2hillm: pip install uri2hillm")
         return compile_hillm_uri(uri, host)
+
+    if is_gillm_uri(uri):
+        return compile_gillm_uri(uri, host)
+
+    if is_tillm_uri(uri):
+        return compile_tillm_uri(uri, host)
 
     if is_endpoint_uri(uri):
         return build_endpoint_actions(uri, host)

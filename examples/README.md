@@ -12,6 +12,9 @@ Each sample lives under **`examples/<category>/<name>/`**.
 | `examples/integrators/rest-api` | HTTP REST server (`nlp2uri-serve`) |
 | `examples/integrators/mcp-stdio` | MCP stdio server (`nlp2uri-mcp`) |
 | `examples/integrators/shell-export` | Bash `eval "$(nlp2uri shell export …)"` |
+| `examples/hillm/compile-uri` | `hillm://` URI → `OSAction` + CQRS driver |
+| `examples/hillm/dry-run` | Dry-run `HEALTH` / `READ` / `DEVICES` via uri2hillm |
+| `examples/delegate/llm-control` | NL → `hillm://` / `gillm://` / `tillm://` routing |
 
 ## Run all
 

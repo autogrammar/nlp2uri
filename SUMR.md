@@ -15,7 +15,7 @@ SUMD - Structured Unified Markdown Descriptor for AI-aware project refactorizati
 ## Metadata
 
 - **name**: `nlp2uri`
-- **version**: `0.4.10`
+- **version**: `0.4.14`
 - **python_requires**: `>=3.10`
 - **license**: Apache-2.0
 - **ai_model**: `openrouter/qwen/qwen3-coder-next`
@@ -35,19 +35,48 @@ SUMD (description) → DOQL/source (code) → taskfile (automation) → testql (
 
 app {
   name: nlp2uri;
-  version: 0.4.10;
+  version: 0.4.14;
 }
 
 dependencies {
   runtime: pyyaml>=6.0;
   dev: "pytest>=8.0, pytest-cov>=5.0, goal>=2.1.0, costs>=0.1.20, pfix>=0.1.60";
+  linux: "dbus-python>=1.3.2; sys_platform == 'linux'";
+  windows: "pywin32>=306; sys_platform == 'win32'";
+  full: psutil>=6.0;
+  envmap: "env2llm>=0.1.4, getv>=0.2.0, nlp2env>=0.1.2";
+  codegen: "pyyaml>=6.0, grpcio-tools>=1.60, protobuf>=4.25";
+}
+
+interface[type="mcp"] {
+  framework: stdio;
+}
+interface[type="mcp"] page[name="nlp2uri-mcp"] {
+  entry: nlp2uri.integrators.mcp_server:main;
 }
 
 interface[type="cli"] {
   framework: argparse;
 }
 interface[type="cli"] page[name="nlp2uri"] {
+  entry: nlp2uri.cli:main;
+}
 
+integration[name="email"] {
+  type: smtp;
+}
+
+integration[name="nlp"] {
+  type: api;
+}
+
+tests {
+  import: testql-scenarios/**/*.testql.toon.yaml;
+}
+
+env_vars {
+  keys: OPENROUTER_API_KEY, LLM_MODEL, PFIX_AUTO_APPLY, PFIX_AUTO_INSTALL_DEPS, PFIX_AUTO_RESTART, PFIX_MAX_RETRIES, PFIX_DRY_RUN, PFIX_ENABLED, PFIX_GIT_COMMIT, PFIX_GIT_PREFIX, PFIX_CREATE_BACKUPS, OLLAMA_API_URL, OLLAMA_LLM_MODEL, XDG_CONFIG_HOME, NLP2URI_CAPTURE_DIR, NLP2URI_KORU_CLI_TIMEOUT, KORU_AUTOPILOT_INSTANCE, KORU_AUTOPILOT_SOCKET, XDG_RUNTIME_DIR, NLP2URI_EXAMPLE_DIR, NLP2DSL_EXAMPLE_DIR, SMTP_HOST, REDIS_URL, PROCESS_REGISTRY_URL, NLP2DSL_AUTO_EXECUTE, GETV_HOME, NLP2DSL_BACKEND_URL, NLP2DSL_WORKER_URL, TODOMAT_COMPOSE_DIR;
+  profile_smtp: SMTP_HOST;
 }
 
 deploy {
@@ -58,7 +87,20 @@ deploy {
 environment[name="local"] {
   runtime: docker-compose;
   env_file: .env;
+  template_file: .env.example;
   python_version: >=3.10;
+  vars: LLM_MODEL, OLLAMA_API_URL, OLLAMA_LLM_MODEL, OPENROUTER_API_KEY, PFIX_AUTO_APPLY, PFIX_AUTO_INSTALL_DEPS, PFIX_AUTO_RESTART, PFIX_CREATE_BACKUPS, PFIX_DRY_RUN, PFIX_ENABLED, PFIX_GIT_COMMIT, PFIX_GIT_PREFIX, PFIX_MAX_RETRIES;
+  profile_smtp: SMTP_HOST;
+  runtime_llm: OPENROUTER_API_KEY;
+  runtime_ollama: OLLAMA_API_URL, OLLAMA_LLM_MODEL;
+  runtime_pfix: PFIX_AUTO_APPLY, PFIX_AUTO_INSTALL_DEPS, PFIX_AUTO_RESTART, PFIX_CREATE_BACKUPS, PFIX_DRY_RUN, PFIX_ENABLED, PFIX_GIT_COMMIT, PFIX_GIT_PREFIX, PFIX_MAX_RETRIES;
+}
+
+environment[name="ollama"] {
+  runtime: docker-compose;
+  env_file: .env.ollama;
+  vars: LLM_MODEL, OLLAMA_API_URL;
+  runtime_ollama: OLLAMA_API_URL;
 }
 ```
 
@@ -82,76 +124,74 @@ pfix>=0.1.60
 
 ## Call Graph
 
-*320 nodes · 444 edges · 59 modules · CC̄=3.5*
+*343 nodes · 486 edges · 60 modules · CC̄=3.6*
 
 ### Hubs (by degree)
 
 | Function | CC | in | out | total |
 |----------|----|----|-----|-------|
-| `compile_uri_to_control_plan` *(in src.nlp2uri.control_compile)* | 25 ⚠ | 3 | 51 | **54** |
+| `compile_uri_to_control_plan` *(in src.nlp2uri.control_compile)* | 25 ⚠ | 5 | 53 | **58** |
+| `build_parser` *(in src.nlp2uri.cli_parser)* | 1 | 1 | 52 | **53** |
 | `build_koru_ide_uri_index` *(in src.nlp2uri.systemmap.koru_ide)* | 22 ⚠ | 2 | 50 | **52** |
-| `build_parser` *(in src.nlp2uri.cli_parser)* | 1 | 1 | 51 | **52** |
+| `compile_uri_to_actions` *(in src.nlp2uri.compile)* | 22 ⚠ | 5 | 26 | **31** |
+| `print` *(in scripts.test-cqrs-smoke)* | 0 | 31 | 0 | **31** |
 | `build_resource_actions` *(in src.nlp2uri.host.resource)* | 14 ⚠ | 2 | 29 | **31** |
+| `action_control_execute` *(in src.nlp2uri.control_cli)* | 18 ⚠ | 1 | 29 | **30** |
 | `write_environment_map` *(in src.nlp2uri.systemmap.export)* | 9 | 1 | 29 | **30** |
-| `_add_entry` *(in src.nlp2uri.systemmap.index)* | 3 | 24 | 4 | **28** |
-| `build_getv_uri_index` *(in src.nlp2uri.systemmap.getv_uri)* | 6 | 3 | 24 | **27** |
-| `compile_uri_to_actions` *(in src.nlp2uri.compile)* | 18 ⚠ | 5 | 20 | **25** |
 
 ```toon markpact:analysis path=project/calls.toon.yaml
 # code2llm call graph | /home/tom/github/semcod/nlp2uri
-# generated in 0.16s
-# nodes: 320 | edges: 444 | modules: 59
-# CC̄=3.5
+# generated in 0.24s
+# nodes: 343 | edges: 486 | modules: 60
+# CC̄=3.6
 
 HUBS[20]:
   src.nlp2uri.control_compile.compile_uri_to_control_plan
-    CC=25  in:3  out:51  total:54
+    CC=25  in:5  out:53  total:58
+  src.nlp2uri.cli_parser.build_parser
+    CC=1  in:1  out:52  total:53
   src.nlp2uri.systemmap.koru_ide.build_koru_ide_uri_index
     CC=22  in:2  out:50  total:52
-  src.nlp2uri.cli_parser.build_parser
-    CC=1  in:1  out:51  total:52
+  src.nlp2uri.compile.compile_uri_to_actions
+    CC=22  in:5  out:26  total:31
+  scripts.test-cqrs-smoke.print
+    CC=0  in:31  out:0  total:31
   src.nlp2uri.host.resource.build_resource_actions
     CC=14  in:2  out:29  total:31
+  src.nlp2uri.control_cli.action_control_execute
+    CC=18  in:1  out:29  total:30
   src.nlp2uri.systemmap.export.write_environment_map
     CC=9  in:1  out:29  total:30
   src.nlp2uri.systemmap.index._add_entry
     CC=3  in:24  out:4  total:28
   src.nlp2uri.systemmap.getv_uri.build_getv_uri_index
     CC=6  in:3  out:24  total:27
-  src.nlp2uri.compile.compile_uri_to_actions
-    CC=18  in:5  out:20  total:25
+  src.nlp2uri.schemes.util.abstract_url
+    CC=9  in:21  out:5  total:26
   src.nlp2uri.systemmap.resolve._match_command_entry
     CC=16  in:1  out:24  total:25
-  src.nlp2uri.schemes.util.abstract_url
-    CC=9  in:20  out:5  total:25
   src.nlp2uri.schemes.build.build_uri
     CC=19  in:2  out:22  total:24
   src.nlp2uri.systemmap.encode.encode_segment
     CC=1  in:22  out:1  total:23
-  schemas.codegen.export_driver_stubs.main
-    CC=11  in:0  out:23  total:23
   src.nlp2uri.host.artifact.resolve_artifact_path
     CC=12  in:1  out:22  total:23
+  schemas.codegen.export_driver_stubs.main
+    CC=11  in:0  out:23  total:23
   src.nlp2uri.systemmap.index.build_uri_index
     CC=6  in:5  out:17  total:22
-  src.nlp2uri.config._load_from_path
-    CC=6  in:3  out:17  total:20
+  src.nlp2uri.control_cli.add_control_parser
+    CC=1  in:1  out:20  total:21
+  src.nlp2uri.control_cli._finalize_control_plan_payload
+    CC=12  in:2  out:19  total:21
   src.nlp2uri.systemmap.uri._get
     CC=4  in:15  out:5  total:20
-  examples.resolve.new-intents.e2e.print
-    CC=0  in:20  out:0  total:20
-  src.nlp2uri.systemmap.getv_uri.compile_getv_uri
-    CC=14  in:2  out:18  total:20
-  src.nlp2uri.systemmap.index._ir_field
-    CC=2  in:16  out:3  total:19
 
 MODULES:
   examples.execute.dry-run.main  [1 funcs]
     main  CC=3  out:7
   examples.mcp.tool-handoff.main  [1 funcs]
     main  CC=2  out:8
-  examples.resolve.new-intents.e2e  [1 funcs]
-    print  CC=0  out:0
   examples.resolve.nl-to-uri.main  [1 funcs]
     main  CC=3  out:5
   schemas.codegen.export_driver_stubs  [1 funcs]
@@ -174,6 +214,8 @@ MODULES:
     main  CC=4  out:14
     openapi_yaml  CC=1  out:2
     queries_proto  CC=1  out:3
+  scripts.test-cqrs-smoke  [1 funcs]
+    print  CC=0  out:0
   src.nlp2uri.adapters.base  [1 funcs]
     __init__  CC=2  out:2
   src.nlp2uri.adapters.mcp  [4 funcs]
@@ -182,7 +224,7 @@ MODULES:
     _tool_list_system_uris  CC=2  out:7
     _tool_resolve_system_map  CC=3  out:10
   src.nlp2uri.cli  [12 funcs]
-    _dispatch_command  CC=6  out:7
+    _dispatch_command  CC=7  out:9
     _emit  CC=3  out:4
     _payload_text  CC=3  out:6
     _platform  CC=2  out:1
@@ -195,7 +237,7 @@ MODULES:
   src.nlp2uri.cli_parser  [3 funcs]
     add_common_args  CC=3  out:2
     add_text_args  CC=1  out:3
-    build_parser  CC=1  out:51
+    build_parser  CC=1  out:52
   src.nlp2uri.compile  [54 funcs]
     _capture_outfile  CC=1  out:3
     _compile_app  CC=4  out:5
@@ -218,24 +260,35 @@ MODULES:
     config_search_paths  CC=5  out:15
     default_config  CC=1  out:3
     ensure_config  CC=4  out:9
+  src.nlp2uri.control_cli  [23 funcs]
+    _add_lane_args  CC=1  out:6
+    _apply_runtime_overrides  CC=5  out:7
+    _client_factory  CC=1  out:2
+    _control_uri  CC=5  out:2
+    _default_strategy_hint  CC=3  out:2
+    _fetch_autopilot_status  CC=6  out:9
+    _finalize_control_plan_payload  CC=12  out:19
+    _load_status_json  CC=11  out:11
+    _plan_payload  CC=9  out:11
+    _print_json  CC=1  out:2
   src.nlp2uri.control_compile  [4 funcs]
     _query_params  CC=3  out:3
     _truthy  CC=3  out:2
-    compile_uri_to_control_plan  CC=25  out:51
+    compile_uri_to_control_plan  CC=25  out:53
     is_control_uri  CC=2  out:2
-  src.nlp2uri.control_execute  [9 funcs]
+  src.nlp2uri.control_execute  [10 funcs]
     _build_client  CC=3  out:2
     _execute_cli  CC=9  out:9
     _execute_drive  CC=10  out:12
     _execute_status  CC=5  out:7
-    _verification_status  CC=11  out:4
+    _verification_status  CC=12  out:5
     compile_and_execute_control_uri  CC=5  out:6
     execute_control_action  CC=9  out:8
     execute_control_plan  CC=2  out:2
     koruide_available  CC=1  out:0
-  src.nlp2uri.cqrs.dispatcher  [2 funcs]
+    koruide_missing_message  CC=2  out:0
+  src.nlp2uri.cqrs.dispatcher  [1 funcs]
     __init__  CC=5  out:5
-    execute_uri  CC=4  out:10
   src.nlp2uri.cqrs.drivers.artifact_filesystem  [1 funcs]
     compile  CC=7  out:7
   src.nlp2uri.cqrs.drivers.command_curl  [1 funcs]
@@ -448,9 +501,9 @@ EDGES:
   schemas.codegen.fix_proto_imports.fix_driver → schemas.codegen.fix_proto_imports._pascal
   schemas.codegen.fix_proto_imports.main → schemas.codegen.fix_proto_imports.fix_api
   schemas.codegen.fix_proto_imports.main → schemas.codegen.fix_proto_imports.fix_driver
-  schemas.codegen.fix_proto_imports.main → examples.resolve.new-intents.e2e.print
-  schemas.codegen.export_mcp_schemas.main → examples.resolve.new-intents.e2e.print
-  schemas.codegen.export_driver_stubs.main → examples.resolve.new-intents.e2e.print
+  schemas.codegen.fix_proto_imports.main → scripts.test-cqrs-smoke.print
+  schemas.codegen.export_mcp_schemas.main → scripts.test-cqrs-smoke.print
+  schemas.codegen.export_driver_stubs.main → scripts.test-cqrs-smoke.print
   schemas.codegen.scaffold_scheme.aggregate_proto → schemas.codegen.scaffold_scheme._proto_package
   schemas.codegen.scaffold_scheme.aggregate_proto → schemas.codegen.scaffold_scheme._pascal
   schemas.codegen.scaffold_scheme.commands_proto → schemas.codegen.scaffold_scheme._proto_package
@@ -473,15 +526,17 @@ EDGES:
   schemas.codegen.scaffold_scheme.scaffold_scheme → schemas.codegen.scaffold_scheme.api_proto
   schemas.codegen.scaffold_scheme.scaffold_scheme → schemas.codegen.scaffold_scheme.openapi_yaml
   schemas.codegen.scaffold_scheme.scaffold_scheme → schemas.codegen.scaffold_scheme.readme_md
-  schemas.codegen.scaffold_scheme.main → examples.resolve.new-intents.e2e.print
-  examples.mcp.tool-handoff.main.main → examples.resolve.new-intents.e2e.print
+  schemas.codegen.scaffold_scheme.main → scripts.test-cqrs-smoke.print
+  examples.mcp.tool-handoff.main.main → scripts.test-cqrs-smoke.print
   examples.mcp.tool-handoff.main.main → src.nlp2uri.mcp.mcp_handoff_payload
   examples.mcp.tool-handoff.main.main → src.nlp2uri.mcp.tool_resolve_desktop_action
   examples.execute.dry-run.main.main → src.nlp2uri.resolve.nlp2uri
   examples.execute.dry-run.main.main → src.nlp2uri.compile.compile_uri_to_actions
-  examples.execute.dry-run.main.main → examples.resolve.new-intents.e2e.print
+  examples.execute.dry-run.main.main → scripts.test-cqrs-smoke.print
   examples.resolve.nl-to-uri.main.main → src.nlp2uri.resolve.nlp2uri
-  examples.resolve.nl-to-uri.main.main → examples.resolve.new-intents.e2e.print
+  examples.resolve.nl-to-uri.main.main → scripts.test-cqrs-smoke.print
+  src.nlp2uri.runtime.execute_uri → src.nlp2uri.config.get_effective_platform
+  src.nlp2uri.runtime.execute_uri → src.nlp2uri.compile.compile_uri_to_actions
   src.nlp2uri.config.NLP2URIConfig.resolved_platform → src.nlp2uri.platform_detect.detect_platform
   src.nlp2uri.config.NLP2URIConfig.to_dict → src.nlp2uri.platform_detect.detect_platform
   src.nlp2uri.config.NLP2URIConfig.to_yaml → src.nlp2uri.config.payload_keys
@@ -492,8 +547,6 @@ EDGES:
   src.nlp2uri.config._load_from_path → src.nlp2uri.config._parse_simple_yaml
   src.nlp2uri.config._load_from_path → src.nlp2uri.config.payload_keys
   src.nlp2uri.config.load_config → src.nlp2uri.config.find_config_path
-  src.nlp2uri.config.load_config → src.nlp2uri.config._load_from_path
-  src.nlp2uri.config.load_config → src.nlp2uri.config.default_config
 ```
 
 ## Test Contracts
@@ -520,59 +573,57 @@ EDGES:
 
 ```toon markpact:analysis path=project/calls.toon.yaml
 # code2llm call graph | /home/tom/github/semcod/nlp2uri
-# generated in 0.16s
-# nodes: 320 | edges: 444 | modules: 59
-# CC̄=3.5
+# generated in 0.24s
+# nodes: 343 | edges: 486 | modules: 60
+# CC̄=3.6
 
 HUBS[20]:
   src.nlp2uri.control_compile.compile_uri_to_control_plan
-    CC=25  in:3  out:51  total:54
+    CC=25  in:5  out:53  total:58
+  src.nlp2uri.cli_parser.build_parser
+    CC=1  in:1  out:52  total:53
   src.nlp2uri.systemmap.koru_ide.build_koru_ide_uri_index
     CC=22  in:2  out:50  total:52
-  src.nlp2uri.cli_parser.build_parser
-    CC=1  in:1  out:51  total:52
+  src.nlp2uri.compile.compile_uri_to_actions
+    CC=22  in:5  out:26  total:31
+  scripts.test-cqrs-smoke.print
+    CC=0  in:31  out:0  total:31
   src.nlp2uri.host.resource.build_resource_actions
     CC=14  in:2  out:29  total:31
+  src.nlp2uri.control_cli.action_control_execute
+    CC=18  in:1  out:29  total:30
   src.nlp2uri.systemmap.export.write_environment_map
     CC=9  in:1  out:29  total:30
   src.nlp2uri.systemmap.index._add_entry
     CC=3  in:24  out:4  total:28
   src.nlp2uri.systemmap.getv_uri.build_getv_uri_index
     CC=6  in:3  out:24  total:27
-  src.nlp2uri.compile.compile_uri_to_actions
-    CC=18  in:5  out:20  total:25
+  src.nlp2uri.schemes.util.abstract_url
+    CC=9  in:21  out:5  total:26
   src.nlp2uri.systemmap.resolve._match_command_entry
     CC=16  in:1  out:24  total:25
-  src.nlp2uri.schemes.util.abstract_url
-    CC=9  in:20  out:5  total:25
   src.nlp2uri.schemes.build.build_uri
     CC=19  in:2  out:22  total:24
   src.nlp2uri.systemmap.encode.encode_segment
     CC=1  in:22  out:1  total:23
-  schemas.codegen.export_driver_stubs.main
-    CC=11  in:0  out:23  total:23
   src.nlp2uri.host.artifact.resolve_artifact_path
     CC=12  in:1  out:22  total:23
+  schemas.codegen.export_driver_stubs.main
+    CC=11  in:0  out:23  total:23
   src.nlp2uri.systemmap.index.build_uri_index
     CC=6  in:5  out:17  total:22
-  src.nlp2uri.config._load_from_path
-    CC=6  in:3  out:17  total:20
+  src.nlp2uri.control_cli.add_control_parser
+    CC=1  in:1  out:20  total:21
+  src.nlp2uri.control_cli._finalize_control_plan_payload
+    CC=12  in:2  out:19  total:21
   src.nlp2uri.systemmap.uri._get
     CC=4  in:15  out:5  total:20
-  examples.resolve.new-intents.e2e.print
-    CC=0  in:20  out:0  total:20
-  src.nlp2uri.systemmap.getv_uri.compile_getv_uri
-    CC=14  in:2  out:18  total:20
-  src.nlp2uri.systemmap.index._ir_field
-    CC=2  in:16  out:3  total:19
 
 MODULES:
   examples.execute.dry-run.main  [1 funcs]
     main  CC=3  out:7
   examples.mcp.tool-handoff.main  [1 funcs]
     main  CC=2  out:8
-  examples.resolve.new-intents.e2e  [1 funcs]
-    print  CC=0  out:0
   examples.resolve.nl-to-uri.main  [1 funcs]
     main  CC=3  out:5
   schemas.codegen.export_driver_stubs  [1 funcs]
@@ -595,6 +646,8 @@ MODULES:
     main  CC=4  out:14
     openapi_yaml  CC=1  out:2
     queries_proto  CC=1  out:3
+  scripts.test-cqrs-smoke  [1 funcs]
+    print  CC=0  out:0
   src.nlp2uri.adapters.base  [1 funcs]
     __init__  CC=2  out:2
   src.nlp2uri.adapters.mcp  [4 funcs]
@@ -603,7 +656,7 @@ MODULES:
     _tool_list_system_uris  CC=2  out:7
     _tool_resolve_system_map  CC=3  out:10
   src.nlp2uri.cli  [12 funcs]
-    _dispatch_command  CC=6  out:7
+    _dispatch_command  CC=7  out:9
     _emit  CC=3  out:4
     _payload_text  CC=3  out:6
     _platform  CC=2  out:1
@@ -616,7 +669,7 @@ MODULES:
   src.nlp2uri.cli_parser  [3 funcs]
     add_common_args  CC=3  out:2
     add_text_args  CC=1  out:3
-    build_parser  CC=1  out:51
+    build_parser  CC=1  out:52
   src.nlp2uri.compile  [54 funcs]
     _capture_outfile  CC=1  out:3
     _compile_app  CC=4  out:5
@@ -639,24 +692,35 @@ MODULES:
     config_search_paths  CC=5  out:15
     default_config  CC=1  out:3
     ensure_config  CC=4  out:9
+  src.nlp2uri.control_cli  [23 funcs]
+    _add_lane_args  CC=1  out:6
+    _apply_runtime_overrides  CC=5  out:7
+    _client_factory  CC=1  out:2
+    _control_uri  CC=5  out:2
+    _default_strategy_hint  CC=3  out:2
+    _fetch_autopilot_status  CC=6  out:9
+    _finalize_control_plan_payload  CC=12  out:19
+    _load_status_json  CC=11  out:11
+    _plan_payload  CC=9  out:11
+    _print_json  CC=1  out:2
   src.nlp2uri.control_compile  [4 funcs]
     _query_params  CC=3  out:3
     _truthy  CC=3  out:2
-    compile_uri_to_control_plan  CC=25  out:51
+    compile_uri_to_control_plan  CC=25  out:53
     is_control_uri  CC=2  out:2
-  src.nlp2uri.control_execute  [9 funcs]
+  src.nlp2uri.control_execute  [10 funcs]
     _build_client  CC=3  out:2
     _execute_cli  CC=9  out:9
     _execute_drive  CC=10  out:12
     _execute_status  CC=5  out:7
-    _verification_status  CC=11  out:4
+    _verification_status  CC=12  out:5
     compile_and_execute_control_uri  CC=5  out:6
     execute_control_action  CC=9  out:8
     execute_control_plan  CC=2  out:2
     koruide_available  CC=1  out:0
-  src.nlp2uri.cqrs.dispatcher  [2 funcs]
+    koruide_missing_message  CC=2  out:0
+  src.nlp2uri.cqrs.dispatcher  [1 funcs]
     __init__  CC=5  out:5
-    execute_uri  CC=4  out:10
   src.nlp2uri.cqrs.drivers.artifact_filesystem  [1 funcs]
     compile  CC=7  out:7
   src.nlp2uri.cqrs.drivers.command_curl  [1 funcs]
@@ -869,9 +933,9 @@ EDGES:
   schemas.codegen.fix_proto_imports.fix_driver → schemas.codegen.fix_proto_imports._pascal
   schemas.codegen.fix_proto_imports.main → schemas.codegen.fix_proto_imports.fix_api
   schemas.codegen.fix_proto_imports.main → schemas.codegen.fix_proto_imports.fix_driver
-  schemas.codegen.fix_proto_imports.main → examples.resolve.new-intents.e2e.print
-  schemas.codegen.export_mcp_schemas.main → examples.resolve.new-intents.e2e.print
-  schemas.codegen.export_driver_stubs.main → examples.resolve.new-intents.e2e.print
+  schemas.codegen.fix_proto_imports.main → scripts.test-cqrs-smoke.print
+  schemas.codegen.export_mcp_schemas.main → scripts.test-cqrs-smoke.print
+  schemas.codegen.export_driver_stubs.main → scripts.test-cqrs-smoke.print
   schemas.codegen.scaffold_scheme.aggregate_proto → schemas.codegen.scaffold_scheme._proto_package
   schemas.codegen.scaffold_scheme.aggregate_proto → schemas.codegen.scaffold_scheme._pascal
   schemas.codegen.scaffold_scheme.commands_proto → schemas.codegen.scaffold_scheme._proto_package
@@ -894,15 +958,17 @@ EDGES:
   schemas.codegen.scaffold_scheme.scaffold_scheme → schemas.codegen.scaffold_scheme.api_proto
   schemas.codegen.scaffold_scheme.scaffold_scheme → schemas.codegen.scaffold_scheme.openapi_yaml
   schemas.codegen.scaffold_scheme.scaffold_scheme → schemas.codegen.scaffold_scheme.readme_md
-  schemas.codegen.scaffold_scheme.main → examples.resolve.new-intents.e2e.print
-  examples.mcp.tool-handoff.main.main → examples.resolve.new-intents.e2e.print
+  schemas.codegen.scaffold_scheme.main → scripts.test-cqrs-smoke.print
+  examples.mcp.tool-handoff.main.main → scripts.test-cqrs-smoke.print
   examples.mcp.tool-handoff.main.main → src.nlp2uri.mcp.mcp_handoff_payload
   examples.mcp.tool-handoff.main.main → src.nlp2uri.mcp.tool_resolve_desktop_action
   examples.execute.dry-run.main.main → src.nlp2uri.resolve.nlp2uri
   examples.execute.dry-run.main.main → src.nlp2uri.compile.compile_uri_to_actions
-  examples.execute.dry-run.main.main → examples.resolve.new-intents.e2e.print
+  examples.execute.dry-run.main.main → scripts.test-cqrs-smoke.print
   examples.resolve.nl-to-uri.main.main → src.nlp2uri.resolve.nlp2uri
-  examples.resolve.nl-to-uri.main.main → examples.resolve.new-intents.e2e.print
+  examples.resolve.nl-to-uri.main.main → scripts.test-cqrs-smoke.print
+  src.nlp2uri.runtime.execute_uri → src.nlp2uri.config.get_effective_platform
+  src.nlp2uri.runtime.execute_uri → src.nlp2uri.compile.compile_uri_to_actions
   src.nlp2uri.config.NLP2URIConfig.resolved_platform → src.nlp2uri.platform_detect.detect_platform
   src.nlp2uri.config.NLP2URIConfig.to_dict → src.nlp2uri.platform_detect.detect_platform
   src.nlp2uri.config.NLP2URIConfig.to_yaml → src.nlp2uri.config.payload_keys
@@ -913,29 +979,28 @@ EDGES:
   src.nlp2uri.config._load_from_path → src.nlp2uri.config._parse_simple_yaml
   src.nlp2uri.config._load_from_path → src.nlp2uri.config.payload_keys
   src.nlp2uri.config.load_config → src.nlp2uri.config.find_config_path
-  src.nlp2uri.config.load_config → src.nlp2uri.config._load_from_path
-  src.nlp2uri.config.load_config → src.nlp2uri.config.default_config
 ```
 
 ### Code Analysis (`project/analysis.toon.yaml`)
 
 ```toon markpact:analysis path=project/analysis.toon.yaml
-# code2llm | 298f 17195L | proto:162,python:79,yaml:36,shell:15,json:2,yml:1,toml:1 | 2026-06-07
-# generated in 0.04s
-# CC̅=3.5 | critical:6/450 | dups:0 | cycles:0
+# code2llm | 303f 17917L | proto:162,python:84,yaml:36,shell:15,json:2,yml:1,toml:1 | 2026-06-08
+# generated in 0.14s
+# CC̅=3.6 | critical:7/478 | dups:0 | cycles:0
 
-HEALTH[6]:
-  🟡 CC    _match_command_entry CC=16 (limit:15)
-  🟡 CC    compile_uri_to_control_plan CC=25 (limit:15)
-  🟡 CC    build_koru_ide_uri_index CC=22 (limit:15)
-  🟡 CC    compile_uri_to_actions CC=18 (limit:15)
-  🟡 CC    build_uri CC=19 (limit:15)
+HEALTH[7]:
   🟡 CC    to_slots CC=15 (limit:15)
+  🟡 CC    build_uri CC=19 (limit:15)
+  🟡 CC    build_koru_ide_uri_index CC=22 (limit:15)
+  🟡 CC    _match_command_entry CC=16 (limit:15)
+  🟡 CC    compile_uri_to_actions CC=22 (limit:15)
+  🟡 CC    compile_uri_to_control_plan CC=25 (limit:15)
+  🟡 CC    action_control_execute CC=18 (limit:15)
 
 REFACTOR[1]:
-  1. split 6 high-CC methods  (CC>15)
+  1. split 7 high-CC methods  (CC>15)
 
-PIPELINES[186]:
+PIPELINES[190]:
   [1] Src [main]: main → fix_api → _pascal
       PURITY: 100% pure
   [2] Src [main]: main → print
@@ -950,126 +1015,127 @@ PIPELINES[186]:
       PURITY: 100% pure
   [7] Src [main]: main → nlp2uri → get_effective_platform → load_config → ...(2 more)
       PURITY: 100% pure
-  [8] Src [resolved_platform]: resolved_platform → detect_platform
+  [8] Src [get_executor]: get_executor
       PURITY: 100% pure
-  [9] Src [apply_runtime_env]: apply_runtime_env
+  [9] Src [resolved_platform]: resolved_platform → detect_platform
       PURITY: 100% pure
-  [10] Src [to_dict]: to_dict → detect_platform
+  [10] Src [apply_runtime_env]: apply_runtime_env
       PURITY: 100% pure
-  [11] Src [to_yaml]: to_yaml → payload_keys
+  [11] Src [to_dict]: to_dict → detect_platform
       PURITY: 100% pure
-  [12] Src [text_uri_list]: text_uri_list
+  [12] Src [to_yaml]: to_yaml → payload_keys
       PURITY: 100% pure
-  [13] Src [tool_execute_desktop_uri]: tool_execute_desktop_uri
+  [13] Src [text_uri_list]: text_uri_list
       PURITY: 100% pure
-  [14] Src [desktop_id_for_app]: desktop_id_for_app → desktop_id_candidate_names
+  [14] Src [tool_execute_desktop_uri]: tool_execute_desktop_uri
       PURITY: 100% pure
-  [15] Src [__getattr__]: __getattr__
+  [15] Src [_parse_absolute_uri]: _parse_absolute_uri
       PURITY: 100% pure
-  [16] Src [_read_json]: _read_json
+  [16] Src [_parse_http_url]: _parse_http_url
       PURITY: 100% pure
-  [17] Src [_send]: _send
+  [17] Src [_parse_ide_project]: _parse_ide_project → _strip_quotes
       PURITY: 100% pure
-  [18] Src [do_GET]: do_GET
+  [18] Src [_parse_ide_chat_send]: _parse_ide_chat_send → _strip_quotes
       PURITY: 100% pure
-  [19] Src [do_POST]: do_POST
+  [19] Src [_parse_ide_status]: _parse_ide_status → _normalize_ide_name
       PURITY: 100% pure
-  [20] Src [main]: main → run_server → ensure_config → find_config_path → ...(1 more)
+  [20] Src [_parse_ide_command]: _parse_ide_command → _normalize_ide_name
       PURITY: 100% pure
-  [21] Src [main]: main → run_stdio → ensure_config → find_config_path → ...(1 more)
+  [21] Src [_parse_file_open]: _parse_file_open → _strip_quotes
       PURITY: 100% pure
-  [22] Src [_result]: _result
+  [22] Src [_parse_settings_panel]: _parse_settings_panel → _normalize_panel
       PURITY: 100% pure
-  [23] Src [_dry]: _dry
+  [23] Src [_parse_terminal]: _parse_terminal → _strip_quotes
       PURITY: 100% pure
-  [24] Src [_run]: _run
+  [24] Src [_parse_window_move]: _parse_window_move
       PURITY: 100% pure
-  [25] Src [_first_available]: _first_available
+  [25] Src [_parse_settings]: _parse_settings
       PURITY: 100% pure
-  [26] Src [_open_with_browser]: _open_with_browser
+  [26] Src [_parse_active_window]: _parse_active_window
       PURITY: 100% pure
-  [27] Src [_parse_nlp2uri]: _parse_nlp2uri
+  [27] Src [_parse_capture]: _parse_capture → _strip_quotes
       PURITY: 100% pure
-  [28] Src [slugify_app_name]: slugify_app_name
+  [28] Src [_parse_focus]: _parse_focus
       PURITY: 100% pure
-  [29] Src [execute]: execute
+  [29] Src [_parse_app_open]: _parse_app_open → _normalize_app_name
       PURITY: 100% pure
-  [30] Src [_open_generic]: _open_generic
+  [30] Src [_parse_path]: _parse_path → _strip_quotes
       PURITY: 100% pure
-  [31] Src [_open_settings]: _open_settings
+  [31] Src [_parse_open_prefix]: _parse_open_prefix → _normalize_app_name
       PURITY: 100% pure
-  [32] Src [_open_app]: _open_app
+  [32] Src [desktop_id_for_app]: desktop_id_for_app → desktop_id_candidate_names
       PURITY: 100% pure
-  [33] Src [_focus_app]: _focus_app
+  [33] Src [with_params]: with_params
       PURITY: 100% pure
-  [34] Src [_capture]: _capture
+  [34] Src [to_slots]: to_slots
       PURITY: 100% pure
-  [35] Src [get_executor]: get_executor → detect_platform
+  [35] Src [to_dict]: to_dict
       PURITY: 100% pure
-  [36] Src [execute]: execute
+  [36] Src [to_dict]: to_dict
       PURITY: 100% pure
-  [37] Src [_open]: _open
+  [37] Src [to_dict]: to_dict
       PURITY: 100% pure
-  [38] Src [_open_app]: _open_app
+  [38] Src [to_dict]: to_dict
       PURITY: 100% pure
-  [39] Src [_focus_app]: _focus_app
+  [39] Src [to_dict]: to_dict
       PURITY: 100% pure
-  [40] Src [_capture]: _capture
+  [40] Src [to_dict]: to_dict
       PURITY: 100% pure
-  [41] Src [execute]: execute
+  [41] Src [__getattr__]: __getattr__
       PURITY: 100% pure
-  [42] Src [_start]: _start
+  [42] Src [_read_json]: _read_json
       PURITY: 100% pure
-  [43] Src [_open_app]: _open_app
+  [43] Src [_send]: _send
       PURITY: 100% pure
-  [44] Src [_focus_app]: _focus_app
+  [44] Src [do_GET]: do_GET
       PURITY: 100% pure
-  [45] Src [_capture]: _capture
+  [45] Src [do_POST]: do_POST
       PURITY: 100% pure
-  [46] Src [is_artifact_uri]: is_artifact_uri
+  [46] Src [main]: main → run_server → ensure_config → find_config_path → ...(1 more)
       PURITY: 100% pure
-  [47] Src [is_resource_uri]: is_resource_uri
+  [47] Src [main]: main → run_stdio → ensure_config → find_config_path → ...(1 more)
       PURITY: 100% pure
-  [48] Src [to_dict]: to_dict
+  [48] Src [_result]: _result
       PURITY: 100% pure
-  [49] Src [__init__]: __init__ → load_config → find_config_path → config_search_paths
+  [49] Src [_dry]: _dry
       PURITY: 100% pure
-  [50] Src [with_platform]: with_platform
+  [50] Src [_run]: _run
       PURITY: 100% pure
 
 LAYERS:
-  src/                            CC̄=3.6    ←in:0  →out:0
-  │ !! compile                    650L  0C   54m  CC=18     ←5
+  src/                            CC̄=3.7    ←in:0  →out:0
+  │ !! compile                    662L  0C   54m  CC=22     ←5
   │ !! parse_nl                   540L  0C   30m  CC=7      ←1
+  │ !! control_cli                523L  0C   23m  CC=18     ←2
   │ mcp                        462L  1C   21m  CC=6      ←0
   │ index                      351L  2C   23m  CC=7      ←6
-  │ control_execute            339L  1C   11m  CC=11     ←2
+  │ control_execute            341L  1C   11m  CC=12     ←3
   │ !! models                     272L  10C   10m  CC=15     ←0
+  │ service                    258L  1C   18m  CC=13     ←0
+  │ !! control_compile            244L  0C    7m  CC=25     ←5
   │ config                     230L  1C   17m  CC=8      ←7
-  │ !! control_compile            228L  0C    6m  CC=25     ←4
-  │ service                    228L  1C   16m  CC=13     ←0
   │ getv_uri                   225L  1C    9m  CC=14     ←3
   │ !! resolve                    189L  1C    9m  CC=16     ←2
-  │ cli                        184L  0C   12m  CC=6      ←0
+  │ cli                        189L  0C   12m  CC=7      ←0
   │ !! koru_ide                   182L  0C    3m  CC=22     ←1
   │ compile                    179L  0C   11m  CC=12     ←5
   │ desktop                    166L  0C    6m  CC=6      ←0
   │ export                     149L  0C    4m  CC=9      ←1
   │ linux                      145L  1C    6m  CC=11     ←0
-  │ cli_parser                 136L  0C    3m  CC=3      ←1
+  │ cli_parser                 139L  0C    3m  CC=3      ←2
   │ ide                        136L  0C    5m  CC=4      ←0
   │ base                       130L  1C    9m  CC=7      ←1
   │ mcp_server                 128L  0C   10m  CC=8      ←0
   │ service_ops                128L  3C    8m  CC=5      ←0
   │ uri                        123L  0C   16m  CC=5      ←2
-  │ dispatcher                 117L  1C    4m  CC=5      ←1
+  │ dispatcher                 117L  1C    4m  CC=5      ←0
   │ base                        97L  5C    4m  CC=8      ←0
   │ registry                    97L  1C    6m  CC=8      ←1
   │ getv_load                   97L  0C    8m  CC=8      ←1
   │ macos                       94L  1C    5m  CC=7      ←0
   │ windows                     94L  1C    5m  CC=7      ←0
   │ artifact                    94L  0C    4m  CC=13     ←2
-  │ runtime                     93L  0C    2m  CC=9      ←0
+  │ runtime                     93L  0C    2m  CC=9      ←1
   │ rest_server                 90L  1C    7m  CC=4      ←0
   │ container_docker            88L  1C    4m  CC=14     ←0
   │ rest                        87L  1C    4m  CC=14     ←0
@@ -1081,26 +1147,30 @@ LAYERS:
   │ shell                       66L  1C    2m  CC=11     ←0
   │ plugins                     64L  0C    3m  CC=7      ←1
   │ desktop_apps                60L  0C    5m  CC=3      ←0
-  │ resolve                     60L  0C    2m  CC=13     ←4
+  │ resolve                     60L  0C    2m  CC=13     ←5
   │ base                        59L  3C    5m  CC=2      ←0
   │ cli                         53L  1C    1m  CC=12     ←0
   │ http_store                  52L  1C    3m  CC=3      ←0
   │ fallback                    52L  0C    1m  CC=6      ←1
-  │ util                        47L  0C    5m  CC=9      ←5
+  │ util                        47L  0C    5m  CC=9      ←6
   │ context                     47L  0C    2m  CC=8      ←1
   │ load                        46L  0C    4m  CC=3      ←3
+  │ env_uri                     42L  0C    0m  CC=0.0    ←0
   │ command_curl                39L  1C    2m  CC=5      ←0
   │ resource_probe              35L  1C    2m  CC=5      ←0
   │ endpoint                    34L  0C    3m  CC=8      ←2
   │ runtime_curl                34L  1C    2m  CC=3      ←0
   │ endpoint_curl               33L  1C    2m  CC=2      ←0
   │ artifact_filesystem         32L  1C    1m  CC=7      ←0
+  │ hillm_uri2hillm             31L  1C    1m  CC=3      ←0
+  │ env_uri2env                 30L  1C    1m  CC=3      ←0
   │ delegate                    29L  1C    2m  CC=2      ←0
   │ __init__                    29L  0C    0m  CC=0.0    ←0
   │ __init__                    28L  0C    0m  CC=0.0    ←0
   │ getv_cli                    27L  1C    1m  CC=2      ←0
   │ file                        25L  0C    1m  CC=3      ←0
   │ registry                    24L  0C    1m  CC=3      ←0
+  │ hillm_uri                   24L  0C    0m  CC=0.0    ←0
   │ __init__                    22L  0C    1m  CC=3      ←0
   │ http                        22L  0C    1m  CC=4      ←0
   │ platform_detect             18L  0C    1m  CC=5      ←5
@@ -1316,7 +1386,7 @@ LAYERS:
   │ run-e2e.sh                  40L  0C    0m  CC=0.0    ←0
   │ main                        29L  0C    1m  CC=3      ←0
   │ main                        27L  0C    1m  CC=2      ←0
-  │ e2e.sh                      25L  0C    1m  CC=0.0    ←10
+  │ e2e.sh                      25L  0C    1m  CC=0.0    ←0
   │ e2e.sh                      23L  0C    0m  CC=0.0    ←0
   │ e2e.sh                      15L  0C    0m  CC=0.0    ←0
   │ e2e.sh                      12L  0C    0m  CC=0.0    ←0
@@ -1326,9 +1396,9 @@ LAYERS:
   │ e2e.sh                      11L  0C    0m  CC=0.0    ←0
   │ mcp-config.json             10L  0C    0m  CC=0.0    ←0
   │
-  scripts/                        CC̄=0.0    ←in:0  →out:0
+  scripts/                        CC̄=0.0    ←in:31  →out:0
   │ test-live-registry.sh       72L  0C    2m  CC=0.0    ←0
-  │ test-cqrs-smoke.sh          55L  0C    1m  CC=0.0    ←0
+  │ test-cqrs-smoke.sh          55L  0C    1m  CC=0.0    ←11
   │ install-editable.sh         22L  0C    0m  CC=0.0    ←0
   │ testapp-handler.sh           6L  0C    0m  CC=0.0    ←0
   │
@@ -1336,7 +1406,7 @@ LAYERS:
   │ !! planfile.yaml             1319L  0C    0m  CC=0.0    ←0
   │ !! goal.yaml                  511L  0C    0m  CC=0.0    ←0
   │ prefact.yaml                94L  0C    0m  CC=0.0    ←0
-  │ pyproject.toml              85L  0C    0m  CC=0.0    ←0
+  │ pyproject.toml              89L  0C    0m  CC=0.0    ←0
   │ project.sh                  59L  0C    0m  CC=0.0    ←0
   │ Dockerfile                  29L  0C    0m  CC=0.0    ←0
   │ nlp2uri.yaml                 8L  0C    0m  CC=0.0    ←0
@@ -1350,15 +1420,17 @@ LAYERS:
   │
 
 COUPLING:
-                    examples.resolve       src.nlp2uri  examples.execute      examples.mcp   schemas.codegen
-  examples.resolve                ──                 1                ←4                ←4                ←5  hub
-       src.nlp2uri                 5                ──                ←2                ←2                    hub
-  examples.execute                 4                 2                ──                                    
-      examples.mcp                 4                 2                                  ──                  
-   schemas.codegen                 5                                                                      ──
+                             scripts       src.nlp2uri  examples.execute      examples.mcp   schemas.codegen  examples.resolve
+           scripts                ──               ←16                ←4                ←4                ←5                ←2  hub
+       src.nlp2uri                16                ──                ←2                ←2                                  ←1  hub
+  examples.execute                 4                 2                ──                                                      
+      examples.mcp                 4                 2                                  ──                                    
+   schemas.codegen                 5                                                                      ──                  
+  examples.resolve                 2                 1                                                                      ──
   CYCLES: none
-  HUB: examples.resolve/ (fan-in=18)
+  HUB: scripts/ (fan-in=31)
   HUB: src.nlp2uri/ (fan-in=5)
+  SMELL: src.nlp2uri/ fan-out=16 → split needed
 
 EXTERNAL:
   validation: run `vallm batch .` → validation.toon
@@ -1368,23 +1440,23 @@ EXTERNAL:
 ### Duplication (`project/duplication.toon.yaml`)
 
 ```toon markpact:analysis path=project/duplication.toon.yaml
-# redup/duplication | 15 groups | 79f 8728L | 2026-06-07
+# redup/duplication | 15 groups | 82f 9374L | 2026-06-08
 
 SUMMARY:
-  files_scanned: 79
-  total_lines:   8728
+  files_scanned: 82
+  total_lines:   9374
   dup_groups:    15
   dup_fragments: 33
   saved_lines:   154
-  scan_ms:       2627
+  scan_ms:       3935
 
 HOTSPOTS[7] (files with most duplication):
-  src/nlp2uri/systemmap/index.py  dup=70L  groups=3  frags=7  (0.8%)
-  src/nlp2uri/parse_nl.py  dup=51L  groups=2  frags=5  (0.6%)
+  src/nlp2uri/systemmap/index.py  dup=70L  groups=3  frags=7  (0.7%)
+  src/nlp2uri/parse_nl.py  dup=51L  groups=2  frags=5  (0.5%)
   src/nlp2uri/schemes/desktop.py  dup=36L  groups=1  frags=2  (0.4%)
   src/nlp2uri/compile.py  dup=29L  groups=3  frags=5  (0.3%)
   src/nlp2uri/systemmap/compile.py  dup=24L  groups=1  frags=2  (0.3%)
-  src/nlp2uri/systemmap/uri.py  dup=14L  groups=2  frags=4  (0.2%)
+  src/nlp2uri/systemmap/uri.py  dup=14L  groups=2  frags=4  (0.1%)
   src/nlp2uri/systemmap/getv_uri.py  dup=8L  groups=1  frags=1  (0.1%)
 
 DUPLICATES[15] (ranked by impact):
@@ -1407,8 +1479,8 @@ DUPLICATES[15] (ranked by impact):
       src/nlp2uri/systemmap/index.py:190-200  (_index_artifacts)
       src/nlp2uri/systemmap/index.py:300-310  (_index_validations)
   [85ffa2defd9f0fa1]   STRU  _windows_window_move_actions  L=10 N=2 saved=10 sim=1.00
-      src/nlp2uri/compile.py:450-459  (_windows_window_move_actions)
-      src/nlp2uri/compile.py:496-501  (_windows_window_focus_actions)
+      src/nlp2uri/compile.py:462-471  (_windows_window_move_actions)
+      src/nlp2uri/compile.py:508-513  (_windows_window_focus_actions)
   [4fac14ef046e2d2c]   STRU  _mentions_no_submit  L=9 N=2 saved=9 sim=1.00
       src/nlp2uri/parse_nl.py:145-153  (_mentions_no_submit)
       src/nlp2uri/parse_nl.py:156-164  (_mentions_require_plugin)
@@ -1416,8 +1488,8 @@ DUPLICATES[15] (ranked by impact):
       src/nlp2uri/systemmap/getv_uri.py:105-112  (to_dict)
       src/nlp2uri/systemmap/resolve.py:22-29  (to_dict)
   [a5e2055bcecafecc]   STRU  _macos_window_move_actions  L=7 N=2 saved=7 sim=1.00
-      src/nlp2uri/compile.py:441-447  (_macos_window_move_actions)
-      src/nlp2uri/compile.py:491-493  (_macos_window_focus_actions)
+      src/nlp2uri/compile.py:453-459  (_macos_window_move_actions)
+      src/nlp2uri/compile.py:503-505  (_macos_window_focus_actions)
   [1079b0e4b2d5a43f]   EXAC  probe  L=6 N=2 saved=6 sim=1.00
       src/nlp2uri/cqrs/drivers/resource_probe.py:30-35  (probe)
       src/nlp2uri/cqrs/drivers/runtime_curl.py:29-34  (probe)
@@ -1431,7 +1503,7 @@ DUPLICATES[15] (ranked by impact):
       src/nlp2uri/systemmap/uri.py:79-82  (uri_for_schedule)
       src/nlp2uri/systemmap/uri.py:85-88  (uri_for_generated_service)
   [7320e91881d35948]   EXAC  _query_params  L=3 N=2 saved=3 sim=1.00
-      src/nlp2uri/compile.py:72-74  (_query_params)
+      src/nlp2uri/compile.py:84-86  (_query_params)
       src/nlp2uri/control_compile.py:18-20  (_query_params)
   [ff8711d5a6139426]   STRU  uri_for_conversation  L=3 N=2 saved=3 sim=1.00
       src/nlp2uri/systemmap/uri.py:63-65  (uri_for_conversation)
@@ -1527,25 +1599,25 @@ METRICS-TARGET:
 ### Evolution / Churn (`project/evolution.toon.yaml`)
 
 ```toon markpact:analysis path=project/evolution.toon.yaml
-# code2llm/evolution | 443 func | 67f | 2026-06-07
+# code2llm/evolution | 471 func | 70f | 2026-06-08
 # generated in 0.00s
 
-NEXT[8] (ranked by impact):
+NEXT[9] (ranked by impact):
   [1] !! SPLIT           src/nlp2uri/compile.py
-      WHY: 650L, 0 classes, max CC=18
-      EFFORT: ~4h  IMPACT: 11700
+      WHY: 662L, 0 classes, max CC=22
+      EFFORT: ~4h  IMPACT: 14564
 
   [2] !! SPLIT           src/nlp2uri/parse_nl.py
       WHY: 540L, 0 classes, max CC=7
       EFFORT: ~4h  IMPACT: 3780
 
-  [3] !  SPLIT-FUNC      compile_uri_to_actions  CC=18  fan=20
-      WHY: CC=18 exceeds 15
-      EFFORT: ~1h  IMPACT: 360
+  [3] !  SPLIT-FUNC      compile_uri_to_actions  CC=22  fan=24
+      WHY: CC=22 exceeds 15
+      EFFORT: ~1h  IMPACT: 528
 
-  [4] !! SPLIT-FUNC      compile_uri_to_control_plan  CC=25  fan=14
+  [4] !! SPLIT-FUNC      compile_uri_to_control_plan  CC=25  fan=15
       WHY: CC=25 exceeds 15
-      EFFORT: ~1h  IMPACT: 350
+      EFFORT: ~1h  IMPACT: 375
 
   [5] !  SPLIT-FUNC      build_uri  CC=19  fan=17
       WHY: CC=19 exceeds 15
@@ -1555,11 +1627,15 @@ NEXT[8] (ranked by impact):
       WHY: CC=22 exceeds 15
       EFFORT: ~1h  IMPACT: 308
 
-  [7] !  SPLIT-FUNC      _match_command_entry  CC=16  fan=13
+  [7] !  SPLIT-FUNC      action_control_execute  CC=18  fan=17
+      WHY: CC=18 exceeds 15
+      EFFORT: ~1h  IMPACT: 306
+
+  [8] !  SPLIT-FUNC      _match_command_entry  CC=16  fan=13
       WHY: CC=16 exceeds 15
       EFFORT: ~1h  IMPACT: 208
 
-  [8] !! SPLIT           planfile.yaml
+  [9] !! SPLIT           planfile.yaml
       WHY: 1319L, 0 classes, max CC=0
       EFFORT: ~4h  IMPACT: 0
 
@@ -1570,10 +1646,10 @@ RISKS[3]:
   ⚠ Splitting src/nlp2uri/parse_nl.py may break 30 import paths
 
 METRICS-TARGET:
-  CC̄:          3.5 → ≤2.4
+  CC̄:          3.7 → ≤2.6
   max-CC:      25 → ≤12
-  god-modules: 4 → 0
-  high-CC(≥15): 6 → ≤3
+  god-modules: 5 → 0
+  high-CC(≥15): 7 → ≤3
   hub-types:   0 → ≤0
 
 PATTERNS (language parser shared logic):
@@ -1601,7 +1677,7 @@ PATTERNS (language parser shared logic):
     - Standardized FunctionInfo/ClassInfo models
 
 HISTORY:
-  prev CC̄=3.3 → now CC̄=3.5
+  prev CC̄=3.5 → now CC̄=3.7
 ```
 
 ## Intent

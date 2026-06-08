@@ -119,6 +119,35 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.15] - 2026-06-08
+
+### Docs
+- Update README.md
+- Update SUMD.md
+- Update SUMR.md
+- Update TODO.md
+- Update examples/README.md
+- Update examples/hillm/compile-uri/README.md
+- Update examples/hillm/dry-run/README.md
+- Update project/README.md
+- Update project/context.md
+
+### Test
+- Update tests/test_llm_delegates.py
+
+### Other
+- Update .gitignore
+- Update app.doql.less
+- Update examples/delegate/llm-control/e2e.sh
+- Update examples/delegate/llm-control/main.py
+- Update examples/hillm/_ensure_uri2hillm.sh
+- Update examples/hillm/compile-uri/e2e.sh
+- Update examples/hillm/compile-uri/main.py
+- Update examples/hillm/dry-run/e2e.sh
+- Update examples/hillm/dry-run/main.py
+- Update examples/run-e2e.sh
+- ... and 19 more files
+
 ## [0.4.14] - 2026-06-08
 
 ### Docs

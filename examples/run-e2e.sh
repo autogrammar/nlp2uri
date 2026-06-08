@@ -16,6 +16,9 @@ for script in \
     examples/resolve/new-intents/e2e.sh \
     examples/execute/dry-run/e2e.sh \
     examples/mcp/tool-handoff/e2e.sh \
+    examples/hillm/compile-uri/e2e.sh \
+    examples/hillm/dry-run/e2e.sh \
+    examples/delegate/llm-control/e2e.sh \
     examples/integrators/shell-export/e2e.sh \
     examples/integrators/mcp-stdio/e2e.sh
 do

@@ -13,7 +13,7 @@ _IDE_NAME = r"(?:cursor|vscode|code|windsurf|jetbrains|pycharm|zed|ide)"
 _ABSOLUTE_URI_RE = re.compile(
     r"^(?:https?|file|mailto|tel|sms|cursor|vscode|vscode-insiders|"
     r"ms-settings|x-apple\.systempreferences|nlp2uri|app|desktop-screenshot|desktop-window|"
-    r"ide-chat|ide-command|koru-control)://\S+",
+    r"ide-chat|ide-command|koru-control|hillm|gillm|tillm)://\S+",
     re.IGNORECASE,
 )
 _PATH_RE = re.compile(r"(?:^|[\s'\"])(/?(?:[\w.\-~]+/)+[\w.\-~]+)")
@@ -188,6 +188,20 @@ def _parse_absolute_uri(raw: str, _lowered: str) -> UriIntent | None:
     if not _ABSOLUTE_URI_RE.match(raw):
         return None
     parsed = urlparse(raw)
+    scheme = parsed.scheme.lower()
+    if scheme in {"hillm", "gillm", "tillm"}:
+        kind_map = {
+            "hillm": IntentKind.HILLM,
+            "gillm": IntentKind.GILLM,
+            "tillm": IntentKind.TILLM,
+        }
+        return UriIntent(
+            kind=kind_map[scheme],
+            target=raw,
+            params={"uri": raw, "domain": scheme},
+            raw_text=raw,
+            confidence=1.0,
+        )
     return UriIntent(
         kind=IntentKind.NAVIGATE,
         target=raw,
@@ -497,12 +511,43 @@ def _parse_open_prefix(raw: str, lowered: str) -> UriIntent | None:
     )
 
 
-def _parse_fallback(raw: str, _lowered: str) -> UriIntent:
+def _parse_llm_delegate(raw: str, _lowered: str) -> UriIntent | None:
+    from nlp2uri.delegates.llm_bridge import resolve_llm_prompt
+
+    hit = resolve_llm_prompt(raw)
+    if not hit:
+        return None
+    domain, uri = hit
+    kind_map = {
+        "hillm": IntentKind.HILLM,
+        "gillm": IntentKind.GILLM,
+        "tillm": IntentKind.TILLM,
+    }
     return UriIntent(
-        kind=IntentKind.NAVIGATE,
-        target=raw,
+        kind=kind_map[domain],
+        target=uri,
+        params={"uri": uri, "domain": domain},
         raw_text=raw,
-        confidence=0.3,
+        confidence=0.88,
+    )
+
+
+def _parse_fallback(raw: str, lowered: str) -> UriIntent:
+    llm = _parse_llm_delegate(raw, lowered)
+    if llm is not None:
+        return llm
+    if re.match(r"^[\w.-]+\.(com|org|net|pl|io|dev|edu)(?:/|\?|$)", lowered) or lowered.startswith(
+        ("www.", "http://", "https://")
+    ):
+        return UriIntent(
+            kind=IntentKind.NAVIGATE,
+            target=raw,
+            raw_text=raw,
+            confidence=0.3,
+        )
+    raise ValueError(
+        f"could not resolve prompt to a known intent: {raw!r}. "
+        "Try explicit URIs (hillm://, app://, ide-chat://) or rephrase."
     )
 
 
@@ -524,6 +569,7 @@ _PARSERS: tuple[Callable[[str, str], UriIntent | None], ...] = (
     _parse_app_open,
     _parse_path,
     _parse_open_prefix,
+    _parse_llm_delegate,
 )
 
 

@@ -1,8 +1,8 @@
 % ── Project Metadata ─────────────────────────────────────
-project_metadata('nlp2uri', '0.4.10', 'python').
+project_metadata('nlp2uri', '0.4.14', 'python').
 
 % ── Project Files ────────────────────────────────────────
-project_file('app.doql.less', 30, 'less').
+project_file('app.doql.less', 72, 'less').
 project_file('examples/execute/dry-run/e2e.sh', 12, 'shell').
 project_file('examples/execute/dry-run/main.py', 30, 'python').
 project_file('examples/integrators/mcp-stdio/e2e.sh', 16, 'shell').
@@ -32,12 +32,13 @@ project_file('src/nlp2uri/adapters/cli.py', 54, 'python').
 project_file('src/nlp2uri/adapters/mcp.py', 463, 'python').
 project_file('src/nlp2uri/adapters/rest.py', 88, 'python').
 project_file('src/nlp2uri/adapters/shell.py', 67, 'python').
-project_file('src/nlp2uri/cli.py', 185, 'python').
-project_file('src/nlp2uri/cli_parser.py', 137, 'python').
-project_file('src/nlp2uri/compile.py', 651, 'python').
+project_file('src/nlp2uri/cli.py', 190, 'python').
+project_file('src/nlp2uri/cli_parser.py', 140, 'python').
+project_file('src/nlp2uri/compile.py', 663, 'python').
 project_file('src/nlp2uri/config.py', 231, 'python').
-project_file('src/nlp2uri/control_compile.py', 229, 'python').
-project_file('src/nlp2uri/control_execute.py', 340, 'python').
+project_file('src/nlp2uri/control_cli.py', 524, 'python').
+project_file('src/nlp2uri/control_compile.py', 245, 'python').
+project_file('src/nlp2uri/control_execute.py', 342, 'python').
 project_file('src/nlp2uri/cqrs/__init__.py', 9, 'python').
 project_file('src/nlp2uri/cqrs/base.py', 98, 'python').
 project_file('src/nlp2uri/cqrs/dispatcher.py', 118, 'python').
@@ -47,7 +48,9 @@ project_file('src/nlp2uri/cqrs/drivers/command_curl.py', 40, 'python').
 project_file('src/nlp2uri/cqrs/drivers/container_docker.py', 89, 'python').
 project_file('src/nlp2uri/cqrs/drivers/delegate.py', 30, 'python').
 project_file('src/nlp2uri/cqrs/drivers/endpoint_curl.py', 34, 'python').
+project_file('src/nlp2uri/cqrs/drivers/env_uri2env.py', 31, 'python').
 project_file('src/nlp2uri/cqrs/drivers/getv_cli.py', 28, 'python').
+project_file('src/nlp2uri/cqrs/drivers/hillm_uri2hillm.py', 32, 'python').
 project_file('src/nlp2uri/cqrs/drivers/resource_probe.py', 36, 'python').
 project_file('src/nlp2uri/cqrs/drivers/runtime_curl.py', 35, 'python').
 project_file('src/nlp2uri/cqrs/drivers/service_ops.py', 129, 'python').
@@ -82,15 +85,17 @@ project_file('src/nlp2uri/schemes/file.py', 26, 'python').
 project_file('src/nlp2uri/schemes/http.py', 23, 'python').
 project_file('src/nlp2uri/schemes/ide.py', 137, 'python').
 project_file('src/nlp2uri/schemes/util.py', 48, 'python').
-project_file('src/nlp2uri/service.py', 229, 'python').
+project_file('src/nlp2uri/service.py', 259, 'python').
 project_file('src/nlp2uri/systemmap/__init__.py', 81, 'python').
 project_file('src/nlp2uri/systemmap/compile.py', 180, 'python').
 project_file('src/nlp2uri/systemmap/context.py', 48, 'python').
 project_file('src/nlp2uri/systemmap/encode.py', 16, 'python').
+project_file('src/nlp2uri/systemmap/env_uri.py', 43, 'python').
 project_file('src/nlp2uri/systemmap/export.py', 150, 'python').
 project_file('src/nlp2uri/systemmap/fallback.py', 53, 'python').
 project_file('src/nlp2uri/systemmap/getv_load.py', 98, 'python').
 project_file('src/nlp2uri/systemmap/getv_uri.py', 226, 'python').
+project_file('src/nlp2uri/systemmap/hillm_uri.py', 25, 'python').
 project_file('src/nlp2uri/systemmap/index.py', 352, 'python').
 project_file('src/nlp2uri/systemmap/koru_ide.py', 183, 'python').
 project_file('src/nlp2uri/systemmap/load.py', 47, 'python').
@@ -100,14 +105,15 @@ project_file('tests/conftest.py', 18, 'python').
 project_file('tests/integration/test_xdg_handler.py', 99, 'python').
 project_file('tests/test_adapters.py', 120, 'python').
 project_file('tests/test_artifact_driver.py', 57, 'python').
-project_file('tests/test_cli.py', 92, 'python').
+project_file('tests/test_cli.py', 142, 'python').
 project_file('tests/test_compile.py', 34, 'python').
 project_file('tests/test_config.py', 65, 'python').
 project_file('tests/test_container_driver.py', 56, 'python').
-project_file('tests/test_cqrs_drivers.py', 115, 'python').
+project_file('tests/test_cqrs_drivers.py', 127, 'python').
 project_file('tests/test_getv_uri.py', 74, 'python').
+project_file('tests/test_hillm_uri.py', 80, 'python').
 project_file('tests/test_http_event_store.py', 51, 'python').
-project_file('tests/test_ide_control.py', 118, 'python').
+project_file('tests/test_ide_control.py', 133, 'python').
 project_file('tests/test_intents_phase2.py', 112, 'python').
 project_file('tests/test_koru_control_execute.py', 96, 'python').
 project_file('tests/test_koru_ide_control.py', 79, 'python').
@@ -157,12 +163,12 @@ python_function('src/nlp2uri/cli.py', '_run_shell', 1, 5, 9).
 python_function('src/nlp2uri/cli.py', '_run_adapter_command', 1, 5, 9).
 python_function('src/nlp2uri/cli.py', '_run_envmap', 1, 4, 8).
 python_function('src/nlp2uri/cli.py', '_run_execute', 1, 6, 11).
-python_function('src/nlp2uri/cli.py', '_dispatch_command', 1, 6, 7).
+python_function('src/nlp2uri/cli.py', '_dispatch_command', 1, 7, 8).
 python_function('src/nlp2uri/cli.py', 'main', 1, 1, 3).
 python_function('src/nlp2uri/cli_parser.py', 'add_common_args', 1, 3, 1).
 python_function('src/nlp2uri/cli_parser.py', 'add_text_args', 1, 1, 2).
-python_function('src/nlp2uri/cli_parser.py', 'build_parser', 0, 1, 6).
-python_function('src/nlp2uri/compile.py', 'compile_uri_to_actions', 2, 18, 19).
+python_function('src/nlp2uri/cli_parser.py', 'build_parser', 0, 1, 7).
+python_function('src/nlp2uri/compile.py', 'compile_uri_to_actions', 2, 22, 23).
 python_function('src/nlp2uri/compile.py', '_query_params', 1, 3, 3).
 python_function('src/nlp2uri/compile.py', '_first_available', 1, 3, 1).
 python_function('src/nlp2uri/compile.py', '_open_uri', 2, 5, 2).
@@ -229,15 +235,39 @@ python_function('src/nlp2uri/config.py', 'save_config', 2, 4, 8).
 python_function('src/nlp2uri/config.py', 'ensure_config', 1, 4, 6).
 python_function('src/nlp2uri/config.py', 'get_effective_platform', 1, 2, 2).
 python_function('src/nlp2uri/config.py', 'reset_config_cache', 0, 1, 0).
+python_function('src/nlp2uri/control_cli.py', '_add_lane_args', 1, 1, 2).
+python_function('src/nlp2uri/control_cli.py', 'add_control_parser', 1, 1, 5).
+python_function('src/nlp2uri/control_cli.py', '_print_json', 1, 1, 2).
+python_function('src/nlp2uri/control_cli.py', '_resolve_ide', 1, 8, 5).
+python_function('src/nlp2uri/control_cli.py', '_with_instance_env', 1, 3, 2).
+python_function('src/nlp2uri/control_cli.py', '_socket_basename', 1, 7, 5).
+python_function('src/nlp2uri/control_cli.py', '_resolve_socket_path', 2, 6, 8).
+python_function('src/nlp2uri/control_cli.py', '_client_factory', 2, 1, 2).
+python_function('src/nlp2uri/control_cli.py', '_fetch_autopilot_status', 2, 6, 8).
+python_function('src/nlp2uri/control_cli.py', '_resolve_workspace_from_status', 3, 10, 7).
+python_function('src/nlp2uri/control_cli.py', '_resolve_workspace', 2, 5, 6).
+python_function('src/nlp2uri/control_cli.py', '_default_strategy_hint', 2, 3, 2).
+python_function('src/nlp2uri/control_cli.py', '_control_uri', 0, 5, 2).
+python_function('src/nlp2uri/control_cli.py', '_apply_runtime_overrides', 1, 5, 7).
+python_function('src/nlp2uri/control_cli.py', '_text_ref_from_payload', 1, 13, 3).
+python_function('src/nlp2uri/control_cli.py', '_submit_from_payload', 1, 10, 6).
+python_function('src/nlp2uri/control_cli.py', '_finalize_control_plan_payload', 1, 12, 11).
+python_function('src/nlp2uri/control_cli.py', '_plan_payload', 1, 9, 6).
+python_function('src/nlp2uri/control_cli.py', 'action_control_plan', 1, 7, 8).
+python_function('src/nlp2uri/control_cli.py', 'action_control_execute', 1, 18, 13).
+python_function('src/nlp2uri/control_cli.py', '_load_status_json', 1, 11, 10).
+python_function('src/nlp2uri/control_cli.py', 'action_control_list_uris', 1, 8, 12).
+python_function('src/nlp2uri/control_cli.py', 'dispatch_control_action', 1, 4, 4).
 python_function('src/nlp2uri/control_compile.py', 'is_control_uri', 1, 2, 2).
 python_function('src/nlp2uri/control_compile.py', '_query_params', 1, 3, 3).
 python_function('src/nlp2uri/control_compile.py', '_truthy', 1, 3, 2).
+python_function('src/nlp2uri/control_compile.py', '_default_strategy_hint', 3, 4, 2).
 python_function('src/nlp2uri/control_compile.py', '_replay_cli_drive', 0, 6, 2).
 python_function('src/nlp2uri/control_compile.py', '_replay_cli_status', 0, 3, 1).
-python_function('src/nlp2uri/control_compile.py', 'compile_uri_to_control_plan', 1, 25, 12).
+python_function('src/nlp2uri/control_compile.py', 'compile_uri_to_control_plan', 1, 25, 13).
 python_function('src/nlp2uri/control_execute.py', 'koruide_available', 0, 1, 0).
 python_function('src/nlp2uri/control_execute.py', 'koruide_missing_message', 0, 2, 0).
-python_function('src/nlp2uri/control_execute.py', '_verification_status', 2, 11, 2).
+python_function('src/nlp2uri/control_execute.py', '_verification_status', 2, 12, 2).
 python_function('src/nlp2uri/control_execute.py', '_build_client', 0, 3, 2).
 python_function('src/nlp2uri/control_execute.py', 'execute_control_action', 1, 9, 5).
 python_function('src/nlp2uri/control_execute.py', 'execute_control_plan', 1, 2, 2).
@@ -446,6 +476,9 @@ python_function('tests/test_cli.py', 'test_cli_resolve_json', 1, 3, 4).
 python_function('tests/test_cli.py', 'test_cli_execute_dry_run', 1, 3, 3).
 python_function('tests/test_cli.py', 'test_cli_version', 1, 3, 3).
 python_function('tests/test_cli.py', 'test_cli_plan_ide_chat_with_text_flag', 1, 5, 4).
+python_function('tests/test_cli.py', 'test_cli_control_plan_with_text_flag', 1, 4, 3).
+python_function('tests/test_cli.py', 'test_cli_control_plan_enriches_workspace_and_strategy_hint', 2, 6, 4).
+python_function('tests/test_cli.py', 'test_cli_control_plan_dry_run_help', 1, 2, 2).
 python_function('tests/test_cli.py', 'test_cli_compile_ide_chat_with_text_flag', 1, 3, 3).
 python_function('tests/test_cli.py', 'test_cli_execute_raw_ide_chat_with_text_flag', 1, 5, 3).
 python_function('tests/test_compile.py', 'test_compile_app_open_linux', 0, 3, 2).
@@ -466,6 +499,7 @@ python_function('tests/test_container_driver.py', 'test_registry_lists_container
 python_function('tests/test_cqrs_drivers.py', 'test_registry_loads_all_schemes', 0, 4, 3).
 python_function('tests/test_cqrs_drivers.py', 'test_command_curl_driver_compile', 0, 5, 2).
 python_function('tests/test_cqrs_drivers.py', 'test_getv_driver_compile', 0, 3, 3).
+python_function('tests/test_cqrs_drivers.py', 'test_hillm_driver_compile', 0, 4, 4).
 python_function('tests/test_cqrs_drivers.py', 'test_endpoint_driver_compile', 0, 4, 3).
 python_function('tests/test_cqrs_drivers.py', 'test_endpoint_via_compile_uri_to_actions', 0, 3, 1).
 python_function('tests/test_cqrs_drivers.py', 'test_app_delegate_driver', 0, 3, 5).
@@ -483,12 +517,21 @@ python_function('tests/test_getv_uri.py', 'test_resolve_prompt_env_key', 1, 3, 3
 python_function('tests/test_getv_uri.py', 'test_get_var_masked', 1, 4, 2).
 python_function('tests/test_getv_uri.py', 'test_compile_get_var', 0, 3, 2).
 python_function('tests/test_getv_uri.py', 'test_compile_getv_via_top_level', 0, 2, 2).
+python_function('tests/test_hillm_uri.py', 'test_is_hillm_uri', 0, 4, 2).
+python_function('tests/test_hillm_uri.py', 'test_compile_hillm_uri_returns_os_action', 0, 4, 4).
+python_function('tests/test_hillm_uri.py', 'test_compile_uri_to_actions_routes_hillm', 0, 2, 2).
+python_function('tests/test_hillm_uri.py', 'test_cqrs_hillm_driver_compile', 0, 4, 4).
+python_function('tests/test_hillm_uri.py', 'test_run_uri_dispatches_dry_run_read', 0, 4, 3).
+python_function('tests/test_hillm_uri.py', 'test_uri2hillm_cli_executes_via_subprocess', 0, 5, 3).
+python_function('tests/test_hillm_uri.py', 'test_nlp2uri_systemmap_wrapper_exports', 0, 4, 2).
 python_function('tests/test_http_event_store.py', 'test_http_event_store_posts_to_registry', 0, 4, 9).
 python_function('tests/test_ide_control.py', 'test_parse_ide_chat_send_polish', 0, 4, 2).
 python_function('tests/test_ide_control.py', 'test_parse_ide_chat_paste_no_submit', 0, 4, 1).
 python_function('tests/test_ide_control.py', 'test_parse_ide_status', 0, 3, 1).
 python_function('tests/test_ide_control.py', 'test_build_ide_chat_uri_without_embedded_text', 0, 4, 5).
-python_function('tests/test_ide_control.py', 'test_control_plan_ide_chat_send', 0, 14, 2).
+python_function('tests/test_ide_control.py', 'test_control_plan_ide_chat_send', 0, 15, 2).
+python_function('tests/test_ide_control.py', 'test_control_plan_cursor_submit_default_strategy_hint', 0, 3, 1).
+python_function('tests/test_ide_control.py', 'test_control_plan_no_strategy_hint_when_no_submit', 0, 3, 1).
 python_function('tests/test_ide_control.py', 'test_control_plan_koru_control_status', 0, 5, 1).
 python_function('tests/test_ide_control.py', 'test_nlp2uri_round_trip_includes_control_plan', 0, 5, 3).
 python_function('tests/test_ide_control.py', 'test_compile_ide_chat_os_action_with_extra_text', 0, 6, 2).
@@ -649,8 +692,12 @@ python_method('DelegateCompileDriver', 'compile', 1, 2, 3).
 python_class('src/nlp2uri/cqrs/drivers/endpoint_curl.py', 'EndpointCurlDriver').
 python_method('EndpointCurlDriver', 'compile', 1, 2, 3).
 python_method('EndpointCurlDriver', 'probe', 1, 2, 3).
+python_class('src/nlp2uri/cqrs/drivers/env_uri2env.py', 'EnvUri2envDriver').
+python_method('EnvUri2envDriver', 'compile', 1, 3, 4).
 python_class('src/nlp2uri/cqrs/drivers/getv_cli.py', 'GetvCliDriver').
 python_method('GetvCliDriver', 'compile', 1, 2, 3).
+python_class('src/nlp2uri/cqrs/drivers/hillm_uri2hillm.py', 'HillmUri2hillmDriver').
+python_method('HillmUri2hillmDriver', 'compile', 1, 3, 4).
 python_class('src/nlp2uri/cqrs/drivers/resource_probe.py', 'ResourceProbeDriver').
 python_method('ResourceProbeDriver', 'compile', 1, 5, 4).
 python_method('ResourceProbeDriver', 'probe', 1, 3, 4).
@@ -757,6 +804,8 @@ python_method('NLP2URIService', 'resolve_system_map', 2, 5, 5).
 python_method('NLP2URIService', 'list_getv_uris', 0, 3, 5).
 python_method('NLP2URIService', 'resolve_getv', 1, 4, 3).
 python_method('NLP2URIService', 'read_getv_var', 1, 1, 1).
+python_method('NLP2URIService', 'resolve_env', 1, 4, 2).
+python_method('NLP2URIService', 'materialize_env', 1, 2, 2).
 python_class('src/nlp2uri/systemmap/getv_uri.py', 'ResolvedGetvUri').
 python_method('ResolvedGetvUri', 'to_dict', 0, 1, 0).
 python_class('src/nlp2uri/systemmap/index.py', 'UriMapEntry').
@@ -809,6 +858,8 @@ sumd_declared_file('testql-scenarios/koru-ide-control-roundtrip.testql.toon.yaml
 sumd_declared_file('project/map.toon.yaml', 'analysis').
 sumd_declared_file('project/logic.pl', 'analysis').
 sumd_declared_file('project/calls.toon.yaml', 'analysis').
+sumd_interface('mcp', 'stdio').
+sumd_interface('mcp', '').
 sumd_interface('cli', 'argparse').
 sumd_interface('cli', '').
 sumd_deploy_target('docker_compose').

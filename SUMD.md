@@ -20,7 +20,7 @@ Natural language to URI resolution and cross-platform local URI execution
 ## Metadata
 
 - **name**: `nlp2uri`
-- **version**: `0.4.10`
+- **version**: `0.4.14`
 - **python_requires**: `>=3.10`
 - **license**: Apache-2.0
 - **ai_model**: `openrouter/qwen/qwen3-coder-next`
@@ -33,120 +33,6 @@ Natural language to URI resolution and cross-platform local URI execution
 SUMD (description) → DOQL/source (code) → taskfile (automation) → testql (verification)
 ```
 
-### Koru IDE Control Integration Analysis
-
-Stan na 2026-06-07: `nlp2uri` jest już używany w Koru jako warstwa
-rozpoznania intencji i kontraktu URI dla sterowania IDE, ale nie jest
-jedynym wykonawcą kontroli. Faktyczny transport i dowody wykonania należą do
-Koru/KoruIDE: `koruapi.desktop_uri` importuje `NLP2URIService`, `koru ide
-control plan|execute|list-uris` wywołuje funkcje `desktop_uri_*`, a wykonanie
-schodzi przez `koruide.client.KoruIDEClient` do socketu autopilota lub przez
-fallback CLI `koru autopilot drive/status`.
-
-Bieżący przepływ kontroli IDE:
-
-1. Wejście NL/CLI/MCP trafia do Koru (`coru chat`, `coru text`, `koru ide
-   control ...`) albo bezpośrednio do `nlp2uri`.
-2. `nlp2uri.parse_nl` rozpoznaje intencje IDE: wysłanie tekstu do chatu,
-   wklejenie bez submitu, status pluginu i proste komendy IDE.
-3. `nlp2uri.schemes.ide` buduje abstrakcyjne URI:
-   `ide-chat://{ide}/send`, `ide-command://{ide}/execute`,
-   `koru-control://ide/drive` i `koru-control://ide/status`.
-4. `nlp2uri.resolve` dokleja `control_plan` dla URI kontrolnych, a
-   `nlp2uri.control_compile` kompiluje je do `koru.control.v1` z parametrami:
-   `surface`, `transport`, `operation`, `ide`, `workspace`, `submit`,
-   `require_plugin`, `strategy_hint`, `text_ref`, `verification`,
-   `replay.cli` i `replay.mcp`.
-5. `nlp2uri.control_execute` wykonuje plan:
-   `dry_run` zwraca planowany replay,
-   tryb live używa `koruide_socket` przez `KoruIDEClient`,
-   a gdy `koruide`/daemon nie jest dostępny, wykonuje replay przez `koru`
-   CLI.
-6. Po stronie Koru `koruide` wybiera właściwą sesję pluginu przez
-   `PluginRouter`, dopasowuje IDE i workspace, obsługuje wersję/protokół
-   pluginu i wykonuje `drive/status`.
-7. Orkiestrator Koru interpretuje ACK z pluginu i klasyfikuje dowody:
-   `strict`, `event_only`, `plugin_ack`, `submit_unverified`,
-   `plugin_error`. To jest obecnie najważniejsza warstwa bezpieczeństwa,
-   bo odróżnia samo wklejenie tekstu od potwierdzonego wysłania wiadomości.
-
-Wtyczki są istotne, bo sterowanie IDE nie polega tylko na `xdotool`/klawiaturze.
-Docelowy, wiarygodny path to socket autopilota plus plugin IDE. Plugin rejestruje
-się w daemonie z `ide`, wersją, `buildSha`, `protocolVersion`, capabilities,
-workspace name/folders i katalogiem komend. `PluginRouter` wybiera plugin po IDE
-i workspace, usuwa stare lub niezgodne wersją sesje, a status pluginów może być
-zamieniony przez `nlp2uri.systemmap.koru_ide` na indeks URI:
-`ide://...`, `ide-chat://...`, `ide-command://...`, `koru-control://...`.
-
-Odpowiedź na pytanie "czy nlp2uri jest używany do kontroli": tak, ale jako
-warstwa semantyczna i kontraktowa, nie jako pełny runtime IDE. Koru używa
-`nlp2uri` do przejścia `prompt → URI → koru.control.v1 → replay/execute`.
-Sterowanie w sensie fizycznym wykonuje `koruide` i plugin albo fallback `koru`
-CLI. To jest dobra granica odpowiedzialności: `nlp2uri` normalizuje zamiar,
-a Koru zachowuje wiedzę o konkretnych IDE, socketach, oknach, pluginach i
-dowodach wykonania.
-
-Najważniejsze braki do rozbudowy w `nlp2uri`, żeby lepiej obsługiwać Koru:
-
-1. Rozszerzyć schematy kontrolne poza `send/status`:
-   `ide-chat://{ide}/open`, `ide-chat://{ide}/focus`,
-   `ide-chat://{ide}/paste`, `ide-chat://{ide}/submit`,
-   `ide-command://{ide}/execute` z katalogu capability oraz
-   `koru-control://plugin/install|reload|connect|diagnose`.
-2. Uporządkować payload tekstowy: URI nie powinno nieść dużej treści promptu;
-   `text_ref`/`--text`/`--text-file` powinny stać się podstawowym kontraktem
-   dla CLI, REST i MCP, z jasną walidacją "brak tekstu" przed wykonaniem.
-3. Dodać wersjonowany JSON Schema dla `koru.control.v1`, w tym pola
-   `contract_version`, `capability`, `workspace`, `socket`, `verification_policy`,
-   `idempotency_key`, `timeout_ms` i oczekiwane statusy wykonania.
-4. Wzmocnić discovery z live statusu Koru:
-   indeks URI powinien zawierać capabilities pluginu, wersję protokołu,
-   workspace matching, health socketu, build mismatch i rekomendowany replay.
-5. Rozbudować parser NL o polskie i angielskie warianty operacyjne:
-   "otwórz chat", "skup Cursor", "wklej bez wysyłania", "wyślij tylko przez
-   plugin", "sprawdź czy wiadomość została wysłana", "uruchom komendę z
-   katalogu pluginu".
-6. Dodać polityki bezpieczeństwa sterowania: `require_plugin`, `dry_run`
-   domyślny dla niepewnych komend, blokady dla submitu bez tekstu, limity
-   długości payloadu, allowlista IDE/komend i jawne rozróżnienie paste vs send.
-7. Zacieśnić MCP/REST parity: narzędzia MCP `compile_control`,
-   `execute_control`, `list_koru_ide_uris` powinny mieć te same argumenty i
-   semantykę co CLI `plan/compile/execute`, szczególnie `text`,
-   `text_file`, `dry_run`, `uri_only`, `workspace`, `require_plugin`.
-8. Dodać testy kontraktowe dla live/fake daemonu Koru: planowanie, dry-run,
-   fake socket ACK, brak daemonu, brak pluginu, require-plugin, workspace
-   mismatch, no-submit, submit-unverified i status pluginu.
-
-Minimalny docelowy kontrakt dla Koru powinien wyglądać tak:
-
-```json
-{
-  "command_version": "koru.control.v1",
-  "surface": "ide_chat",
-  "transport": "koruide_socket",
-  "operation": "drive",
-  "ide": "cursor",
-  "workspace": "/path/to/project",
-  "submit": true,
-  "require_plugin": false,
-  "text_ref": "external_payload",
-  "verification": {
-    "expect_ack": true,
-    "expect_message_sent": true,
-    "timeout_ms": 120000
-  },
-  "replay": {
-    "cli": ["koru", "autopilot", "drive", "--ide", "cursor", "--prompt", "..."],
-    "mcp": "koru_ide_drive"
-  }
-}
-```
-
-Priorytet techniczny: najpierw domknąć kontrakt i testy `koru.control.v1`,
-potem rozszerzać surface/operacje. Bez tego `nlp2uri` może rozpoznawać więcej
-komend, ale Koru nie będzie miał stabilnego, weryfikowalnego sposobu ich
-wykonania przez pluginy.
-
 ### DOQL Application Declaration (`app.doql.less`)
 
 ```less markpact:doql path=app.doql.less
@@ -154,19 +40,48 @@ wykonania przez pluginy.
 
 app {
   name: nlp2uri;
-  version: 0.4.10;
+  version: 0.4.14;
 }
 
 dependencies {
   runtime: pyyaml>=6.0;
   dev: "pytest>=8.0, pytest-cov>=5.0, goal>=2.1.0, costs>=0.1.20, pfix>=0.1.60";
+  linux: "dbus-python>=1.3.2; sys_platform == 'linux'";
+  windows: "pywin32>=306; sys_platform == 'win32'";
+  full: psutil>=6.0;
+  envmap: "env2llm>=0.1.4, getv>=0.2.0, nlp2env>=0.1.2";
+  codegen: "pyyaml>=6.0, grpcio-tools>=1.60, protobuf>=4.25";
+}
+
+interface[type="mcp"] {
+  framework: stdio;
+}
+interface[type="mcp"] page[name="nlp2uri-mcp"] {
+  entry: nlp2uri.integrators.mcp_server:main;
 }
 
 interface[type="cli"] {
   framework: argparse;
 }
 interface[type="cli"] page[name="nlp2uri"] {
+  entry: nlp2uri.cli:main;
+}
 
+integration[name="email"] {
+  type: smtp;
+}
+
+integration[name="nlp"] {
+  type: api;
+}
+
+tests {
+  import: testql-scenarios/**/*.testql.toon.yaml;
+}
+
+env_vars {
+  keys: OPENROUTER_API_KEY, LLM_MODEL, PFIX_AUTO_APPLY, PFIX_AUTO_INSTALL_DEPS, PFIX_AUTO_RESTART, PFIX_MAX_RETRIES, PFIX_DRY_RUN, PFIX_ENABLED, PFIX_GIT_COMMIT, PFIX_GIT_PREFIX, PFIX_CREATE_BACKUPS, OLLAMA_API_URL, OLLAMA_LLM_MODEL, XDG_CONFIG_HOME, NLP2URI_CAPTURE_DIR, NLP2URI_KORU_CLI_TIMEOUT, KORU_AUTOPILOT_INSTANCE, KORU_AUTOPILOT_SOCKET, XDG_RUNTIME_DIR, NLP2URI_EXAMPLE_DIR, NLP2DSL_EXAMPLE_DIR, SMTP_HOST, REDIS_URL, PROCESS_REGISTRY_URL, NLP2DSL_AUTO_EXECUTE, GETV_HOME, NLP2DSL_BACKEND_URL, NLP2DSL_WORKER_URL, TODOMAT_COMPOSE_DIR;
+  profile_smtp: SMTP_HOST;
 }
 
 deploy {
@@ -177,7 +92,20 @@ deploy {
 environment[name="local"] {
   runtime: docker-compose;
   env_file: .env;
+  template_file: .env.example;
   python_version: >=3.10;
+  vars: LLM_MODEL, OLLAMA_API_URL, OLLAMA_LLM_MODEL, OPENROUTER_API_KEY, PFIX_AUTO_APPLY, PFIX_AUTO_INSTALL_DEPS, PFIX_AUTO_RESTART, PFIX_CREATE_BACKUPS, PFIX_DRY_RUN, PFIX_ENABLED, PFIX_GIT_COMMIT, PFIX_GIT_PREFIX, PFIX_MAX_RETRIES;
+  profile_smtp: SMTP_HOST;
+  runtime_llm: OPENROUTER_API_KEY;
+  runtime_ollama: OLLAMA_API_URL, OLLAMA_LLM_MODEL;
+  runtime_pfix: PFIX_AUTO_APPLY, PFIX_AUTO_INSTALL_DEPS, PFIX_AUTO_RESTART, PFIX_CREATE_BACKUPS, PFIX_DRY_RUN, PFIX_ENABLED, PFIX_GIT_COMMIT, PFIX_GIT_PREFIX, PFIX_MAX_RETRIES;
+}
+
+environment[name="ollama"] {
+  runtime: docker-compose;
+  env_file: .env.ollama;
+  vars: LLM_MODEL, OLLAMA_API_URL;
+  runtime_ollama: OLLAMA_API_URL;
 }
 ```
 
@@ -256,7 +184,7 @@ SHELL[4]{command, exit_code}:
 ```yaml
 project:
   name: nlp2uri
-  version: 0.4.10
+  version: 0.4.14
   env: local
 ```
 
@@ -325,14 +253,14 @@ pip install -e .[dev]
 ### `project/map.toon.yaml`
 
 ```toon markpact:analysis path=project/map.toon.yaml
-# nlp2uri | 120f 11187L | python:104,shell:15,less:1 | 2026-06-07
-# stats: 447 func | 52 cls | 120 mod | CC̄=3.6 | critical:16 | cycles:0
-# alerts[5]: CC compile_uri_to_control_plan=25; CC build_koru_ide_uri_index=22; CC build_uri=19; CC compile_uri_to_actions=18; CC _match_command_entry=16
-# hotspots[5]: write_environment_map fan=26; compile_uri_to_actions fan=19; build_getv_uri_index fan=19; main fan=18; build_uri fan=17
+# nlp2uri | 126f 12109L | python:110,shell:15,less:1 | 2026-06-08
+# stats: 484 func | 54 cls | 126 mod | CC̄=3.7 | critical:22 | cycles:0
+# alerts[5]: CC compile_uri_to_control_plan=25; CC compile_uri_to_actions=22; CC build_koru_ide_uri_index=22; CC build_uri=19; CC action_control_execute=18
+# hotspots[5]: write_environment_map fan=26; compile_uri_to_actions fan=23; build_getv_uri_index fan=19; main fan=18; build_uri fan=17
 # evolution: baseline
 # Keys: M=modules, D=details, i=imports, e=exports, c=classes, f=functions, m=methods
-M[120]:
-  app.doql.less,30
+M[126]:
+  app.doql.less,72
   examples/execute/dry-run/e2e.sh,12
   examples/execute/dry-run/main.py,30
   examples/integrators/mcp-stdio/e2e.sh,16
@@ -362,12 +290,13 @@ M[120]:
   src/nlp2uri/adapters/mcp.py,463
   src/nlp2uri/adapters/rest.py,88
   src/nlp2uri/adapters/shell.py,67
-  src/nlp2uri/cli.py,185
-  src/nlp2uri/cli_parser.py,137
-  src/nlp2uri/compile.py,651
+  src/nlp2uri/cli.py,190
+  src/nlp2uri/cli_parser.py,140
+  src/nlp2uri/compile.py,663
   src/nlp2uri/config.py,231
-  src/nlp2uri/control_compile.py,229
-  src/nlp2uri/control_execute.py,340
+  src/nlp2uri/control_cli.py,524
+  src/nlp2uri/control_compile.py,245
+  src/nlp2uri/control_execute.py,342
   src/nlp2uri/cqrs/__init__.py,9
   src/nlp2uri/cqrs/base.py,98
   src/nlp2uri/cqrs/dispatcher.py,118
@@ -377,7 +306,9 @@ M[120]:
   src/nlp2uri/cqrs/drivers/container_docker.py,89
   src/nlp2uri/cqrs/drivers/delegate.py,30
   src/nlp2uri/cqrs/drivers/endpoint_curl.py,34
+  src/nlp2uri/cqrs/drivers/env_uri2env.py,31
   src/nlp2uri/cqrs/drivers/getv_cli.py,28
+  src/nlp2uri/cqrs/drivers/hillm_uri2hillm.py,32
   src/nlp2uri/cqrs/drivers/resource_probe.py,36
   src/nlp2uri/cqrs/drivers/runtime_curl.py,35
   src/nlp2uri/cqrs/drivers/service_ops.py,129
@@ -412,15 +343,17 @@ M[120]:
   src/nlp2uri/schemes/http.py,23
   src/nlp2uri/schemes/ide.py,137
   src/nlp2uri/schemes/util.py,48
-  src/nlp2uri/service.py,229
+  src/nlp2uri/service.py,259
   src/nlp2uri/systemmap/__init__.py,81
   src/nlp2uri/systemmap/compile.py,180
   src/nlp2uri/systemmap/context.py,48
   src/nlp2uri/systemmap/encode.py,16
+  src/nlp2uri/systemmap/env_uri.py,43
   src/nlp2uri/systemmap/export.py,150
   src/nlp2uri/systemmap/fallback.py,53
   src/nlp2uri/systemmap/getv_load.py,98
   src/nlp2uri/systemmap/getv_uri.py,226
+  src/nlp2uri/systemmap/hillm_uri.py,25
   src/nlp2uri/systemmap/index.py,352
   src/nlp2uri/systemmap/koru_ide.py,183
   src/nlp2uri/systemmap/load.py,47
@@ -430,14 +363,15 @@ M[120]:
   tests/integration/test_xdg_handler.py,99
   tests/test_adapters.py,120
   tests/test_artifact_driver.py,57
-  tests/test_cli.py,92
+  tests/test_cli.py,142
   tests/test_compile.py,34
   tests/test_config.py,65
   tests/test_container_driver.py,56
-  tests/test_cqrs_drivers.py,115
+  tests/test_cqrs_drivers.py,127
   tests/test_getv_uri.py,74
+  tests/test_hillm_uri.py,80
   tests/test_http_event_store.py,51
-  tests/test_ide_control.py,118
+  tests/test_ide_control.py,133
   tests/test_intents_phase2.py,112
   tests/test_koru_control_execute.py,96
   tests/test_koru_ide_control.py,79
@@ -601,11 +535,37 @@ D:
     ensure_config(path)
     get_effective_platform(override)
     reset_config_cache()
+  src/nlp2uri/control_cli.py:
+    e: _add_lane_args,add_control_parser,_print_json,_resolve_ide,_with_instance_env,_socket_basename,_resolve_socket_path,_client_factory,_fetch_autopilot_status,_resolve_workspace_from_status,_resolve_workspace,_default_strategy_hint,_control_uri,_apply_runtime_overrides,_text_ref_from_payload,_submit_from_payload,_finalize_control_plan_payload,_plan_payload,action_control_plan,action_control_execute,_load_status_json,action_control_list_uris,dispatch_control_action
+    _add_lane_args(parser)
+    add_control_parser(sub)
+    _print_json(payload)
+    _resolve_ide(args)
+    _with_instance_env(args)
+    _socket_basename(instance)
+    _resolve_socket_path(args;ide)
+    _client_factory(args;ide)
+    _fetch_autopilot_status(args;ide)
+    _resolve_workspace_from_status(status;ide;project)
+    _resolve_workspace(args;ide)
+    _default_strategy_hint(ide;submit)
+    _control_uri()
+    _apply_runtime_overrides(uri)
+    _text_ref_from_payload(payload)
+    _submit_from_payload(payload)
+    _finalize_control_plan_payload(payload)
+    _plan_payload(prompt)
+    action_control_plan(args)
+    action_control_execute(args)
+    _load_status_json(args)
+    action_control_list_uris(args)
+    dispatch_control_action(args)
   src/nlp2uri/control_compile.py:
-    e: is_control_uri,_query_params,_truthy,_replay_cli_drive,_replay_cli_status,compile_uri_to_control_plan
+    e: is_control_uri,_query_params,_truthy,_default_strategy_hint,_replay_cli_drive,_replay_cli_status,compile_uri_to_control_plan
     is_control_uri(uri)
     _query_params(parsed)
     _truthy(value)
+    _default_strategy_hint(ide;submit;hint)
     _replay_cli_drive()
     _replay_cli_status()
     compile_uri_to_control_plan(uri)
@@ -650,9 +610,15 @@ D:
   src/nlp2uri/cqrs/drivers/endpoint_curl.py:
     e: EndpointCurlDriver
     EndpointCurlDriver: compile(1),probe(1)
+  src/nlp2uri/cqrs/drivers/env_uri2env.py:
+    e: EnvUri2envDriver
+    EnvUri2envDriver: compile(1)
   src/nlp2uri/cqrs/drivers/getv_cli.py:
     e: GetvCliDriver
     GetvCliDriver: compile(1)
+  src/nlp2uri/cqrs/drivers/hillm_uri2hillm.py:
+    e: HillmUri2hillmDriver
+    HillmUri2hillmDriver: compile(1)
   src/nlp2uri/cqrs/drivers/resource_probe.py:
     e: ResourceProbeDriver
     ResourceProbeDriver: compile(1),probe(1)
@@ -841,7 +807,7 @@ D:
     percent_encode_segment(value)
   src/nlp2uri/service.py:
     e: NLP2URIService
-    NLP2URIService: default(1),for_platform(2),_cfg(0),_host(0),from_prompt(1),resolve(1),compile(1),execute(1),handle_prompt(1),handle_uri(1),list_koru_ide_uris(1),list_system_uris(1),resolve_system_map(2),list_getv_uris(0),resolve_getv(1),read_getv_var(1)  # Reusable facade: prompt → URI → compile → execute.
+    NLP2URIService: default(1),for_platform(2),_cfg(0),_host(0),from_prompt(1),resolve(1),compile(1),execute(1),handle_prompt(1),handle_uri(1),list_koru_ide_uris(1),list_system_uris(1),resolve_system_map(2),list_getv_uris(0),resolve_getv(1),read_getv_var(1),resolve_env(1),materialize_env(1)  # Reusable facade: prompt → URI → compile → execute.
   src/nlp2uri/systemmap/__init__.py:
   src/nlp2uri/systemmap/compile.py:
     e: is_system_map_uri,_decode_segment,_backend_url,_worker_url,compile_system_map_uri,_compile_command,_compile_runtime,_compile_resource,_compile_artifact,_compile_access,_compile_metadata
@@ -864,6 +830,7 @@ D:
     e: encode_segment,encode_path
     encode_segment(value)
     encode_path(value)
+  src/nlp2uri/systemmap/env_uri.py:
   src/nlp2uri/systemmap/export.py:
     e: _require_env2llm,_ir_field,apply_desktop_uri_mapping,write_environment_map
     _require_env2llm()
@@ -894,6 +861,7 @@ D:
     resolve_prompt_against_getv(prompt)
     compile_getv_uri(uri;host)
     get_getv_var_value(uri)
+  src/nlp2uri/systemmap/hillm_uri.py:
   src/nlp2uri/systemmap/index.py:
     e: _model_dump,_ir_field,_add_entry,_index_environment,_index_runtimes,_index_commands,_index_resources,_index_access,_index_artifacts,_index_policies,_index_schedules,_index_generated_services,_index_deploy,_index_desktop,_index_validations,build_uri_index,_get_id,_get_id_field,UriMapEntry,UriMap
     UriMapEntry: to_dict(0)  # One addressable entity in a SystemMap.
@@ -979,11 +947,14 @@ D:
     test_build_artifact_actions_open()
     test_cqrs_artifact_driver_compile()
   tests/test_cli.py:
-    e: test_cli_resolve_json,test_cli_execute_dry_run,test_cli_version,test_cli_plan_ide_chat_with_text_flag,test_cli_compile_ide_chat_with_text_flag,test_cli_execute_raw_ide_chat_with_text_flag
+    e: test_cli_resolve_json,test_cli_execute_dry_run,test_cli_version,test_cli_plan_ide_chat_with_text_flag,test_cli_control_plan_with_text_flag,test_cli_control_plan_enriches_workspace_and_strategy_hint,test_cli_control_plan_dry_run_help,test_cli_compile_ide_chat_with_text_flag,test_cli_execute_raw_ide_chat_with_text_flag
     test_cli_resolve_json(capsys)
     test_cli_execute_dry_run(capsys)
     test_cli_version(capsys)
     test_cli_plan_ide_chat_with_text_flag(capsys)
+    test_cli_control_plan_with_text_flag(capsys)
+    test_cli_control_plan_enriches_workspace_and_strategy_hint(capsys;monkeypatch)
+    test_cli_control_plan_dry_run_help(capsys)
     test_cli_compile_ide_chat_with_text_flag(capsys)
     test_cli_execute_raw_ide_chat_with_text_flag(capsys)
   tests/test_compile.py:
@@ -1008,10 +979,11 @@ D:
     test_container_exec_compile()
     test_registry_lists_container_target()
   tests/test_cqrs_drivers.py:
-    e: test_registry_loads_all_schemes,test_command_curl_driver_compile,test_getv_driver_compile,test_endpoint_driver_compile,test_endpoint_via_compile_uri_to_actions,test_app_delegate_driver,test_execute_dry_run_appends_events,test_probe_endpoint,test_runtime_curl_probe,test_driver_registry_get_builtin,test_service_curl_driver_maps_todomat_health,test_service_docker_driver_compose_ps,test_service_systemd_driver_unit
+    e: test_registry_loads_all_schemes,test_command_curl_driver_compile,test_getv_driver_compile,test_hillm_driver_compile,test_endpoint_driver_compile,test_endpoint_via_compile_uri_to_actions,test_app_delegate_driver,test_execute_dry_run_appends_events,test_probe_endpoint,test_runtime_curl_probe,test_driver_registry_get_builtin,test_service_curl_driver_maps_todomat_health,test_service_docker_driver_compose_ps,test_service_systemd_driver_unit
     test_registry_loads_all_schemes()
     test_command_curl_driver_compile()
     test_getv_driver_compile()
+    test_hillm_driver_compile()
     test_endpoint_driver_compile()
     test_endpoint_via_compile_uri_to_actions()
     test_app_delegate_driver()
@@ -1031,17 +1003,28 @@ D:
     test_get_var_masked(getv_home)
     test_compile_get_var()
     test_compile_getv_via_top_level()
+  tests/test_hillm_uri.py:
+    e: test_is_hillm_uri,test_compile_hillm_uri_returns_os_action,test_compile_uri_to_actions_routes_hillm,test_cqrs_hillm_driver_compile,test_run_uri_dispatches_dry_run_read,test_uri2hillm_cli_executes_via_subprocess,test_nlp2uri_systemmap_wrapper_exports
+    test_is_hillm_uri()
+    test_compile_hillm_uri_returns_os_action()
+    test_compile_uri_to_actions_routes_hillm()
+    test_cqrs_hillm_driver_compile()
+    test_run_uri_dispatches_dry_run_read()
+    test_uri2hillm_cli_executes_via_subprocess()
+    test_nlp2uri_systemmap_wrapper_exports()
   tests/test_http_event_store.py:
     e: test_http_event_store_posts_to_registry,_Handler
     _Handler: do_POST(0),log_message(1)
     test_http_event_store_posts_to_registry()
   tests/test_ide_control.py:
-    e: test_parse_ide_chat_send_polish,test_parse_ide_chat_paste_no_submit,test_parse_ide_status,test_build_ide_chat_uri_without_embedded_text,test_control_plan_ide_chat_send,test_control_plan_koru_control_status,test_nlp2uri_round_trip_includes_control_plan,test_compile_ide_chat_os_action_with_extra_text,test_compile_ide_chat_requires_text,test_is_control_uri,test_resolve_ide_status_uri
+    e: test_parse_ide_chat_send_polish,test_parse_ide_chat_paste_no_submit,test_parse_ide_status,test_build_ide_chat_uri_without_embedded_text,test_control_plan_ide_chat_send,test_control_plan_cursor_submit_default_strategy_hint,test_control_plan_no_strategy_hint_when_no_submit,test_control_plan_koru_control_status,test_nlp2uri_round_trip_includes_control_plan,test_compile_ide_chat_os_action_with_extra_text,test_compile_ide_chat_requires_text,test_is_control_uri,test_resolve_ide_status_uri
     test_parse_ide_chat_send_polish()
     test_parse_ide_chat_paste_no_submit()
     test_parse_ide_status()
     test_build_ide_chat_uri_without_embedded_text()
     test_control_plan_ide_chat_send()
+    test_control_plan_cursor_submit_default_strategy_hint()
+    test_control_plan_no_strategy_hint_when_no_submit()
     test_control_plan_koru_control_status()
     test_nlp2uri_round_trip_includes_control_plan()
     test_compile_ide_chat_os_action_with_extra_text()
@@ -1157,10 +1140,10 @@ D:
 
 ```prolog markpact:analysis path=project/logic.pl
 % ── Project Metadata ─────────────────────────────────────
-project_metadata('nlp2uri', '0.4.10', 'python').
+project_metadata('nlp2uri', '0.4.14', 'python').
 
 % ── Project Files ────────────────────────────────────────
-project_file('app.doql.less', 30, 'less').
+project_file('app.doql.less', 72, 'less').
 project_file('examples/execute/dry-run/e2e.sh', 12, 'shell').
 project_file('examples/execute/dry-run/main.py', 30, 'python').
 project_file('examples/integrators/mcp-stdio/e2e.sh', 16, 'shell').
@@ -1190,12 +1173,13 @@ project_file('src/nlp2uri/adapters/cli.py', 54, 'python').
 project_file('src/nlp2uri/adapters/mcp.py', 463, 'python').
 project_file('src/nlp2uri/adapters/rest.py', 88, 'python').
 project_file('src/nlp2uri/adapters/shell.py', 67, 'python').
-project_file('src/nlp2uri/cli.py', 185, 'python').
-project_file('src/nlp2uri/cli_parser.py', 137, 'python').
-project_file('src/nlp2uri/compile.py', 651, 'python').
+project_file('src/nlp2uri/cli.py', 190, 'python').
+project_file('src/nlp2uri/cli_parser.py', 140, 'python').
+project_file('src/nlp2uri/compile.py', 663, 'python').
 project_file('src/nlp2uri/config.py', 231, 'python').
-project_file('src/nlp2uri/control_compile.py', 229, 'python').
-project_file('src/nlp2uri/control_execute.py', 340, 'python').
+project_file('src/nlp2uri/control_cli.py', 524, 'python').
+project_file('src/nlp2uri/control_compile.py', 245, 'python').
+project_file('src/nlp2uri/control_execute.py', 342, 'python').
 project_file('src/nlp2uri/cqrs/__init__.py', 9, 'python').
 project_file('src/nlp2uri/cqrs/base.py', 98, 'python').
 project_file('src/nlp2uri/cqrs/dispatcher.py', 118, 'python').
@@ -1205,7 +1189,9 @@ project_file('src/nlp2uri/cqrs/drivers/command_curl.py', 40, 'python').
 project_file('src/nlp2uri/cqrs/drivers/container_docker.py', 89, 'python').
 project_file('src/nlp2uri/cqrs/drivers/delegate.py', 30, 'python').
 project_file('src/nlp2uri/cqrs/drivers/endpoint_curl.py', 34, 'python').
+project_file('src/nlp2uri/cqrs/drivers/env_uri2env.py', 31, 'python').
 project_file('src/nlp2uri/cqrs/drivers/getv_cli.py', 28, 'python').
+project_file('src/nlp2uri/cqrs/drivers/hillm_uri2hillm.py', 32, 'python').
 project_file('src/nlp2uri/cqrs/drivers/resource_probe.py', 36, 'python').
 project_file('src/nlp2uri/cqrs/drivers/runtime_curl.py', 35, 'python').
 project_file('src/nlp2uri/cqrs/drivers/service_ops.py', 129, 'python').
@@ -1240,15 +1226,17 @@ project_file('src/nlp2uri/schemes/file.py', 26, 'python').
 project_file('src/nlp2uri/schemes/http.py', 23, 'python').
 project_file('src/nlp2uri/schemes/ide.py', 137, 'python').
 project_file('src/nlp2uri/schemes/util.py', 48, 'python').
-project_file('src/nlp2uri/service.py', 229, 'python').
+project_file('src/nlp2uri/service.py', 259, 'python').
 project_file('src/nlp2uri/systemmap/__init__.py', 81, 'python').
 project_file('src/nlp2uri/systemmap/compile.py', 180, 'python').
 project_file('src/nlp2uri/systemmap/context.py', 48, 'python').
 project_file('src/nlp2uri/systemmap/encode.py', 16, 'python').
+project_file('src/nlp2uri/systemmap/env_uri.py', 43, 'python').
 project_file('src/nlp2uri/systemmap/export.py', 150, 'python').
 project_file('src/nlp2uri/systemmap/fallback.py', 53, 'python').
 project_file('src/nlp2uri/systemmap/getv_load.py', 98, 'python').
 project_file('src/nlp2uri/systemmap/getv_uri.py', 226, 'python').
+project_file('src/nlp2uri/systemmap/hillm_uri.py', 25, 'python').
 project_file('src/nlp2uri/systemmap/index.py', 352, 'python').
 project_file('src/nlp2uri/systemmap/koru_ide.py', 183, 'python').
 project_file('src/nlp2uri/systemmap/load.py', 47, 'python').
@@ -1258,14 +1246,15 @@ project_file('tests/conftest.py', 18, 'python').
 project_file('tests/integration/test_xdg_handler.py', 99, 'python').
 project_file('tests/test_adapters.py', 120, 'python').
 project_file('tests/test_artifact_driver.py', 57, 'python').
-project_file('tests/test_cli.py', 92, 'python').
+project_file('tests/test_cli.py', 142, 'python').
 project_file('tests/test_compile.py', 34, 'python').
 project_file('tests/test_config.py', 65, 'python').
 project_file('tests/test_container_driver.py', 56, 'python').
-project_file('tests/test_cqrs_drivers.py', 115, 'python').
+project_file('tests/test_cqrs_drivers.py', 127, 'python').
 project_file('tests/test_getv_uri.py', 74, 'python').
+project_file('tests/test_hillm_uri.py', 80, 'python').
 project_file('tests/test_http_event_store.py', 51, 'python').
-project_file('tests/test_ide_control.py', 118, 'python').
+project_file('tests/test_ide_control.py', 133, 'python').
 project_file('tests/test_intents_phase2.py', 112, 'python').
 project_file('tests/test_koru_control_execute.py', 96, 'python').
 project_file('tests/test_koru_ide_control.py', 79, 'python').
@@ -1315,12 +1304,12 @@ python_function('src/nlp2uri/cli.py', '_run_shell', 1, 5, 9).
 python_function('src/nlp2uri/cli.py', '_run_adapter_command', 1, 5, 9).
 python_function('src/nlp2uri/cli.py', '_run_envmap', 1, 4, 8).
 python_function('src/nlp2uri/cli.py', '_run_execute', 1, 6, 11).
-python_function('src/nlp2uri/cli.py', '_dispatch_command', 1, 6, 7).
+python_function('src/nlp2uri/cli.py', '_dispatch_command', 1, 7, 8).
 python_function('src/nlp2uri/cli.py', 'main', 1, 1, 3).
 python_function('src/nlp2uri/cli_parser.py', 'add_common_args', 1, 3, 1).
 python_function('src/nlp2uri/cli_parser.py', 'add_text_args', 1, 1, 2).
-python_function('src/nlp2uri/cli_parser.py', 'build_parser', 0, 1, 6).
-python_function('src/nlp2uri/compile.py', 'compile_uri_to_actions', 2, 18, 19).
+python_function('src/nlp2uri/cli_parser.py', 'build_parser', 0, 1, 7).
+python_function('src/nlp2uri/compile.py', 'compile_uri_to_actions', 2, 22, 23).
 python_function('src/nlp2uri/compile.py', '_query_params', 1, 3, 3).
 python_function('src/nlp2uri/compile.py', '_first_available', 1, 3, 1).
 python_function('src/nlp2uri/compile.py', '_open_uri', 2, 5, 2).
@@ -1387,15 +1376,39 @@ python_function('src/nlp2uri/config.py', 'save_config', 2, 4, 8).
 python_function('src/nlp2uri/config.py', 'ensure_config', 1, 4, 6).
 python_function('src/nlp2uri/config.py', 'get_effective_platform', 1, 2, 2).
 python_function('src/nlp2uri/config.py', 'reset_config_cache', 0, 1, 0).
+python_function('src/nlp2uri/control_cli.py', '_add_lane_args', 1, 1, 2).
+python_function('src/nlp2uri/control_cli.py', 'add_control_parser', 1, 1, 5).
+python_function('src/nlp2uri/control_cli.py', '_print_json', 1, 1, 2).
+python_function('src/nlp2uri/control_cli.py', '_resolve_ide', 1, 8, 5).
+python_function('src/nlp2uri/control_cli.py', '_with_instance_env', 1, 3, 2).
+python_function('src/nlp2uri/control_cli.py', '_socket_basename', 1, 7, 5).
+python_function('src/nlp2uri/control_cli.py', '_resolve_socket_path', 2, 6, 8).
+python_function('src/nlp2uri/control_cli.py', '_client_factory', 2, 1, 2).
+python_function('src/nlp2uri/control_cli.py', '_fetch_autopilot_status', 2, 6, 8).
+python_function('src/nlp2uri/control_cli.py', '_resolve_workspace_from_status', 3, 10, 7).
+python_function('src/nlp2uri/control_cli.py', '_resolve_workspace', 2, 5, 6).
+python_function('src/nlp2uri/control_cli.py', '_default_strategy_hint', 2, 3, 2).
+python_function('src/nlp2uri/control_cli.py', '_control_uri', 0, 5, 2).
+python_function('src/nlp2uri/control_cli.py', '_apply_runtime_overrides', 1, 5, 7).
+python_function('src/nlp2uri/control_cli.py', '_text_ref_from_payload', 1, 13, 3).
+python_function('src/nlp2uri/control_cli.py', '_submit_from_payload', 1, 10, 6).
+python_function('src/nlp2uri/control_cli.py', '_finalize_control_plan_payload', 1, 12, 11).
+python_function('src/nlp2uri/control_cli.py', '_plan_payload', 1, 9, 6).
+python_function('src/nlp2uri/control_cli.py', 'action_control_plan', 1, 7, 8).
+python_function('src/nlp2uri/control_cli.py', 'action_control_execute', 1, 18, 13).
+python_function('src/nlp2uri/control_cli.py', '_load_status_json', 1, 11, 10).
+python_function('src/nlp2uri/control_cli.py', 'action_control_list_uris', 1, 8, 12).
+python_function('src/nlp2uri/control_cli.py', 'dispatch_control_action', 1, 4, 4).
 python_function('src/nlp2uri/control_compile.py', 'is_control_uri', 1, 2, 2).
 python_function('src/nlp2uri/control_compile.py', '_query_params', 1, 3, 3).
 python_function('src/nlp2uri/control_compile.py', '_truthy', 1, 3, 2).
+python_function('src/nlp2uri/control_compile.py', '_default_strategy_hint', 3, 4, 2).
 python_function('src/nlp2uri/control_compile.py', '_replay_cli_drive', 0, 6, 2).
 python_function('src/nlp2uri/control_compile.py', '_replay_cli_status', 0, 3, 1).
-python_function('src/nlp2uri/control_compile.py', 'compile_uri_to_control_plan', 1, 25, 12).
+python_function('src/nlp2uri/control_compile.py', 'compile_uri_to_control_plan', 1, 25, 13).
 python_function('src/nlp2uri/control_execute.py', 'koruide_available', 0, 1, 0).
 python_function('src/nlp2uri/control_execute.py', 'koruide_missing_message', 0, 2, 0).
-python_function('src/nlp2uri/control_execute.py', '_verification_status', 2, 11, 2).
+python_function('src/nlp2uri/control_execute.py', '_verification_status', 2, 12, 2).
 python_function('src/nlp2uri/control_execute.py', '_build_client', 0, 3, 2).
 python_function('src/nlp2uri/control_execute.py', 'execute_control_action', 1, 9, 5).
 python_function('src/nlp2uri/control_execute.py', 'execute_control_plan', 1, 2, 2).
@@ -1604,6 +1617,9 @@ python_function('tests/test_cli.py', 'test_cli_resolve_json', 1, 3, 4).
 python_function('tests/test_cli.py', 'test_cli_execute_dry_run', 1, 3, 3).
 python_function('tests/test_cli.py', 'test_cli_version', 1, 3, 3).
 python_function('tests/test_cli.py', 'test_cli_plan_ide_chat_with_text_flag', 1, 5, 4).
+python_function('tests/test_cli.py', 'test_cli_control_plan_with_text_flag', 1, 4, 3).
+python_function('tests/test_cli.py', 'test_cli_control_plan_enriches_workspace_and_strategy_hint', 2, 6, 4).
+python_function('tests/test_cli.py', 'test_cli_control_plan_dry_run_help', 1, 2, 2).
 python_function('tests/test_cli.py', 'test_cli_compile_ide_chat_with_text_flag', 1, 3, 3).
 python_function('tests/test_cli.py', 'test_cli_execute_raw_ide_chat_with_text_flag', 1, 5, 3).
 python_function('tests/test_compile.py', 'test_compile_app_open_linux', 0, 3, 2).
@@ -1624,6 +1640,7 @@ python_function('tests/test_container_driver.py', 'test_registry_lists_container
 python_function('tests/test_cqrs_drivers.py', 'test_registry_loads_all_schemes', 0, 4, 3).
 python_function('tests/test_cqrs_drivers.py', 'test_command_curl_driver_compile', 0, 5, 2).
 python_function('tests/test_cqrs_drivers.py', 'test_getv_driver_compile', 0, 3, 3).
+python_function('tests/test_cqrs_drivers.py', 'test_hillm_driver_compile', 0, 4, 4).
 python_function('tests/test_cqrs_drivers.py', 'test_endpoint_driver_compile', 0, 4, 3).
 python_function('tests/test_cqrs_drivers.py', 'test_endpoint_via_compile_uri_to_actions', 0, 3, 1).
 python_function('tests/test_cqrs_drivers.py', 'test_app_delegate_driver', 0, 3, 5).
@@ -1641,12 +1658,21 @@ python_function('tests/test_getv_uri.py', 'test_resolve_prompt_env_key', 1, 3, 3
 python_function('tests/test_getv_uri.py', 'test_get_var_masked', 1, 4, 2).
 python_function('tests/test_getv_uri.py', 'test_compile_get_var', 0, 3, 2).
 python_function('tests/test_getv_uri.py', 'test_compile_getv_via_top_level', 0, 2, 2).
+python_function('tests/test_hillm_uri.py', 'test_is_hillm_uri', 0, 4, 2).
+python_function('tests/test_hillm_uri.py', 'test_compile_hillm_uri_returns_os_action', 0, 4, 4).
+python_function('tests/test_hillm_uri.py', 'test_compile_uri_to_actions_routes_hillm', 0, 2, 2).
+python_function('tests/test_hillm_uri.py', 'test_cqrs_hillm_driver_compile', 0, 4, 4).
+python_function('tests/test_hillm_uri.py', 'test_run_uri_dispatches_dry_run_read', 0, 4, 3).
+python_function('tests/test_hillm_uri.py', 'test_uri2hillm_cli_executes_via_subprocess', 0, 5, 3).
+python_function('tests/test_hillm_uri.py', 'test_nlp2uri_systemmap_wrapper_exports', 0, 4, 2).
 python_function('tests/test_http_event_store.py', 'test_http_event_store_posts_to_registry', 0, 4, 9).
 python_function('tests/test_ide_control.py', 'test_parse_ide_chat_send_polish', 0, 4, 2).
 python_function('tests/test_ide_control.py', 'test_parse_ide_chat_paste_no_submit', 0, 4, 1).
 python_function('tests/test_ide_control.py', 'test_parse_ide_status', 0, 3, 1).
 python_function('tests/test_ide_control.py', 'test_build_ide_chat_uri_without_embedded_text', 0, 4, 5).
-python_function('tests/test_ide_control.py', 'test_control_plan_ide_chat_send', 0, 14, 2).
+python_function('tests/test_ide_control.py', 'test_control_plan_ide_chat_send', 0, 15, 2).
+python_function('tests/test_ide_control.py', 'test_control_plan_cursor_submit_default_strategy_hint', 0, 3, 1).
+python_function('tests/test_ide_control.py', 'test_control_plan_no_strategy_hint_when_no_submit', 0, 3, 1).
 python_function('tests/test_ide_control.py', 'test_control_plan_koru_control_status', 0, 5, 1).
 python_function('tests/test_ide_control.py', 'test_nlp2uri_round_trip_includes_control_plan', 0, 5, 3).
 python_function('tests/test_ide_control.py', 'test_compile_ide_chat_os_action_with_extra_text', 0, 6, 2).
@@ -1807,8 +1833,12 @@ python_method('DelegateCompileDriver', 'compile', 1, 2, 3).
 python_class('src/nlp2uri/cqrs/drivers/endpoint_curl.py', 'EndpointCurlDriver').
 python_method('EndpointCurlDriver', 'compile', 1, 2, 3).
 python_method('EndpointCurlDriver', 'probe', 1, 2, 3).
+python_class('src/nlp2uri/cqrs/drivers/env_uri2env.py', 'EnvUri2envDriver').
+python_method('EnvUri2envDriver', 'compile', 1, 3, 4).
 python_class('src/nlp2uri/cqrs/drivers/getv_cli.py', 'GetvCliDriver').
 python_method('GetvCliDriver', 'compile', 1, 2, 3).
+python_class('src/nlp2uri/cqrs/drivers/hillm_uri2hillm.py', 'HillmUri2hillmDriver').
+python_method('HillmUri2hillmDriver', 'compile', 1, 3, 4).
 python_class('src/nlp2uri/cqrs/drivers/resource_probe.py', 'ResourceProbeDriver').
 python_method('ResourceProbeDriver', 'compile', 1, 5, 4).
 python_method('ResourceProbeDriver', 'probe', 1, 3, 4).
@@ -1915,6 +1945,8 @@ python_method('NLP2URIService', 'resolve_system_map', 2, 5, 5).
 python_method('NLP2URIService', 'list_getv_uris', 0, 3, 5).
 python_method('NLP2URIService', 'resolve_getv', 1, 4, 3).
 python_method('NLP2URIService', 'read_getv_var', 1, 1, 1).
+python_method('NLP2URIService', 'resolve_env', 1, 4, 2).
+python_method('NLP2URIService', 'materialize_env', 1, 2, 2).
 python_class('src/nlp2uri/systemmap/getv_uri.py', 'ResolvedGetvUri').
 python_method('ResolvedGetvUri', 'to_dict', 0, 1, 0).
 python_class('src/nlp2uri/systemmap/index.py', 'UriMapEntry').
@@ -1967,6 +1999,8 @@ sumd_declared_file('testql-scenarios/koru-ide-control-roundtrip.testql.toon.yaml
 sumd_declared_file('project/map.toon.yaml', 'analysis').
 sumd_declared_file('project/logic.pl', 'analysis').
 sumd_declared_file('project/calls.toon.yaml', 'analysis').
+sumd_interface('mcp', 'stdio').
+sumd_interface('mcp', '').
 sumd_interface('cli', 'argparse').
 sumd_interface('cli', '').
 sumd_deploy_target('docker_compose').
@@ -1975,76 +2009,74 @@ sumd_deploy_compose_file('docker-compose.yml').
 
 ## Call Graph
 
-*320 nodes · 444 edges · 59 modules · CC̄=3.5*
+*343 nodes · 486 edges · 60 modules · CC̄=3.6*
 
 ### Hubs (by degree)
 
 | Function | CC | in | out | total |
 |----------|----|----|-----|-------|
-| `compile_uri_to_control_plan` *(in src.nlp2uri.control_compile)* | 25 ⚠ | 3 | 51 | **54** |
+| `compile_uri_to_control_plan` *(in src.nlp2uri.control_compile)* | 25 ⚠ | 5 | 53 | **58** |
+| `build_parser` *(in src.nlp2uri.cli_parser)* | 1 | 1 | 52 | **53** |
 | `build_koru_ide_uri_index` *(in src.nlp2uri.systemmap.koru_ide)* | 22 ⚠ | 2 | 50 | **52** |
-| `build_parser` *(in src.nlp2uri.cli_parser)* | 1 | 1 | 51 | **52** |
+| `compile_uri_to_actions` *(in src.nlp2uri.compile)* | 22 ⚠ | 5 | 26 | **31** |
+| `print` *(in scripts.test-cqrs-smoke)* | 0 | 31 | 0 | **31** |
 | `build_resource_actions` *(in src.nlp2uri.host.resource)* | 14 ⚠ | 2 | 29 | **31** |
+| `action_control_execute` *(in src.nlp2uri.control_cli)* | 18 ⚠ | 1 | 29 | **30** |
 | `write_environment_map` *(in src.nlp2uri.systemmap.export)* | 9 | 1 | 29 | **30** |
-| `_add_entry` *(in src.nlp2uri.systemmap.index)* | 3 | 24 | 4 | **28** |
-| `build_getv_uri_index` *(in src.nlp2uri.systemmap.getv_uri)* | 6 | 3 | 24 | **27** |
-| `compile_uri_to_actions` *(in src.nlp2uri.compile)* | 18 ⚠ | 5 | 20 | **25** |
 
 ```toon markpact:analysis path=project/calls.toon.yaml
 # code2llm call graph | /home/tom/github/semcod/nlp2uri
-# generated in 0.16s
-# nodes: 320 | edges: 444 | modules: 59
-# CC̄=3.5
+# generated in 0.24s
+# nodes: 343 | edges: 486 | modules: 60
+# CC̄=3.6
 
 HUBS[20]:
   src.nlp2uri.control_compile.compile_uri_to_control_plan
-    CC=25  in:3  out:51  total:54
+    CC=25  in:5  out:53  total:58
+  src.nlp2uri.cli_parser.build_parser
+    CC=1  in:1  out:52  total:53
   src.nlp2uri.systemmap.koru_ide.build_koru_ide_uri_index
     CC=22  in:2  out:50  total:52
-  src.nlp2uri.cli_parser.build_parser
-    CC=1  in:1  out:51  total:52
+  src.nlp2uri.compile.compile_uri_to_actions
+    CC=22  in:5  out:26  total:31
+  scripts.test-cqrs-smoke.print
+    CC=0  in:31  out:0  total:31
   src.nlp2uri.host.resource.build_resource_actions
     CC=14  in:2  out:29  total:31
+  src.nlp2uri.control_cli.action_control_execute
+    CC=18  in:1  out:29  total:30
   src.nlp2uri.systemmap.export.write_environment_map
     CC=9  in:1  out:29  total:30
   src.nlp2uri.systemmap.index._add_entry
     CC=3  in:24  out:4  total:28
   src.nlp2uri.systemmap.getv_uri.build_getv_uri_index
     CC=6  in:3  out:24  total:27
-  src.nlp2uri.compile.compile_uri_to_actions
-    CC=18  in:5  out:20  total:25
+  src.nlp2uri.schemes.util.abstract_url
+    CC=9  in:21  out:5  total:26
   src.nlp2uri.systemmap.resolve._match_command_entry
     CC=16  in:1  out:24  total:25
-  src.nlp2uri.schemes.util.abstract_url
-    CC=9  in:20  out:5  total:25
   src.nlp2uri.schemes.build.build_uri
     CC=19  in:2  out:22  total:24
   src.nlp2uri.systemmap.encode.encode_segment
     CC=1  in:22  out:1  total:23
-  schemas.codegen.export_driver_stubs.main
-    CC=11  in:0  out:23  total:23
   src.nlp2uri.host.artifact.resolve_artifact_path
     CC=12  in:1  out:22  total:23
+  schemas.codegen.export_driver_stubs.main
+    CC=11  in:0  out:23  total:23
   src.nlp2uri.systemmap.index.build_uri_index
     CC=6  in:5  out:17  total:22
-  src.nlp2uri.config._load_from_path
-    CC=6  in:3  out:17  total:20
+  src.nlp2uri.control_cli.add_control_parser
+    CC=1  in:1  out:20  total:21
+  src.nlp2uri.control_cli._finalize_control_plan_payload
+    CC=12  in:2  out:19  total:21
   src.nlp2uri.systemmap.uri._get
     CC=4  in:15  out:5  total:20
-  examples.resolve.new-intents.e2e.print
-    CC=0  in:20  out:0  total:20
-  src.nlp2uri.systemmap.getv_uri.compile_getv_uri
-    CC=14  in:2  out:18  total:20
-  src.nlp2uri.systemmap.index._ir_field
-    CC=2  in:16  out:3  total:19
 
 MODULES:
   examples.execute.dry-run.main  [1 funcs]
     main  CC=3  out:7
   examples.mcp.tool-handoff.main  [1 funcs]
     main  CC=2  out:8
-  examples.resolve.new-intents.e2e  [1 funcs]
-    print  CC=0  out:0
   examples.resolve.nl-to-uri.main  [1 funcs]
     main  CC=3  out:5
   schemas.codegen.export_driver_stubs  [1 funcs]
@@ -2067,6 +2099,8 @@ MODULES:
     main  CC=4  out:14
     openapi_yaml  CC=1  out:2
     queries_proto  CC=1  out:3
+  scripts.test-cqrs-smoke  [1 funcs]
+    print  CC=0  out:0
   src.nlp2uri.adapters.base  [1 funcs]
     __init__  CC=2  out:2
   src.nlp2uri.adapters.mcp  [4 funcs]
@@ -2075,7 +2109,7 @@ MODULES:
     _tool_list_system_uris  CC=2  out:7
     _tool_resolve_system_map  CC=3  out:10
   src.nlp2uri.cli  [12 funcs]
-    _dispatch_command  CC=6  out:7
+    _dispatch_command  CC=7  out:9
     _emit  CC=3  out:4
     _payload_text  CC=3  out:6
     _platform  CC=2  out:1
@@ -2088,7 +2122,7 @@ MODULES:
   src.nlp2uri.cli_parser  [3 funcs]
     add_common_args  CC=3  out:2
     add_text_args  CC=1  out:3
-    build_parser  CC=1  out:51
+    build_parser  CC=1  out:52
   src.nlp2uri.compile  [54 funcs]
     _capture_outfile  CC=1  out:3
     _compile_app  CC=4  out:5
@@ -2111,24 +2145,35 @@ MODULES:
     config_search_paths  CC=5  out:15
     default_config  CC=1  out:3
     ensure_config  CC=4  out:9
+  src.nlp2uri.control_cli  [23 funcs]
+    _add_lane_args  CC=1  out:6
+    _apply_runtime_overrides  CC=5  out:7
+    _client_factory  CC=1  out:2
+    _control_uri  CC=5  out:2
+    _default_strategy_hint  CC=3  out:2
+    _fetch_autopilot_status  CC=6  out:9
+    _finalize_control_plan_payload  CC=12  out:19
+    _load_status_json  CC=11  out:11
+    _plan_payload  CC=9  out:11
+    _print_json  CC=1  out:2
   src.nlp2uri.control_compile  [4 funcs]
     _query_params  CC=3  out:3
     _truthy  CC=3  out:2
-    compile_uri_to_control_plan  CC=25  out:51
+    compile_uri_to_control_plan  CC=25  out:53
     is_control_uri  CC=2  out:2
-  src.nlp2uri.control_execute  [9 funcs]
+  src.nlp2uri.control_execute  [10 funcs]
     _build_client  CC=3  out:2
     _execute_cli  CC=9  out:9
     _execute_drive  CC=10  out:12
     _execute_status  CC=5  out:7
-    _verification_status  CC=11  out:4
+    _verification_status  CC=12  out:5
     compile_and_execute_control_uri  CC=5  out:6
     execute_control_action  CC=9  out:8
     execute_control_plan  CC=2  out:2
     koruide_available  CC=1  out:0
-  src.nlp2uri.cqrs.dispatcher  [2 funcs]
+    koruide_missing_message  CC=2  out:0
+  src.nlp2uri.cqrs.dispatcher  [1 funcs]
     __init__  CC=5  out:5
-    execute_uri  CC=4  out:10
   src.nlp2uri.cqrs.drivers.artifact_filesystem  [1 funcs]
     compile  CC=7  out:7
   src.nlp2uri.cqrs.drivers.command_curl  [1 funcs]
@@ -2341,9 +2386,9 @@ EDGES:
   schemas.codegen.fix_proto_imports.fix_driver → schemas.codegen.fix_proto_imports._pascal
   schemas.codegen.fix_proto_imports.main → schemas.codegen.fix_proto_imports.fix_api
   schemas.codegen.fix_proto_imports.main → schemas.codegen.fix_proto_imports.fix_driver
-  schemas.codegen.fix_proto_imports.main → examples.resolve.new-intents.e2e.print
-  schemas.codegen.export_mcp_schemas.main → examples.resolve.new-intents.e2e.print
-  schemas.codegen.export_driver_stubs.main → examples.resolve.new-intents.e2e.print
+  schemas.codegen.fix_proto_imports.main → scripts.test-cqrs-smoke.print
+  schemas.codegen.export_mcp_schemas.main → scripts.test-cqrs-smoke.print
+  schemas.codegen.export_driver_stubs.main → scripts.test-cqrs-smoke.print
   schemas.codegen.scaffold_scheme.aggregate_proto → schemas.codegen.scaffold_scheme._proto_package
   schemas.codegen.scaffold_scheme.aggregate_proto → schemas.codegen.scaffold_scheme._pascal
   schemas.codegen.scaffold_scheme.commands_proto → schemas.codegen.scaffold_scheme._proto_package
@@ -2366,15 +2411,17 @@ EDGES:
   schemas.codegen.scaffold_scheme.scaffold_scheme → schemas.codegen.scaffold_scheme.api_proto
   schemas.codegen.scaffold_scheme.scaffold_scheme → schemas.codegen.scaffold_scheme.openapi_yaml
   schemas.codegen.scaffold_scheme.scaffold_scheme → schemas.codegen.scaffold_scheme.readme_md
-  schemas.codegen.scaffold_scheme.main → examples.resolve.new-intents.e2e.print
-  examples.mcp.tool-handoff.main.main → examples.resolve.new-intents.e2e.print
+  schemas.codegen.scaffold_scheme.main → scripts.test-cqrs-smoke.print
+  examples.mcp.tool-handoff.main.main → scripts.test-cqrs-smoke.print
   examples.mcp.tool-handoff.main.main → src.nlp2uri.mcp.mcp_handoff_payload
   examples.mcp.tool-handoff.main.main → src.nlp2uri.mcp.tool_resolve_desktop_action
   examples.execute.dry-run.main.main → src.nlp2uri.resolve.nlp2uri
   examples.execute.dry-run.main.main → src.nlp2uri.compile.compile_uri_to_actions
-  examples.execute.dry-run.main.main → examples.resolve.new-intents.e2e.print
+  examples.execute.dry-run.main.main → scripts.test-cqrs-smoke.print
   examples.resolve.nl-to-uri.main.main → src.nlp2uri.resolve.nlp2uri
-  examples.resolve.nl-to-uri.main.main → examples.resolve.new-intents.e2e.print
+  examples.resolve.nl-to-uri.main.main → scripts.test-cqrs-smoke.print
+  src.nlp2uri.runtime.execute_uri → src.nlp2uri.config.get_effective_platform
+  src.nlp2uri.runtime.execute_uri → src.nlp2uri.compile.compile_uri_to_actions
   src.nlp2uri.config.NLP2URIConfig.resolved_platform → src.nlp2uri.platform_detect.detect_platform
   src.nlp2uri.config.NLP2URIConfig.to_dict → src.nlp2uri.platform_detect.detect_platform
   src.nlp2uri.config.NLP2URIConfig.to_yaml → src.nlp2uri.config.payload_keys
@@ -2385,8 +2432,6 @@ EDGES:
   src.nlp2uri.config._load_from_path → src.nlp2uri.config._parse_simple_yaml
   src.nlp2uri.config._load_from_path → src.nlp2uri.config.payload_keys
   src.nlp2uri.config.load_config → src.nlp2uri.config.find_config_path
-  src.nlp2uri.config.load_config → src.nlp2uri.config._load_from_path
-  src.nlp2uri.config.load_config → src.nlp2uri.config.default_config
 ```
 
 ## Test Contracts

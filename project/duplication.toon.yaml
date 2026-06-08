@@ -1,20 +1,20 @@
-# redup/duplication | 15 groups | 79f 8728L | 2026-06-07
+# redup/duplication | 15 groups | 82f 9374L | 2026-06-08
 
 SUMMARY:
-  files_scanned: 79
-  total_lines:   8728
+  files_scanned: 82
+  total_lines:   9374
   dup_groups:    15
   dup_fragments: 33
   saved_lines:   154
-  scan_ms:       2627
+  scan_ms:       3935
 
 HOTSPOTS[7] (files with most duplication):
-  src/nlp2uri/systemmap/index.py  dup=70L  groups=3  frags=7  (0.8%)
-  src/nlp2uri/parse_nl.py  dup=51L  groups=2  frags=5  (0.6%)
+  src/nlp2uri/systemmap/index.py  dup=70L  groups=3  frags=7  (0.7%)
+  src/nlp2uri/parse_nl.py  dup=51L  groups=2  frags=5  (0.5%)
   src/nlp2uri/schemes/desktop.py  dup=36L  groups=1  frags=2  (0.4%)
   src/nlp2uri/compile.py  dup=29L  groups=3  frags=5  (0.3%)
   src/nlp2uri/systemmap/compile.py  dup=24L  groups=1  frags=2  (0.3%)
-  src/nlp2uri/systemmap/uri.py  dup=14L  groups=2  frags=4  (0.2%)
+  src/nlp2uri/systemmap/uri.py  dup=14L  groups=2  frags=4  (0.1%)
   src/nlp2uri/systemmap/getv_uri.py  dup=8L  groups=1  frags=1  (0.1%)
 
 DUPLICATES[15] (ranked by impact):
@@ -37,8 +37,8 @@ DUPLICATES[15] (ranked by impact):
       src/nlp2uri/systemmap/index.py:190-200  (_index_artifacts)
       src/nlp2uri/systemmap/index.py:300-310  (_index_validations)
   [85ffa2defd9f0fa1]   STRU  _windows_window_move_actions  L=10 N=2 saved=10 sim=1.00
-      src/nlp2uri/compile.py:450-459  (_windows_window_move_actions)
-      src/nlp2uri/compile.py:496-501  (_windows_window_focus_actions)
+      src/nlp2uri/compile.py:462-471  (_windows_window_move_actions)
+      src/nlp2uri/compile.py:508-513  (_windows_window_focus_actions)
   [4fac14ef046e2d2c]   STRU  _mentions_no_submit  L=9 N=2 saved=9 sim=1.00
       src/nlp2uri/parse_nl.py:145-153  (_mentions_no_submit)
       src/nlp2uri/parse_nl.py:156-164  (_mentions_require_plugin)
@@ -46,8 +46,8 @@ DUPLICATES[15] (ranked by impact):
       src/nlp2uri/systemmap/getv_uri.py:105-112  (to_dict)
       src/nlp2uri/systemmap/resolve.py:22-29  (to_dict)
   [a5e2055bcecafecc]   STRU  _macos_window_move_actions  L=7 N=2 saved=7 sim=1.00
-      src/nlp2uri/compile.py:441-447  (_macos_window_move_actions)
-      src/nlp2uri/compile.py:491-493  (_macos_window_focus_actions)
+      src/nlp2uri/compile.py:453-459  (_macos_window_move_actions)
+      src/nlp2uri/compile.py:503-505  (_macos_window_focus_actions)
   [1079b0e4b2d5a43f]   EXAC  probe  L=6 N=2 saved=6 sim=1.00
       src/nlp2uri/cqrs/drivers/resource_probe.py:30-35  (probe)
       src/nlp2uri/cqrs/drivers/runtime_curl.py:29-34  (probe)
@@ -61,7 +61,7 @@ DUPLICATES[15] (ranked by impact):
       src/nlp2uri/systemmap/uri.py:79-82  (uri_for_schedule)
       src/nlp2uri/systemmap/uri.py:85-88  (uri_for_generated_service)
   [7320e91881d35948]   EXAC  _query_params  L=3 N=2 saved=3 sim=1.00
-      src/nlp2uri/compile.py:72-74  (_query_params)
+      src/nlp2uri/compile.py:84-86  (_query_params)
       src/nlp2uri/control_compile.py:18-20  (_query_params)
   [ff8711d5a6139426]   STRU  uri_for_conversation  L=3 N=2 saved=3 sim=1.00
       src/nlp2uri/systemmap/uri.py:63-65  (uri_for_conversation)

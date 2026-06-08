@@ -1,21 +1,840 @@
 project: /home/tom/github/semcod/nlp2uri
 generated_from: code2llm call graph analysis
 stats:
-  total_nodes: 320
-  total_edges: 444
-  modules_count: 59
+  total_nodes: 343
+  total_edges: 486
+  modules_count: 60
 nodes:
-  src.nlp2uri.control_execute.execute_control_action:
-    name: execute_control_action
-    module: src.nlp2uri.control_execute
-    line: 94
+  src.nlp2uri.cli_parser.build_parser:
+    name: build_parser
+    module: src.nlp2uri.cli_parser
+    line: 42
+    cyclomatic_complexity: 1
+    calls_out: 52
+    calls_in: 1
+  src.nlp2uri.compile._compile_window_capture:
+    name: _compile_window_capture
+    module: src.nlp2uri.compile
+    line: 402
+    cyclomatic_complexity: 4
+    calls_out: 6
+    calls_in: 1
+  src.nlp2uri.compile._compile_app_settings:
+    name: _compile_app_settings
+    module: src.nlp2uri.compile
+    line: 107
+    cyclomatic_complexity: 5
+    calls_out: 3
+    calls_in: 1
+  src.nlp2uri.systemmap.koru_ide.build_koru_ide_uri_index:
+    name: build_koru_ide_uri_index
+    module: src.nlp2uri.systemmap.koru_ide
+    line: 16
+    cyclomatic_complexity: 22
+    calls_out: 50
+    calls_in: 2
+  src.nlp2uri.cli._with_platform:
+    name: _with_platform
+    module: src.nlp2uri.cli
+    line: 56
+    cyclomatic_complexity: 2
+    calls_out: 2
+    calls_in: 2
+  src.nlp2uri.compile._linux_window_capture:
+    name: _linux_window_capture
+    module: src.nlp2uri.compile
+    line: 375
+    cyclomatic_complexity: 4
+    calls_out: 5
+    calls_in: 1
+  src.nlp2uri.systemmap.load.load_system_map_from_example:
+    name: load_system_map_from_example
+    module: src.nlp2uri.systemmap.load
+    line: 42
+    cyclomatic_complexity: 3
+    calls_out: 3
+    calls_in: 1
+  src.nlp2uri.compile._first_available:
+    name: _first_available
+    module: src.nlp2uri.compile
+    line: 89
+    cyclomatic_complexity: 3
+    calls_out: 1
+    calls_in: 15
+  src.nlp2uri.systemmap.compile.is_system_map_uri:
+    name: is_system_map_uri
+    module: src.nlp2uri.systemmap.compile
+    line: 30
+    cyclomatic_complexity: 1
+    calls_out: 2
+    calls_in: 1
+  src.nlp2uri.cqrs.drivers.service_ops.ServiceDockerDriver.compile:
+    name: compile
+    module: src.nlp2uri.cqrs.drivers.service_ops
+    line: 73
+    cyclomatic_complexity: 2
+    calls_out: 7
+    calls_in: 0
+  src.nlp2uri.config.save_config:
+    name: save_config
+    module: src.nlp2uri.config
+    line: 187
+    cyclomatic_complexity: 4
+    calls_out: 8
+    calls_in: 3
+  src.nlp2uri.control_cli.action_control_list_uris:
+    name: action_control_list_uris
+    module: src.nlp2uri.control_cli
+    line: 489
+    cyclomatic_complexity: 8
+    calls_out: 18
+    calls_in: 1
+  schemas.codegen.scaffold_scheme.scaffold_scheme:
+    name: scaffold_scheme
+    module: schemas.codegen.scaffold_scheme
+    line: 315
+    cyclomatic_complexity: 4
+    calls_out: 12
+    calls_in: 1
+  src.nlp2uri.cli._run_config:
+    name: _run_config
+    module: src.nlp2uri.cli
+    line: 62
+    cyclomatic_complexity: 3
+    calls_out: 10
+    calls_in: 1
+  src.nlp2uri.integrators.mcp_server._jsonrpc_error:
+    name: _jsonrpc_error
+    module: src.nlp2uri.integrators.mcp_server
+    line: 24
+    cyclomatic_complexity: 2
+    calls_out: 0
+    calls_in: 2
+  src.nlp2uri.service.NLP2URIService.list_system_uris:
+    name: list_system_uris
+    module: src.nlp2uri.service
+    line: 157
+    cyclomatic_complexity: 3
+    calls_out: 5
+    calls_in: 0
+  src.nlp2uri.compile._windows_window_move_actions:
+    name: _windows_window_move_actions
+    module: src.nlp2uri.compile
+    line: 462
+    cyclomatic_complexity: 1
+    calls_out: 1
+    calls_in: 1
+  src.nlp2uri.cqrs.drivers.service_ops.ServiceSystemdDriver.compile:
+    name: compile
+    module: src.nlp2uri.cqrs.drivers.service_ops
+    line: 111
+    cyclomatic_complexity: 3
+    calls_out: 4
+    calls_in: 0
+  src.nlp2uri.control_cli._print_json:
+    name: _print_json
+    module: src.nlp2uri.control_cli
+    line: 76
+    cyclomatic_complexity: 1
+    calls_out: 2
+    calls_in: 4
+  src.nlp2uri.systemmap.getv_uri.get_getv_var_value:
+    name: get_getv_var_value
+    module: src.nlp2uri.systemmap.getv_uri
+    line: 204
     cyclomatic_complexity: 9
+    calls_out: 10
+    calls_in: 1
+  src.nlp2uri.resolve.nlp2uri:
+    name: nlp2uri
+    module: src.nlp2uri.resolve
+    line: 22
+    cyclomatic_complexity: 13
+    calls_out: 13
+    calls_in: 4
+  src.nlp2uri.systemmap.compile._compile_resource:
+    name: _compile_resource
+    module: src.nlp2uri.systemmap.compile
+    line: 141
+    cyclomatic_complexity: 2
+    calls_out: 1
+    calls_in: 1
+  src.nlp2uri.compile._param_truthy:
+    name: _param_truthy
+    module: src.nlp2uri.compile
+    line: 546
+    cyclomatic_complexity: 2
+    calls_out: 3
+    calls_in: 2
+  src.nlp2uri.compile._linux_terminal_actions:
+    name: _linux_terminal_actions
+    module: src.nlp2uri.compile
+    line: 241
+    cyclomatic_complexity: 8
+    calls_out: 3
+    calls_in: 1
+  src.nlp2uri.schemes.desktop.build_terminal:
+    name: build_terminal
+    module: src.nlp2uri.schemes.desktop
+    line: 122
+    cyclomatic_complexity: 2
+    calls_out: 5
+    calls_in: 0
+  src.nlp2uri.systemmap.getv_load.discover_profiles:
+    name: discover_profiles
+    module: src.nlp2uri.systemmap.getv_load
+    line: 63
+    cyclomatic_complexity: 8
     calls_out: 8
     calls_in: 1
-  src.nlp2uri.service.NLP2URIService.for_platform:
-    name: for_platform
+  src.nlp2uri.control_cli._control_uri:
+    name: _control_uri
+    module: src.nlp2uri.control_cli
+    line: 196
+    cyclomatic_complexity: 5
+    calls_out: 2
+    calls_in: 1
+  schemas.codegen.scaffold_scheme.commands_proto:
+    name: commands_proto
+    module: schemas.codegen.scaffold_scheme
+    line: 52
+    cyclomatic_complexity: 1
+    calls_out: 3
+    calls_in: 1
+  src.nlp2uri.adapters.mcp.McpAdapter._tool_execute_control:
+    name: _tool_execute_control
+    module: src.nlp2uri.adapters.mcp
+    line: 410
+    cyclomatic_complexity: 2
+    calls_out: 8
+    calls_in: 0
+  src.nlp2uri.compile._koru_drive_action:
+    name: _koru_drive_action
+    module: src.nlp2uri.compile
+    line: 553
+    cyclomatic_complexity: 6
+    calls_out: 11
+    calls_in: 2
+  src.nlp2uri.compile._query_params:
+    name: _query_params
+    module: src.nlp2uri.compile
+    line: 84
+    cyclomatic_complexity: 3
+    calls_out: 3
+    calls_in: 2
+  src.nlp2uri.cqrs.registry.DriverRegistry.get_driver:
+    name: get_driver
+    module: src.nlp2uri.cqrs.registry
+    line: 69
+    cyclomatic_complexity: 8
+    calls_out: 8
+    calls_in: 0
+  src.nlp2uri.parse_nl._capture_target:
+    name: _capture_target
+    module: src.nlp2uri.parse_nl
+    line: 405
+    cyclomatic_complexity: 4
+    calls_out: 2
+    calls_in: 1
+  src.nlp2uri.systemmap.encode.encode_segment:
+    name: encode_segment
+    module: src.nlp2uri.systemmap.encode
+    line: 8
+    cyclomatic_complexity: 1
+    calls_out: 1
+    calls_in: 22
+  src.nlp2uri.host.endpoint.is_endpoint_uri:
+    name: is_endpoint_uri
+    module: src.nlp2uri.host.endpoint
+    line: 12
+    cyclomatic_complexity: 1
+    calls_out: 2
+    calls_in: 1
+  src.nlp2uri.control_execute._execute_drive:
+    name: _execute_drive
+    module: src.nlp2uri.control_execute
+    line: 212
+    cyclomatic_complexity: 10
+    calls_out: 12
+    calls_in: 1
+  src.nlp2uri.control_execute._execute_status:
+    name: _execute_status
+    module: src.nlp2uri.control_execute
+    line: 245
+    cyclomatic_complexity: 5
+    calls_out: 7
+    calls_in: 1
+  src.nlp2uri.parse_nl._parse_capture:
+    name: _parse_capture
+    module: src.nlp2uri.parse_nl
+    line: 413
+    cyclomatic_complexity: 6
+    calls_out: 8
+    calls_in: 0
+  src.nlp2uri.compile._macos_window_focus_actions:
+    name: _macos_window_focus_actions
+    module: src.nlp2uri.compile
+    line: 503
+    cyclomatic_complexity: 1
+    calls_out: 1
+    calls_in: 1
+  src.nlp2uri.systemmap.uri.uri_for_process:
+    name: uri_for_process
+    module: src.nlp2uri.systemmap.uri
+    line: 68
+    cyclomatic_complexity: 1
+    calls_out: 1
+    calls_in: 0
+  src.nlp2uri.platforms.base.UriExecutor._desktop_id_for_app:
+    name: _desktop_id_for_app
+    module: src.nlp2uri.platforms.base
+    line: 103
+    cyclomatic_complexity: 7
+    calls_out: 7
+    calls_in: 1
+  src.nlp2uri.systemmap.index._index_schedules:
+    name: _index_schedules
+    module: src.nlp2uri.systemmap.index
+    line: 220
+    cyclomatic_complexity: 3
+    calls_out: 4
+    calls_in: 1
+  src.nlp2uri.systemmap.fallback.resolve_prompt_with_fallback:
+    name: resolve_prompt_with_fallback
+    module: src.nlp2uri.systemmap.fallback
+    line: 12
+    cyclomatic_complexity: 6
+    calls_out: 5
+    calls_in: 1
+  src.nlp2uri.compile._macos_settings_panel_uri:
+    name: _macos_settings_panel_uri
+    module: src.nlp2uri.compile
+    line: 218
+    cyclomatic_complexity: 1
+    calls_out: 1
+    calls_in: 1
+  src.nlp2uri.service.NLP2URIService.from_prompt:
+    name: from_prompt
     module: src.nlp2uri.service
+    line: 47
+    cyclomatic_complexity: 2
+    calls_out: 3
+    calls_in: 0
+  src.nlp2uri.config.load_config:
+    name: load_config
+    module: src.nlp2uri.config
+    line: 171
+    cyclomatic_complexity: 4
+    calls_out: 3
+    calls_in: 9
+  src.nlp2uri.cqrs.drivers.getv_cli.GetvCliDriver.compile:
+    name: compile
+    module: src.nlp2uri.cqrs.drivers.getv_cli
+    line: 16
+    cyclomatic_complexity: 2
+    calls_out: 4
+    calls_in: 0
+  src.nlp2uri.control_cli._socket_basename:
+    name: _socket_basename
+    module: src.nlp2uri.control_cli
+    line: 99
+    cyclomatic_complexity: 7
+    calls_out: 5
+    calls_in: 1
+  src.nlp2uri.desktop_apps.find_desktop_id_in_dir:
+    name: find_desktop_id_in_dir
+    module: src.nlp2uri.desktop_apps
+    line: 37
+    cyclomatic_complexity: 3
+    calls_out: 4
+    calls_in: 1
+  src.nlp2uri.compile._windows_window_focus_actions:
+    name: _windows_window_focus_actions
+    module: src.nlp2uri.compile
+    line: 508
+    cyclomatic_complexity: 1
+    calls_out: 1
+    calls_in: 1
+  src.nlp2uri.config.config_search_paths:
+    name: config_search_paths
+    module: src.nlp2uri.config
+    line: 120
+    cyclomatic_complexity: 5
+    calls_out: 15
+    calls_in: 1
+  src.nlp2uri.cqrs.plugins.resolve_driver_class:
+    name: resolve_driver_class
+    module: src.nlp2uri.cqrs.plugins
+    line: 54
+    cyclomatic_complexity: 2
+    calls_out: 2
+    calls_in: 1
+  src.nlp2uri.control_execute._execute_cli:
+    name: _execute_cli
+    module: src.nlp2uri.control_execute
+    line: 268
+    cyclomatic_complexity: 9
+    calls_out: 9
+    calls_in: 4
+  src.nlp2uri.cqrs.registry.DriverRegistry.__init__:
+    name: __init__
+    module: src.nlp2uri.cqrs.registry
+    line: 47
+    cyclomatic_complexity: 2
+    calls_out: 3
+    calls_in: 0
+  src.nlp2uri.compile._compile_launch_app:
+    name: _compile_launch_app
+    module: src.nlp2uri.compile
+    line: 327
+    cyclomatic_complexity: 4
+    calls_out: 4
+    calls_in: 3
+  src.nlp2uri.compile._compile_app_open:
+    name: _compile_app_open
+    module: src.nlp2uri.compile
+    line: 161
+    cyclomatic_complexity: 3
+    calls_out: 3
+    calls_in: 1
+  src.nlp2uri.service.NLP2URIService.list_getv_uris:
+    name: list_getv_uris
+    module: src.nlp2uri.service
+    line: 197
+    cyclomatic_complexity: 3
+    calls_out: 5
+    calls_in: 0
+  src.nlp2uri.control_cli.action_control_plan:
+    name: action_control_plan
+    module: src.nlp2uri.control_cli
+    line: 374
+    cyclomatic_complexity: 7
+    calls_out: 13
+    calls_in: 1
+  src.nlp2uri.control_compile.is_control_uri:
+    name: is_control_uri
+    module: src.nlp2uri.control_compile
+    line: 13
+    cyclomatic_complexity: 2
+    calls_out: 2
+    calls_in: 3
+  src.nlp2uri.service.NLP2URIService.resolve_system_map:
+    name: resolve_system_map
+    module: src.nlp2uri.service
+    line: 167
+    cyclomatic_complexity: 5
+    calls_out: 5
+    calls_in: 0
+  src.nlp2uri.integrators.mcp_server._log:
+    name: _log
+    module: src.nlp2uri.integrators.mcp_server
     line: 36
+    cyclomatic_complexity: 1
+    calls_out: 1
+    calls_in: 2
+  src.nlp2uri.parse_nl._parse_file_open:
+    name: _parse_file_open
+    module: src.nlp2uri.parse_nl
+    line: 313
+    cyclomatic_complexity: 2
+    calls_out: 4
+    calls_in: 0
+  src.nlp2uri.systemmap.resolve._dedupe_hits:
+    name: _dedupe_hits
+    module: src.nlp2uri.systemmap.resolve
+    line: 163
+    cyclomatic_complexity: 4
+    calls_out: 3
+    calls_in: 1
+  src.nlp2uri.cqrs.drivers.service_ops.ServiceDockerDriver.probe:
+    name: probe
+    module: src.nlp2uri.cqrs.drivers.service_ops
+    line: 97
+    cyclomatic_complexity: 1
+    calls_out: 6
+    calls_in: 0
+  src.nlp2uri.compile._windows_terminal_actions:
+    name: _windows_terminal_actions
+    module: src.nlp2uri.compile
+    line: 260
+    cyclomatic_complexity: 4
+    calls_out: 4
+    calls_in: 1
+  src.nlp2uri.integrators.mcp_server._write_json:
+    name: _write_json
+    module: src.nlp2uri.integrators.mcp_server
+    line: 31
+    cyclomatic_complexity: 1
+    calls_out: 3
+    calls_in: 2
+  src.nlp2uri.parse_nl._normalize_aliases:
+    name: _normalize_aliases
+    module: src.nlp2uri.parse_nl
+    line: 176
+    cyclomatic_complexity: 2
+    calls_out: 3
+    calls_in: 1
+  src.nlp2uri.parse_nl._parse_ide_command:
+    name: _parse_ide_command
+    module: src.nlp2uri.parse_nl
+    line: 277
+    cyclomatic_complexity: 7
+    calls_out: 14
+    calls_in: 0
+  src.nlp2uri.integrators.mcp_server._handle_tools_list:
+    name: _handle_tools_list
+    module: src.nlp2uri.integrators.mcp_server
+    line: 48
+    cyclomatic_complexity: 1
+    calls_out: 0
+    calls_in: 1
+  src.nlp2uri.compile._compile_settings_panel:
+    name: _compile_settings_panel
+    module: src.nlp2uri.compile
+    line: 233
+    cyclomatic_complexity: 3
+    calls_out: 5
+    calls_in: 1
+  src.nlp2uri.compile._legacy_nlp2uri_app_focus:
+    name: _legacy_nlp2uri_app_focus
+    module: src.nlp2uri.compile
+    line: 622
+    cyclomatic_complexity: 1
+    calls_out: 1
+    calls_in: 0
+  src.nlp2uri.mcp.tool_resolve_desktop_action:
+    name: tool_resolve_desktop_action
+    module: src.nlp2uri.mcp
+    line: 28
+    cyclomatic_complexity: 2
+    calls_out: 2
+    calls_in: 1
+  src.nlp2uri.cli._request_from_args:
+    name: _request_from_args
+    module: src.nlp2uri.cli
+    line: 44
+    cyclomatic_complexity: 4
+    calls_out: 8
+    calls_in: 3
+  src.nlp2uri.schemes.desktop.build_settings:
+    name: build_settings
+    module: src.nlp2uri.schemes.desktop
+    line: 144
+    cyclomatic_complexity: 6
+    calls_out: 8
+    calls_in: 0
+  src.nlp2uri.systemmap.getv_load._parse_env_file:
+    name: _parse_env_file
+    module: src.nlp2uri.systemmap.getv_load
+    line: 43
+    cyclomatic_complexity: 8
+    calls_out: 11
+    calls_in: 1
+  src.nlp2uri.compile._compile_ide_chat:
+    name: _compile_ide_chat
+    module: src.nlp2uri.compile
+    line: 574
+    cyclomatic_complexity: 5
+    calls_out: 5
+    calls_in: 1
+  examples.mcp.tool-handoff.main.main:
+    name: main
+    module: examples.mcp.tool-handoff.main
+    line: 12
+    cyclomatic_complexity: 2
+    calls_out: 8
+    calls_in: 0
+  src.nlp2uri.compile._linux_window_move_actions:
+    name: _linux_window_move_actions
+    module: src.nlp2uri.compile
+    line: 433
+    cyclomatic_complexity: 3
+    calls_out: 5
+    calls_in: 1
+  src.nlp2uri.control_cli._default_strategy_hint:
+    name: _default_strategy_hint
+    module: src.nlp2uri.control_cli
+    line: 190
+    cyclomatic_complexity: 3
+    calls_out: 2
+    calls_in: 2
+  src.nlp2uri.compile._macos_window_capture:
+    name: _macos_window_capture
+    module: src.nlp2uri.compile
+    line: 389
+    cyclomatic_complexity: 2
+    calls_out: 2
+    calls_in: 1
+  src.nlp2uri.cqrs.drivers.service_ops.ServiceSystemdDriver.probe:
+    name: probe
+    module: src.nlp2uri.cqrs.drivers.service_ops
+    line: 126
+    cyclomatic_complexity: 1
+    calls_out: 2
+    calls_in: 0
+  src.nlp2uri.cli.main:
+    name: main
+    module: src.nlp2uri.cli
+    line: 184
+    cyclomatic_complexity: 1
+    calls_out: 3
+    calls_in: 0
+  src.nlp2uri.cli._emit:
+    name: _emit
+    module: src.nlp2uri.cli
+    line: 29
+    cyclomatic_complexity: 3
+    calls_out: 4
+    calls_in: 5
+  src.nlp2uri.systemmap.compile._compile_metadata:
+    name: _compile_metadata
+    module: src.nlp2uri.systemmap.compile
+    line: 175
+    cyclomatic_complexity: 2
+    calls_out: 4
+    calls_in: 1
+  src.nlp2uri.parse_nl._parse_open_prefix:
+    name: _parse_open_prefix
+    module: src.nlp2uri.parse_nl
+    line: 481
+    cyclomatic_complexity: 5
+    calls_out: 7
+    calls_in: 0
+  src.nlp2uri.compile._linux_window_focus_actions:
+    name: _linux_window_focus_actions
+    module: src.nlp2uri.compile
+    line: 492
+    cyclomatic_complexity: 3
+    calls_out: 5
+    calls_in: 1
+  src.nlp2uri.systemmap.export._ir_field:
+    name: _ir_field
+    module: src.nlp2uri.systemmap.export
+    line: 21
+    cyclomatic_complexity: 2
+    calls_out: 3
+    calls_in: 5
+  src.nlp2uri.service.NLP2URIService.list_koru_ide_uris:
+    name: list_koru_ide_uris
+    module: src.nlp2uri.service
+    line: 141
+    cyclomatic_complexity: 1
+    calls_out: 3
+    calls_in: 0
+  src.nlp2uri.schemes.desktop.build_focus:
+    name: build_focus
+    module: src.nlp2uri.schemes.desktop
+    line: 40
+    cyclomatic_complexity: 1
+    calls_out: 5
+    calls_in: 0
+  src.nlp2uri.host.artifact.resolve_artifact_path:
+    name: resolve_artifact_path
+    module: src.nlp2uri.host.artifact
+    line: 23
+    cyclomatic_complexity: 12
+    calls_out: 22
+    calls_in: 1
+  src.nlp2uri.control_cli.action_control_execute:
+    name: action_control_execute
+    module: src.nlp2uri.control_cli
+    line: 395
+    cyclomatic_complexity: 18
+    calls_out: 29
+    calls_in: 1
+  src.nlp2uri.systemmap.uri.uri_for_schedule:
+    name: uri_for_schedule
+    module: src.nlp2uri.systemmap.uri
+    line: 79
+    cyclomatic_complexity: 1
+    calls_out: 2
+    calls_in: 1
+  src.nlp2uri.parse_nl._normalize_app_name:
+    name: _normalize_app_name
+    module: src.nlp2uri.parse_nl
+    line: 448
+    cyclomatic_complexity: 2
+    calls_out: 1
+    calls_in: 2
+  src.nlp2uri.control_cli._client_factory:
+    name: _client_factory
+    module: src.nlp2uri.control_cli
+    line: 127
+    cyclomatic_complexity: 1
+    calls_out: 2
+    calls_in: 2
+  src.nlp2uri.systemmap.uri.uri_for_conversation:
+    name: uri_for_conversation
+    module: src.nlp2uri.systemmap.uri
+    line: 63
+    cyclomatic_complexity: 1
+    calls_out: 1
+    calls_in: 0
+  src.nlp2uri.cqrs.drivers.delegate.DelegateCompileDriver.compile:
+    name: compile
+    module: src.nlp2uri.cqrs.drivers.delegate
+    line: 16
+    cyclomatic_complexity: 2
+    calls_out: 4
+    calls_in: 0
+  src.nlp2uri.compile._linux_screen_capture:
+    name: _linux_screen_capture
+    module: src.nlp2uri.compile
+    line: 342
+    cyclomatic_complexity: 3
+    calls_out: 3
+    calls_in: 1
+  src.nlp2uri.compile._windows_settings_panel_uri:
+    name: _windows_settings_panel_uri
+    module: src.nlp2uri.compile
+    line: 214
+    cyclomatic_complexity: 1
+    calls_out: 1
+    calls_in: 1
+  src.nlp2uri.systemmap.compile._backend_url:
+    name: _backend_url
+    module: src.nlp2uri.systemmap.compile
+    line: 39
+    cyclomatic_complexity: 1
+    calls_out: 2
+    calls_in: 2
+  src.nlp2uri.cli._payload_text:
+    name: _payload_text
+    module: src.nlp2uri.cli
+    line: 37
+    cyclomatic_complexity: 3
+    calls_out: 6
+    calls_in: 3
+  src.nlp2uri.compile._compile_app_open_with_path:
+    name: _compile_app_open_with_path
+    module: src.nlp2uri.compile
+    line: 131
+    cyclomatic_complexity: 2
+    calls_out: 6
+    calls_in: 1
+  src.nlp2uri.control_execute.koruide_available:
+    name: koruide_available
+    module: src.nlp2uri.control_execute
+    line: 25
+    cyclomatic_complexity: 1
+    calls_out: 0
+    calls_in: 3
+  src.nlp2uri.control_execute.koruide_missing_message:
+    name: koruide_missing_message
+    module: src.nlp2uri.control_execute
+    line: 29
+    cyclomatic_complexity: 2
+    calls_out: 0
+    calls_in: 1
+  src.nlp2uri.desktop_apps._exact_desktop_match:
+    name: _exact_desktop_match
+    module: src.nlp2uri.desktop_apps
+    line: 23
+    cyclomatic_complexity: 3
+    calls_out: 1
+    calls_in: 1
+  src.nlp2uri.config.NLP2URIConfig.to_yaml:
+    name: to_yaml
+    module: src.nlp2uri.config
+    line: 56
+    cyclomatic_complexity: 6
+    calls_out: 11
+    calls_in: 0
+  src.nlp2uri.config.payload_keys:
+    name: payload_keys
+    module: src.nlp2uri.config
+    line: 77
+    cyclomatic_complexity: 1
+    calls_out: 0
+    calls_in: 2
+  src.nlp2uri.cqrs.plugins._parse_entry_point_name:
+    name: _parse_entry_point_name
+    module: src.nlp2uri.cqrs.plugins
+    line: 17
+    cyclomatic_complexity: 4
+    calls_out: 2
+    calls_in: 1
+  src.nlp2uri.control_cli.add_control_parser:
+    name: add_control_parser
+    module: src.nlp2uri.control_cli
+    line: 37
+    cyclomatic_complexity: 1
+    calls_out: 20
+    calls_in: 1
+  schemas.codegen.scaffold_scheme.openapi_yaml:
+    name: openapi_yaml
+    module: schemas.codegen.scaffold_scheme
+    line: 206
+    cyclomatic_complexity: 1
+    calls_out: 2
+    calls_in: 1
+  src.nlp2uri.compile._compile_terminal:
+    name: _compile_terminal
+    module: src.nlp2uri.compile
+    line: 268
+    cyclomatic_complexity: 5
+    calls_out: 5
+    calls_in: 1
+  src.nlp2uri.cqrs.drivers.container_docker.ContainerDockerDriver.probe:
+    name: probe
+    module: src.nlp2uri.cqrs.drivers.container_docker
+    line: 50
+    cyclomatic_complexity: 1
+    calls_out: 3
+    calls_in: 0
+  src.nlp2uri.control_execute._build_client:
+    name: _build_client
+    module: src.nlp2uri.control_execute
+    line: 85
+    cyclomatic_complexity: 3
+    calls_out: 2
+    calls_in: 2
+  src.nlp2uri.systemmap.uri.uri_for_environment:
+    name: uri_for_environment
+    module: src.nlp2uri.systemmap.uri
+    line: 91
+    cyclomatic_complexity: 1
+    calls_out: 1
+    calls_in: 1
+  src.nlp2uri.systemmap.load.env2llm_available:
+    name: env2llm_available
+    module: src.nlp2uri.systemmap.load
+    line: 22
+    cyclomatic_complexity: 1
+    calls_out: 0
+    calls_in: 3
+  src.nlp2uri.systemmap.uri.uri_for_command:
+    name: uri_for_command
+    module: src.nlp2uri.systemmap.uri
+    line: 31
+    cyclomatic_complexity: 3
+    calls_out: 4
+    calls_in: 1
+  src.nlp2uri.cqrs.drivers.artifact_filesystem.ArtifactFilesystemDriver.compile:
+    name: compile
+    module: src.nlp2uri.cqrs.drivers.artifact_filesystem
+    line: 17
+    cyclomatic_complexity: 7
+    calls_out: 7
+    calls_in: 0
+  src.nlp2uri.systemmap.getv_load.getv_missing_message:
+    name: getv_missing_message
+    module: src.nlp2uri.systemmap.getv_load
+    line: 35
+    cyclomatic_complexity: 2
+    calls_out: 0
+    calls_in: 1
+  schemas.codegen.scaffold_scheme._proto_package:
+    name: _proto_package
+    module: schemas.codegen.scaffold_scheme
+    line: 20
+    cyclomatic_complexity: 2
+    calls_out: 2
+    calls_in: 6
+  src.nlp2uri.cqrs.drivers.endpoint_curl.EndpointCurlDriver.probe:
+    name: probe
+    module: src.nlp2uri.cqrs.drivers.endpoint_curl
+    line: 28
     cyclomatic_complexity: 2
     calls_out: 4
     calls_in: 0
@@ -26,82 +845,26 @@ nodes:
     cyclomatic_complexity: 3
     calls_out: 4
     calls_in: 1
-  src.nlp2uri.parse_nl._strip_quotes:
-    name: _strip_quotes
-    module: src.nlp2uri.parse_nl
-    line: 127
+  src.nlp2uri.systemmap.resolve._normalize_token:
+    name: _normalize_token
+    module: src.nlp2uri.systemmap.resolve
+    line: 32
     cyclomatic_complexity: 1
-    calls_out: 2
-    calls_in: 7
-  src.nlp2uri.integrators.mcp_server.handle_message:
-    name: handle_message
-    module: src.nlp2uri.integrators.mcp_server
-    line: 80
-    cyclomatic_complexity: 8
-    calls_out: 12
-    calls_in: 1
-  src.nlp2uri.compile._macos_launch_app_actions:
-    name: _macos_launch_app_actions
-    module: src.nlp2uri.compile
-    line: 307
-    cyclomatic_complexity: 1
-    calls_out: 1
-    calls_in: 1
-  src.nlp2uri.cqrs.drivers.service_ops.ServiceCurlDriver.probe:
-    name: probe
-    module: src.nlp2uri.cqrs.drivers.service_ops
-    line: 61
-    cyclomatic_complexity: 2
-    calls_out: 4
-    calls_in: 0
-  src.nlp2uri.cqrs.registry.default_registry:
-    name: default_registry
-    module: src.nlp2uri.cqrs.registry
-    line: 96
-    cyclomatic_complexity: 1
-    calls_out: 2
-    calls_in: 1
-  src.nlp2uri.parse_nl._parse_file_open:
-    name: _parse_file_open
-    module: src.nlp2uri.parse_nl
-    line: 313
-    cyclomatic_complexity: 2
-    calls_out: 4
-    calls_in: 0
-  schemas.codegen.fix_proto_imports.fix_api:
-    name: fix_api
-    module: schemas.codegen.fix_proto_imports
-    line: 17
-    cyclomatic_complexity: 1
-    calls_out: 3
-    calls_in: 1
-  src.nlp2uri.adapters.mcp.McpAdapter._tool_list_system_uris:
-    name: _tool_list_system_uris
-    module: src.nlp2uri.adapters.mcp
-    line: 353
-    cyclomatic_complexity: 2
-    calls_out: 7
-    calls_in: 0
-  src.nlp2uri.compile._compile_window_move:
-    name: _compile_window_move
-    module: src.nlp2uri.compile
-    line: 462
-    cyclomatic_complexity: 5
-    calls_out: 7
-    calls_in: 1
-  src.nlp2uri.schemes.desktop.build_capture:
-    name: build_capture
-    module: src.nlp2uri.schemes.desktop
-    line: 15
-    cyclomatic_complexity: 5
     calls_out: 5
-    calls_in: 0
-  src.nlp2uri.compile._capture_outfile:
-    name: _capture_outfile
+    calls_in: 1
+  src.nlp2uri.control_cli._apply_runtime_overrides:
+    name: _apply_runtime_overrides
+    module: src.nlp2uri.control_cli
+    line: 216
+    cyclomatic_complexity: 5
+    calls_out: 7
+    calls_in: 1
+  src.nlp2uri.compile._macos_terminal_actions:
+    name: _macos_terminal_actions
     module: src.nlp2uri.compile
-    line: 325
-    cyclomatic_complexity: 1
-    calls_out: 3
+    line: 253
+    cyclomatic_complexity: 2
+    calls_out: 2
     calls_in: 1
   src.nlp2uri.systemmap.index._model_dump:
     name: _model_dump
@@ -110,425 +873,19 @@ nodes:
     cyclomatic_complexity: 3
     calls_out: 6
     calls_in: 1
-  src.nlp2uri.cqrs.drivers.command_curl.CommandCurlDriver.compile:
-    name: compile
-    module: src.nlp2uri.cqrs.drivers.command_curl
-    line: 17
-    cyclomatic_complexity: 5
-    calls_out: 6
-    calls_in: 0
-  src.nlp2uri.schemes.build.build_uri:
-    name: build_uri
-    module: src.nlp2uri.schemes.build
-    line: 12
-    cyclomatic_complexity: 19
-    calls_out: 22
-    calls_in: 2
-  src.nlp2uri.systemmap.compile._compile_resource:
-    name: _compile_resource
-    module: src.nlp2uri.systemmap.compile
-    line: 141
-    cyclomatic_complexity: 2
-    calls_out: 1
-    calls_in: 1
-  src.nlp2uri.systemmap.index._index_artifacts:
-    name: _index_artifacts
-    module: src.nlp2uri.systemmap.index
-    line: 190
-    cyclomatic_complexity: 4
-    calls_out: 4
-    calls_in: 1
-  src.nlp2uri.host.resource._filesystem_probe_path:
-    name: _filesystem_probe_path
-    module: src.nlp2uri.host.resource
-    line: 23
-    cyclomatic_complexity: 5
-    calls_out: 12
-    calls_in: 1
-  src.nlp2uri.adapters.mcp.McpAdapter._tool_execute_control:
-    name: _tool_execute_control
-    module: src.nlp2uri.adapters.mcp
-    line: 410
-    cyclomatic_complexity: 2
-    calls_out: 8
-    calls_in: 0
-  src.nlp2uri.systemmap.resolve._match_runtime_entry:
-    name: _match_runtime_entry
-    module: src.nlp2uri.systemmap.resolve
-    line: 134
-    cyclomatic_complexity: 5
-    calls_out: 2
-    calls_in: 1
-  src.nlp2uri.schemes.desktop.build_terminal:
-    name: build_terminal
-    module: src.nlp2uri.schemes.desktop
-    line: 122
-    cyclomatic_complexity: 2
-    calls_out: 5
-    calls_in: 0
-  src.nlp2uri.parse_nl._parse_ide_command:
-    name: _parse_ide_command
-    module: src.nlp2uri.parse_nl
-    line: 277
-    cyclomatic_complexity: 7
-    calls_out: 14
-    calls_in: 0
-  src.nlp2uri.systemmap.koru_ide.build_koru_ide_uri_index:
-    name: build_koru_ide_uri_index
-    module: src.nlp2uri.systemmap.koru_ide
-    line: 16
-    cyclomatic_complexity: 22
-    calls_out: 50
-    calls_in: 2
-  schemas.codegen.fix_proto_imports._pascal:
-    name: _pascal
-    module: schemas.codegen.fix_proto_imports
-    line: 13
-    cyclomatic_complexity: 2
-    calls_out: 4
-    calls_in: 2
-  src.nlp2uri.control_compile._truthy:
-    name: _truthy
-    module: src.nlp2uri.control_compile
-    line: 23
-    cyclomatic_complexity: 3
-    calls_out: 2
-    calls_in: 5
-  src.nlp2uri.cli._run_config:
-    name: _run_config
-    module: src.nlp2uri.cli
-    line: 62
-    cyclomatic_complexity: 3
-    calls_out: 10
-    calls_in: 1
-  src.nlp2uri.control_compile._query_params:
-    name: _query_params
-    module: src.nlp2uri.control_compile
-    line: 18
-    cyclomatic_complexity: 3
-    calls_out: 3
-    calls_in: 1
-  src.nlp2uri.parse_nl._parse_fallback:
-    name: _parse_fallback
-    module: src.nlp2uri.parse_nl
-    line: 500
-    cyclomatic_complexity: 1
-    calls_out: 1
-    calls_in: 1
-  src.nlp2uri.platform_detect.detect_platform:
-    name: detect_platform
-    module: src.nlp2uri.platform_detect
-    line: 11
-    cyclomatic_complexity: 5
-    calls_out: 1
-    calls_in: 10
-  src.nlp2uri.config.config_search_paths:
-    name: config_search_paths
-    module: src.nlp2uri.config
-    line: 120
-    cyclomatic_complexity: 5
-    calls_out: 15
-    calls_in: 1
-  src.nlp2uri.compile._param_truthy:
-    name: _param_truthy
-    module: src.nlp2uri.compile
-    line: 534
-    cyclomatic_complexity: 2
-    calls_out: 3
-    calls_in: 2
-  src.nlp2uri.parse_nl._parse_settings_panel:
-    name: _parse_settings_panel
-    module: src.nlp2uri.parse_nl
-    line: 331
-    cyclomatic_complexity: 6
-    calls_out: 7
-    calls_in: 0
-  schemas.codegen.scaffold_scheme.scaffold_scheme:
-    name: scaffold_scheme
-    module: schemas.codegen.scaffold_scheme
-    line: 315
-    cyclomatic_complexity: 4
-    calls_out: 12
-    calls_in: 1
-  src.nlp2uri.systemmap.getv_load.getv_missing_message:
-    name: getv_missing_message
-    module: src.nlp2uri.systemmap.getv_load
-    line: 35
-    cyclomatic_complexity: 2
-    calls_out: 0
-    calls_in: 1
-  src.nlp2uri.systemmap.export._require_env2llm:
-    name: _require_env2llm
-    module: src.nlp2uri.systemmap.export
-    line: 16
-    cyclomatic_complexity: 2
-    calls_out: 3
-    calls_in: 1
-  src.nlp2uri.parse_nl._parse_app_open:
-    name: _parse_app_open
-    module: src.nlp2uri.parse_nl
-    line: 455
-    cyclomatic_complexity: 2
-    calls_out: 4
-    calls_in: 0
-  src.nlp2uri.compile._query_params:
-    name: _query_params
-    module: src.nlp2uri.compile
-    line: 72
-    cyclomatic_complexity: 3
-    calls_out: 3
-    calls_in: 2
-  src.nlp2uri.control_execute._execute_status:
-    name: _execute_status
-    module: src.nlp2uri.control_execute
-    line: 243
-    cyclomatic_complexity: 5
-    calls_out: 7
-    calls_in: 1
-  src.nlp2uri.config.payload_keys:
-    name: payload_keys
-    module: src.nlp2uri.config
-    line: 77
-    cyclomatic_complexity: 1
-    calls_out: 0
-    calls_in: 2
-  src.nlp2uri.systemmap.index._ir_field:
-    name: _ir_field
-    module: src.nlp2uri.systemmap.index
-    line: 90
-    cyclomatic_complexity: 2
-    calls_out: 3
-    calls_in: 16
-  src.nlp2uri.cqrs.drivers.runtime_curl.RuntimeCurlDriver.compile:
-    name: compile
-    module: src.nlp2uri.cqrs.drivers.runtime_curl
-    line: 16
-    cyclomatic_complexity: 2
-    calls_out: 4
-    calls_in: 0
-  src.nlp2uri.systemmap.compile._compile_command:
-    name: _compile_command
-    module: src.nlp2uri.systemmap.compile
-    line: 76
-    cyclomatic_complexity: 4
-    calls_out: 8
-    calls_in: 1
-  src.nlp2uri.cli_parser.add_common_args:
-    name: add_common_args
-    module: src.nlp2uri.cli_parser
-    line: 11
-    cyclomatic_complexity: 3
-    calls_out: 2
-    calls_in: 11
-  src.nlp2uri.parse_nl.parse_text:
-    name: parse_text
-    module: src.nlp2uri.parse_nl
-    line: 530
-    cyclomatic_complexity: 5
-    calls_out: 6
-    calls_in: 2
-  src.nlp2uri.service.NLP2URIService.execute:
-    name: execute
-    module: src.nlp2uri.service
-    line: 77
-    cyclomatic_complexity: 2
-    calls_out: 3
-    calls_in: 0
-  schemas.codegen.scaffold_scheme.queries_proto:
-    name: queries_proto
-    module: schemas.codegen.scaffold_scheme
-    line: 137
-    cyclomatic_complexity: 1
-    calls_out: 3
-    calls_in: 1
-  src.nlp2uri.cqrs.drivers.service_ops.ServiceDockerDriver.probe:
-    name: probe
-    module: src.nlp2uri.cqrs.drivers.service_ops
-    line: 97
-    cyclomatic_complexity: 1
-    calls_out: 6
-    calls_in: 0
-  src.nlp2uri.compile._linux_screen_capture:
-    name: _linux_screen_capture
-    module: src.nlp2uri.compile
-    line: 330
-    cyclomatic_complexity: 3
-    calls_out: 3
-    calls_in: 1
-  src.nlp2uri.systemmap.compile._compile_runtime:
-    name: _compile_runtime
-    module: src.nlp2uri.systemmap.compile
-    line: 111
-    cyclomatic_complexity: 12
-    calls_out: 18
-    calls_in: 1
-  src.nlp2uri.cli._run_envmap:
-    name: _run_envmap
-    module: src.nlp2uri.cli
-    line: 114
-    cyclomatic_complexity: 4
-    calls_out: 9
-    calls_in: 1
-  src.nlp2uri.compile._macos_screen_capture:
-    name: _macos_screen_capture
-    module: src.nlp2uri.compile
-    line: 341
-    cyclomatic_complexity: 1
-    calls_out: 1
-    calls_in: 1
-  src.nlp2uri.service.NLP2URIService.default:
-    name: default
-    module: src.nlp2uri.service
-    line: 31
-    cyclomatic_complexity: 1
-    calls_out: 2
-    calls_in: 0
-  src.nlp2uri.systemmap.encode.encode_path:
-    name: encode_path
-    module: src.nlp2uri.systemmap.encode
-    line: 13
-    cyclomatic_complexity: 1
-    calls_out: 2
-    calls_in: 1
-  src.nlp2uri.desktop_apps.find_desktop_id_in_dir:
-    name: find_desktop_id_in_dir
-    module: src.nlp2uri.desktop_apps
-    line: 37
-    cyclomatic_complexity: 3
-    calls_out: 4
-    calls_in: 1
-  src.nlp2uri.config.load_config:
-    name: load_config
-    module: src.nlp2uri.config
-    line: 171
-    cyclomatic_complexity: 4
-    calls_out: 3
-    calls_in: 9
-  src.nlp2uri.control_compile.is_control_uri:
-    name: is_control_uri
-    module: src.nlp2uri.control_compile
-    line: 13
-    cyclomatic_complexity: 2
-    calls_out: 2
-    calls_in: 2
-  src.nlp2uri.control_execute.compile_and_execute_control_uri:
-    name: compile_and_execute_control_uri
-    module: src.nlp2uri.control_execute
-    line: 184
-    cyclomatic_complexity: 5
-    calls_out: 6
-    calls_in: 1
-  src.nlp2uri.compile._compile_settings:
-    name: _compile_settings
-    module: src.nlp2uri.compile
-    line: 290
-    cyclomatic_complexity: 3
-    calls_out: 3
-    calls_in: 2
-  src.nlp2uri.schemes.file.build_file:
-    name: build_file
-    module: src.nlp2uri.schemes.file
-    line: 9
-    cyclomatic_complexity: 3
-    calls_out: 6
-    calls_in: 0
-  src.nlp2uri.systemmap.index._index_schedules:
-    name: _index_schedules
-    module: src.nlp2uri.systemmap.index
-    line: 220
-    cyclomatic_complexity: 3
-    calls_out: 4
-    calls_in: 1
-  src.nlp2uri.parse_nl._bool_param:
-    name: _bool_param
-    module: src.nlp2uri.parse_nl
-    line: 141
-    cyclomatic_complexity: 2
-    calls_out: 0
-    calls_in: 3
-  src.nlp2uri.schemes.util.file_uri:
-    name: file_uri
-    module: src.nlp2uri.schemes.util
-    line: 41
-    cyclomatic_complexity: 1
-    calls_out: 3
-    calls_in: 1
-  src.nlp2uri.systemmap.compile._decode_segment:
-    name: _decode_segment
-    module: src.nlp2uri.systemmap.compile
-    line: 35
-    cyclomatic_complexity: 2
-    calls_out: 1
-    calls_in: 8
-  src.nlp2uri.systemmap.compile._compile_access:
-    name: _compile_access
-    module: src.nlp2uri.systemmap.compile
-    line: 169
-    cyclomatic_complexity: 2
-    calls_out: 5
-    calls_in: 1
-  src.nlp2uri.compile._windows_settings_panel_uri:
-    name: _windows_settings_panel_uri
-    module: src.nlp2uri.compile
-    line: 202
-    cyclomatic_complexity: 1
-    calls_out: 1
-    calls_in: 1
-  src.nlp2uri.compile._compile_koru_control:
-    name: _compile_koru_control
-    module: src.nlp2uri.compile
-    line: 576
-    cyclomatic_complexity: 7
-    calls_out: 10
-    calls_in: 1
-  src.nlp2uri.cli_parser.build_parser:
-    name: build_parser
-    module: src.nlp2uri.cli_parser
-    line: 41
-    cyclomatic_complexity: 1
-    calls_out: 51
-    calls_in: 1
-  src.nlp2uri.systemmap.getv_load._parse_env_file:
-    name: _parse_env_file
-    module: src.nlp2uri.systemmap.getv_load
-    line: 43
+  src.nlp2uri.cqrs.drivers.container_docker.parse_container_uri:
+    name: parse_container_uri
+    module: src.nlp2uri.cqrs.drivers.container_docker
+    line: 14
     cyclomatic_complexity: 8
-    calls_out: 11
-    calls_in: 1
+    calls_out: 8
+    calls_in: 2
   src.nlp2uri.integrators.mcp_server.run_stdio:
     name: run_stdio
     module: src.nlp2uri.integrators.mcp_server
     line: 100
     cyclomatic_complexity: 6
     calls_out: 12
-    calls_in: 1
-  src.nlp2uri.systemmap.compile._compile_artifact:
-    name: _compile_artifact
-    module: src.nlp2uri.systemmap.compile
-    line: 155
-    cyclomatic_complexity: 2
-    calls_out: 1
-    calls_in: 1
-  src.nlp2uri.systemmap.index._add_entry:
-    name: _add_entry
-    module: src.nlp2uri.systemmap.index
-    line: 96
-    cyclomatic_complexity: 3
-    calls_out: 4
-    calls_in: 24
-  src.nlp2uri.config.ensure_config:
-    name: ensure_config
-    module: src.nlp2uri.config
-    line: 201
-    cyclomatic_complexity: 4
-    calls_out: 9
-    calls_in: 4
-  src.nlp2uri.systemmap.getv_uri.get_getv_var_value:
-    name: get_getv_var_value
-    module: src.nlp2uri.systemmap.getv_uri
-    line: 204
-    cyclomatic_complexity: 9
-    calls_out: 10
     calls_in: 1
   src.nlp2uri.adapters.base.BaseAdapter.__init__:
     name: __init__
@@ -537,20 +894,20 @@ nodes:
     cyclomatic_complexity: 2
     calls_out: 2
     calls_in: 0
-  schemas.codegen.fix_proto_imports.fix_driver:
-    name: fix_driver
-    module: schemas.codegen.fix_proto_imports
-    line: 49
+  src.nlp2uri.desktop_apps.desktop_id_candidate_names:
+    name: desktop_id_candidate_names
+    module: src.nlp2uri.desktop_apps
+    line: 14
+    cyclomatic_complexity: 1
+    calls_out: 2
+    calls_in: 1
+  src.nlp2uri.config.default_config:
+    name: default_config
+    module: src.nlp2uri.config
+    line: 143
     cyclomatic_complexity: 1
     calls_out: 3
-    calls_in: 1
-  src.nlp2uri.systemmap.resolve._match_resource_entry:
-    name: _match_resource_entry
-    module: src.nlp2uri.systemmap.resolve
-    line: 112
-    cyclomatic_complexity: 7
-    calls_out: 5
-    calls_in: 1
+    calls_in: 4
   src.nlp2uri.systemmap.uri._get_list:
     name: _get_list
     module: src.nlp2uri.systemmap.uri
@@ -558,61 +915,26 @@ nodes:
     cyclomatic_complexity: 5
     calls_out: 4
     calls_in: 1
-  src.nlp2uri.schemes.ide.build_koru_control_drive:
-    name: build_koru_control_drive
-    module: src.nlp2uri.schemes.ide
-    line: 97
-    cyclomatic_complexity: 3
-    calls_out: 9
-    calls_in: 0
-  src.nlp2uri.systemmap.index._index_validations:
-    name: _index_validations
-    module: src.nlp2uri.systemmap.index
-    line: 300
-    cyclomatic_complexity: 4
-    calls_out: 4
-    calls_in: 1
-  src.nlp2uri.compile._compile_window_focus:
-    name: _compile_window_focus
-    module: src.nlp2uri.compile
-    line: 504
-    cyclomatic_complexity: 5
-    calls_out: 5
-    calls_in: 1
-  src.nlp2uri.systemmap.resolve._entry_hits:
-    name: _entry_hits
-    module: src.nlp2uri.systemmap.resolve
-    line: 155
-    cyclomatic_complexity: 1
-    calls_out: 3
-    calls_in: 1
-  src.nlp2uri.parse_nl._parse_open_prefix:
-    name: _parse_open_prefix
-    module: src.nlp2uri.parse_nl
-    line: 481
-    cyclomatic_complexity: 5
-    calls_out: 7
-    calls_in: 0
-  src.nlp2uri.systemmap.uri.uri_for_runtime:
-    name: uri_for_runtime
-    module: src.nlp2uri.systemmap.uri
-    line: 24
-    cyclomatic_complexity: 1
-    calls_out: 4
-    calls_in: 1
-  src.nlp2uri.parse_nl._parse_ide_chat_send:
-    name: _parse_ide_chat_send
-    module: src.nlp2uri.parse_nl
-    line: 229
-    cyclomatic_complexity: 6
-    calls_out: 13
-    calls_in: 0
-  src.nlp2uri.service.NLP2URIService.compile:
-    name: compile
+  src.nlp2uri.service.NLP2URIService.resolve:
+    name: resolve
     module: src.nlp2uri.service
-    line: 73
+    line: 57
     cyclomatic_complexity: 3
-    calls_out: 3
+    calls_out: 5
+    calls_in: 0
+  src.nlp2uri.systemmap.uri.uri_for_generated_service:
+    name: uri_for_generated_service
+    module: src.nlp2uri.systemmap.uri
+    line: 85
+    cyclomatic_complexity: 1
+    calls_out: 2
+    calls_in: 1
+  src.nlp2uri.adapters.mcp.McpAdapter._tool_compile_control:
+    name: _tool_compile_control
+    module: src.nlp2uri.adapters.mcp
+    line: 400
+    cyclomatic_complexity: 2
+    calls_out: 6
     calls_in: 0
   src.nlp2uri.desktop_apps.desktop_id_for_app:
     name: desktop_id_for_app
@@ -621,404 +943,12 @@ nodes:
     cyclomatic_complexity: 3
     calls_out: 4
     calls_in: 0
-  src.nlp2uri.config._load_from_path:
-    name: _load_from_path
-    module: src.nlp2uri.config
-    line: 154
-    cyclomatic_complexity: 6
-    calls_out: 17
-    calls_in: 3
-  src.nlp2uri.cqrs.drivers.service_ops._compose_dir:
-    name: _compose_dir
-    module: src.nlp2uri.cqrs.drivers.service_ops
-    line: 31
-    cyclomatic_complexity: 3
-    calls_out: 5
-    calls_in: 2
-  src.nlp2uri.systemmap.uri.uri_for_schedule:
-    name: uri_for_schedule
-    module: src.nlp2uri.systemmap.uri
-    line: 79
+  src.nlp2uri.compile._legacy_nlp2uri_app_open:
+    name: _legacy_nlp2uri_app_open
+    module: src.nlp2uri.compile
+    line: 614
     cyclomatic_complexity: 1
     calls_out: 2
-    calls_in: 1
-  src.nlp2uri.parse_nl._parse_ide_status:
-    name: _parse_ide_status
-    module: src.nlp2uri.parse_nl
-    line: 254
-    cyclomatic_complexity: 2
-    calls_out: 4
-    calls_in: 0
-  src.nlp2uri.compile._compile_ide_chat:
-    name: _compile_ide_chat
-    module: src.nlp2uri.compile
-    line: 562
-    cyclomatic_complexity: 5
-    calls_out: 5
-    calls_in: 1
-  src.nlp2uri.compile._compile_app_open:
-    name: _compile_app_open
-    module: src.nlp2uri.compile
-    line: 149
-    cyclomatic_complexity: 3
-    calls_out: 3
-    calls_in: 1
-  src.nlp2uri.config.NLP2URIConfig.to_yaml:
-    name: to_yaml
-    module: src.nlp2uri.config
-    line: 56
-    cyclomatic_complexity: 6
-    calls_out: 11
-    calls_in: 0
-  src.nlp2uri.compile._windows_window_focus_actions:
-    name: _windows_window_focus_actions
-    module: src.nlp2uri.compile
-    line: 496
-    cyclomatic_complexity: 1
-    calls_out: 1
-    calls_in: 1
-  src.nlp2uri.service.NLP2URIService.resolve_system_map:
-    name: resolve_system_map
-    module: src.nlp2uri.service
-    line: 167
-    cyclomatic_complexity: 5
-    calls_out: 5
-    calls_in: 0
-  schemas.codegen.scaffold_scheme.events_proto:
-    name: events_proto
-    module: schemas.codegen.scaffold_scheme
-    line: 89
-    cyclomatic_complexity: 1
-    calls_out: 3
-    calls_in: 1
-  src.nlp2uri.systemmap.uri.uri_for_desktop_session:
-    name: uri_for_desktop_session
-    module: src.nlp2uri.systemmap.uri
-    line: 96
-    cyclomatic_complexity: 1
-    calls_out: 0
-    calls_in: 1
-  src.nlp2uri.host.resource.build_resource_actions:
-    name: build_resource_actions
-    module: src.nlp2uri.host.resource
-    line: 32
-    cyclomatic_complexity: 14
-    calls_out: 29
-    calls_in: 2
-  src.nlp2uri.systemmap.index._index_deploy:
-    name: _index_deploy
-    module: src.nlp2uri.systemmap.index
-    line: 246
-    cyclomatic_complexity: 2
-    calls_out: 2
-    calls_in: 1
-  src.nlp2uri.compile._legacy_nlp2uri_settings:
-    name: _legacy_nlp2uri_settings
-    module: src.nlp2uri.compile
-    line: 598
-    cyclomatic_complexity: 1
-    calls_out: 1
-    calls_in: 0
-  src.nlp2uri.compile._compile_settings_panel:
-    name: _compile_settings_panel
-    module: src.nlp2uri.compile
-    line: 221
-    cyclomatic_complexity: 3
-    calls_out: 5
-    calls_in: 1
-  src.nlp2uri.parse_nl._parse_path:
-    name: _parse_path
-    module: src.nlp2uri.parse_nl
-    line: 468
-    cyclomatic_complexity: 2
-    calls_out: 4
-    calls_in: 0
-  src.nlp2uri.cqrs.plugins._parse_entry_point_name:
-    name: _parse_entry_point_name
-    module: src.nlp2uri.cqrs.plugins
-    line: 17
-    cyclomatic_complexity: 4
-    calls_out: 2
-    calls_in: 1
-  src.nlp2uri.compile._koru_drive_action:
-    name: _koru_drive_action
-    module: src.nlp2uri.compile
-    line: 541
-    cyclomatic_complexity: 6
-    calls_out: 11
-    calls_in: 2
-  src.nlp2uri.systemmap.uri._get:
-    name: _get
-    module: src.nlp2uri.systemmap.uri
-    line: 10
-    cyclomatic_complexity: 4
-    calls_out: 5
-    calls_in: 15
-  src.nlp2uri.cli_parser.add_text_args:
-    name: add_text_args
-    module: src.nlp2uri.cli_parser
-    line: 24
-    cyclomatic_complexity: 1
-    calls_out: 3
-    calls_in: 5
-  src.nlp2uri.compile._linux_window_move_actions:
-    name: _linux_window_move_actions
-    module: src.nlp2uri.compile
-    line: 421
-    cyclomatic_complexity: 3
-    calls_out: 5
-    calls_in: 1
-  examples.resolve.nl-to-uri.main.main:
-    name: main
-    module: examples.resolve.nl-to-uri.main
-    line: 28
-    cyclomatic_complexity: 3
-    calls_out: 5
-    calls_in: 0
-  src.nlp2uri.parse_nl._parse_terminal:
-    name: _parse_terminal
-    module: src.nlp2uri.parse_nl
-    line: 351
-    cyclomatic_complexity: 3
-    calls_out: 5
-    calls_in: 0
-  src.nlp2uri.config.NLP2URIConfig.resolved_platform:
-    name: resolved_platform
-    module: src.nlp2uri.config
-    line: 32
-    cyclomatic_complexity: 4
-    calls_out: 8
-    calls_in: 0
-  src.nlp2uri.cli._payload_text:
-    name: _payload_text
-    module: src.nlp2uri.cli
-    line: 37
-    cyclomatic_complexity: 3
-    calls_out: 6
-    calls_in: 3
-  src.nlp2uri.service.NLP2URIService._host:
-    name: _host
-    module: src.nlp2uri.service
-    line: 44
-    cyclomatic_complexity: 1
-    calls_out: 1
-    calls_in: 0
-  src.nlp2uri.systemmap.encode.encode_segment:
-    name: encode_segment
-    module: src.nlp2uri.systemmap.encode
-    line: 8
-    cyclomatic_complexity: 1
-    calls_out: 1
-    calls_in: 22
-  schemas.codegen.export_driver_stubs.main:
-    name: main
-    module: schemas.codegen.export_driver_stubs
-    line: 57
-    cyclomatic_complexity: 11
-    calls_out: 23
-    calls_in: 0
-  src.nlp2uri.integrators.rest_server.main:
-    name: main
-    module: src.nlp2uri.integrators.rest_server
-    line: 81
-    cyclomatic_complexity: 1
-    calls_out: 5
-    calls_in: 0
-  src.nlp2uri.systemmap.compile._compile_metadata:
-    name: _compile_metadata
-    module: src.nlp2uri.systemmap.compile
-    line: 175
-    cyclomatic_complexity: 2
-    calls_out: 4
-    calls_in: 1
-  src.nlp2uri.cli._request_from_args:
-    name: _request_from_args
-    module: src.nlp2uri.cli
-    line: 44
-    cyclomatic_complexity: 4
-    calls_out: 8
-    calls_in: 3
-  src.nlp2uri.cqrs.dispatcher.CqrsDispatcher.__init__:
-    name: __init__
-    module: src.nlp2uri.cqrs.dispatcher
-    line: 18
-    cyclomatic_complexity: 5
-    calls_out: 5
-    calls_in: 0
-  src.nlp2uri.resolve.nlp2uri:
-    name: nlp2uri
-    module: src.nlp2uri.resolve
-    line: 22
-    cyclomatic_complexity: 13
-    calls_out: 13
-    calls_in: 3
-  src.nlp2uri.config.NLP2URIConfig.to_dict:
-    name: to_dict
-    module: src.nlp2uri.config
-    line: 45
-    cyclomatic_complexity: 2
-    calls_out: 2
-    calls_in: 0
-  src.nlp2uri.integrators.mcp_server._jsonrpc_response:
-    name: _jsonrpc_response
-    module: src.nlp2uri.integrators.mcp_server
-    line: 20
-    cyclomatic_complexity: 1
-    calls_out: 0
-    calls_in: 3
-  src.nlp2uri.compile._windows_window_capture:
-    name: _windows_window_capture
-    module: src.nlp2uri.compile
-    line: 383
-    cyclomatic_complexity: 2
-    calls_out: 2
-    calls_in: 1
-  src.nlp2uri.schemes.ide.build_ide_chat_send:
-    name: build_ide_chat_send
-    module: src.nlp2uri.schemes.ide
-    line: 38
-    cyclomatic_complexity: 3
-    calls_out: 9
-    calls_in: 0
-  schemas.codegen.scaffold_scheme._proto_package:
-    name: _proto_package
-    module: schemas.codegen.scaffold_scheme
-    line: 20
-    cyclomatic_complexity: 2
-    calls_out: 2
-    calls_in: 6
-  examples.resolve.new-intents.e2e.print:
-    name: print
-    module: examples.resolve.new-intents.e2e
-    line: 19
-    cyclomatic_complexity: 0
-    calls_out: 0
-    calls_in: 20
-  src.nlp2uri.cli._with_platform:
-    name: _with_platform
-    module: src.nlp2uri.cli
-    line: 56
-    cyclomatic_complexity: 2
-    calls_out: 2
-    calls_in: 2
-  src.nlp2uri.cqrs.registry.DriverRegistry.__init__:
-    name: __init__
-    module: src.nlp2uri.cqrs.registry
-    line: 47
-    cyclomatic_complexity: 2
-    calls_out: 3
-    calls_in: 0
-  src.nlp2uri.compile._windows_settings_actions:
-    name: _windows_settings_actions
-    module: src.nlp2uri.compile
-    line: 275
-    cyclomatic_complexity: 1
-    calls_out: 1
-    calls_in: 1
-  src.nlp2uri.compile._compile_app_open_with_path:
-    name: _compile_app_open_with_path
-    module: src.nlp2uri.compile
-    line: 119
-    cyclomatic_complexity: 2
-    calls_out: 6
-    calls_in: 1
-  src.nlp2uri.cli._dispatch_command:
-    name: _dispatch_command
-    module: src.nlp2uri.cli
-    line: 161
-    cyclomatic_complexity: 6
-    calls_out: 7
-    calls_in: 1
-  src.nlp2uri.integrators.mcp_server._jsonrpc_error:
-    name: _jsonrpc_error
-    module: src.nlp2uri.integrators.mcp_server
-    line: 24
-    cyclomatic_complexity: 2
-    calls_out: 0
-    calls_in: 2
-  src.nlp2uri.cqrs.plugins.load_driver_plugins:
-    name: load_driver_plugins
-    module: src.nlp2uri.cqrs.plugins
-    line: 27
-    cyclomatic_complexity: 7
-    calls_out: 10
-    calls_in: 2
-  src.nlp2uri.schemes.desktop.build_focus:
-    name: build_focus
-    module: src.nlp2uri.schemes.desktop
-    line: 40
-    cyclomatic_complexity: 1
-    calls_out: 5
-    calls_in: 0
-  src.nlp2uri.compile._legacy_nlp2uri_capture:
-    name: _legacy_nlp2uri_capture
-    module: src.nlp2uri.compile
-    line: 618
-    cyclomatic_complexity: 1
-    calls_out: 2
-    calls_in: 1
-  src.nlp2uri.cqrs.drivers.container_docker.parse_container_uri:
-    name: parse_container_uri
-    module: src.nlp2uri.cqrs.drivers.container_docker
-    line: 14
-    cyclomatic_complexity: 8
-    calls_out: 8
-    calls_in: 2
-  src.nlp2uri.compile._macos_settings_panel_uri:
-    name: _macos_settings_panel_uri
-    module: src.nlp2uri.compile
-    line: 206
-    cyclomatic_complexity: 1
-    calls_out: 1
-    calls_in: 1
-  src.nlp2uri.service.NLP2URIService._cfg:
-    name: _cfg
-    module: src.nlp2uri.service
-    line: 41
-    cyclomatic_complexity: 2
-    calls_out: 1
-    calls_in: 0
-  src.nlp2uri.systemmap.uri.uri_for_desktop_window_focus:
-    name: uri_for_desktop_window_focus
-    module: src.nlp2uri.systemmap.uri
-    line: 101
-    cyclomatic_complexity: 3
-    calls_out: 3
-    calls_in: 2
-  src.nlp2uri.systemmap.load.load_system_map_from_example:
-    name: load_system_map_from_example
-    module: src.nlp2uri.systemmap.load
-    line: 42
-    cyclomatic_complexity: 3
-    calls_out: 3
-    calls_in: 1
-  src.nlp2uri.cqrs.drivers.service_ops.ServiceDockerDriver.compile:
-    name: compile
-    module: src.nlp2uri.cqrs.drivers.service_ops
-    line: 73
-    cyclomatic_complexity: 2
-    calls_out: 7
-    calls_in: 0
-  src.nlp2uri.schemes.ide.build_ide:
-    name: build_ide
-    module: src.nlp2uri.schemes.ide
-    line: 17
-    cyclomatic_complexity: 4
-    calls_out: 10
-    calls_in: 0
-  src.nlp2uri.cli._platform:
-    name: _platform
-    module: src.nlp2uri.cli
-    line: 23
-    cyclomatic_complexity: 2
-    calls_out: 1
-    calls_in: 4
-  schemas.codegen.scaffold_scheme.main:
-    name: main
-    module: schemas.codegen.scaffold_scheme
-    line: 337
-    cyclomatic_complexity: 4
-    calls_out: 14
     calls_in: 0
   src.nlp2uri.systemmap.export.write_environment_map:
     name: write_environment_map
@@ -1027,551 +957,12 @@ nodes:
     cyclomatic_complexity: 9
     calls_out: 29
     calls_in: 1
-  src.nlp2uri.compile._linux_terminal_actions:
-    name: _linux_terminal_actions
+  src.nlp2uri.compile._windows_settings_actions:
+    name: _windows_settings_actions
     module: src.nlp2uri.compile
-    line: 229
-    cyclomatic_complexity: 8
-    calls_out: 3
-    calls_in: 1
-  src.nlp2uri.systemmap.load.env2llm_available:
-    name: env2llm_available
-    module: src.nlp2uri.systemmap.load
-    line: 22
-    cyclomatic_complexity: 1
-    calls_out: 0
-    calls_in: 3
-  src.nlp2uri.systemmap.getv_uri.uri_for_getv_profile:
-    name: uri_for_getv_profile
-    module: src.nlp2uri.systemmap.getv_uri
-    line: 25
-    cyclomatic_complexity: 1
-    calls_out: 2
-    calls_in: 1
-  src.nlp2uri.cqrs.drivers.service_ops.parse_service_name:
-    name: parse_service_name
-    module: src.nlp2uri.cqrs.drivers.service_ops
-    line: 22
-    cyclomatic_complexity: 4
-    calls_out: 4
-    calls_in: 6
-  src.nlp2uri.compile._compile_terminal:
-    name: _compile_terminal
-    module: src.nlp2uri.compile
-    line: 256
-    cyclomatic_complexity: 5
-    calls_out: 5
-    calls_in: 1
-  src.nlp2uri.schemes.desktop.build_app_open:
-    name: build_app_open
-    module: src.nlp2uri.schemes.desktop
-    line: 60
-    cyclomatic_complexity: 3
-    calls_out: 5
-    calls_in: 0
-  src.nlp2uri.cqrs.drivers.container_docker.ContainerDockerDriver.probe:
-    name: probe
-    module: src.nlp2uri.cqrs.drivers.container_docker
-    line: 50
-    cyclomatic_complexity: 1
-    calls_out: 3
-    calls_in: 0
-  src.nlp2uri.config._parse_simple_yaml:
-    name: _parse_simple_yaml
-    module: src.nlp2uri.config
-    line: 107
-    cyclomatic_complexity: 5
-    calls_out: 6
-    calls_in: 1
-  src.nlp2uri.cli._run_execute:
-    name: _run_execute
-    module: src.nlp2uri.cli
-    line: 139
-    cyclomatic_complexity: 6
-    calls_out: 11
-    calls_in: 1
-  src.nlp2uri.integrators.mcp_server._handle_initialize:
-    name: _handle_initialize
-    module: src.nlp2uri.integrators.mcp_server
-    line: 40
-    cyclomatic_complexity: 1
-    calls_out: 0
-    calls_in: 1
-  src.nlp2uri.compile._legacy_nlp2uri_app_focus:
-    name: _legacy_nlp2uri_app_focus
-    module: src.nlp2uri.compile
-    line: 610
+    line: 287
     cyclomatic_complexity: 1
     calls_out: 1
-    calls_in: 0
-  src.nlp2uri.systemmap.uri.uri_for_environment:
-    name: uri_for_environment
-    module: src.nlp2uri.systemmap.uri
-    line: 91
-    cyclomatic_complexity: 1
-    calls_out: 1
-    calls_in: 1
-  src.nlp2uri.systemmap.getv_load.profile_manager:
-    name: profile_manager
-    module: src.nlp2uri.systemmap.getv_load
-    line: 94
-    cyclomatic_complexity: 4
-    calls_out: 4
-    calls_in: 0
-  src.nlp2uri.parse_nl._workspace_hint:
-    name: _workspace_hint
-    module: src.nlp2uri.parse_nl
-    line: 167
-    cyclomatic_complexity: 3
-    calls_out: 4
-    calls_in: 2
-  src.nlp2uri.service.NLP2URIService.from_prompt:
-    name: from_prompt
-    module: src.nlp2uri.service
-    line: 47
-    cyclomatic_complexity: 2
-    calls_out: 3
-    calls_in: 0
-  schemas.codegen.scaffold_scheme._pascal:
-    name: _pascal
-    module: schemas.codegen.scaffold_scheme
-    line: 16
-    cyclomatic_complexity: 2
-    calls_out: 4
-    calls_in: 11
-  src.nlp2uri.systemmap.uri.uri_for_command:
-    name: uri_for_command
-    module: src.nlp2uri.systemmap.uri
-    line: 31
-    cyclomatic_complexity: 3
-    calls_out: 4
-    calls_in: 1
-  src.nlp2uri.systemmap.compile._backend_url:
-    name: _backend_url
-    module: src.nlp2uri.systemmap.compile
-    line: 39
-    cyclomatic_complexity: 1
-    calls_out: 2
-    calls_in: 2
-  src.nlp2uri.cli._emit:
-    name: _emit
-    module: src.nlp2uri.cli
-    line: 29
-    cyclomatic_complexity: 3
-    calls_out: 4
-    calls_in: 5
-  src.nlp2uri.schemes.ide.build_ide_command:
-    name: build_ide_command
-    module: src.nlp2uri.schemes.ide
-    line: 69
-    cyclomatic_complexity: 3
-    calls_out: 8
-    calls_in: 0
-  src.nlp2uri.parse_nl._parse_capture:
-    name: _parse_capture
-    module: src.nlp2uri.parse_nl
-    line: 413
-    cyclomatic_complexity: 6
-    calls_out: 8
-    calls_in: 0
-  src.nlp2uri.systemmap.getv_load.getv_home:
-    name: getv_home
-    module: src.nlp2uri.systemmap.getv_load
-    line: 39
-    cyclomatic_complexity: 1
-    calls_out: 4
-    calls_in: 4
-  src.nlp2uri.resolve.resolve_text:
-    name: resolve_text
-    module: src.nlp2uri.resolve
-    line: 13
-    cyclomatic_complexity: 2
-    calls_out: 3
-    calls_in: 2
-  src.nlp2uri.control_execute._verification_status:
-    name: _verification_status
-    module: src.nlp2uri.control_execute
-    line: 66
-    cyclomatic_complexity: 11
-    calls_out: 4
-    calls_in: 1
-  src.nlp2uri.cqrs.drivers.delegate.DelegateCompileDriver.compile:
-    name: compile
-    module: src.nlp2uri.cqrs.drivers.delegate
-    line: 16
-    cyclomatic_complexity: 2
-    calls_out: 4
-    calls_in: 0
-  src.nlp2uri.systemmap.index._index_commands:
-    name: _index_commands
-    module: src.nlp2uri.systemmap.index
-    line: 147
-    cyclomatic_complexity: 6
-    calls_out: 6
-    calls_in: 1
-  src.nlp2uri.config._yaml_scalar:
-    name: _yaml_scalar
-    module: src.nlp2uri.config
-    line: 81
-    cyclomatic_complexity: 8
-    calls_out: 6
-    calls_in: 1
-  src.nlp2uri.systemmap.compile.compile_system_map_uri:
-    name: compile_system_map_uri
-    module: src.nlp2uri.systemmap.compile
-    line: 47
-    cyclomatic_complexity: 8
-    calls_out: 10
-    calls_in: 5
-  src.nlp2uri.compile._macos_terminal_actions:
-    name: _macos_terminal_actions
-    module: src.nlp2uri.compile
-    line: 241
-    cyclomatic_complexity: 2
-    calls_out: 2
-    calls_in: 1
-  src.nlp2uri.systemmap.resolve._normalize_token:
-    name: _normalize_token
-    module: src.nlp2uri.systemmap.resolve
-    line: 32
-    cyclomatic_complexity: 1
-    calls_out: 5
-    calls_in: 1
-  src.nlp2uri.systemmap.load.env2llm_missing_message:
-    name: env2llm_missing_message
-    module: src.nlp2uri.systemmap.load
-    line: 26
-    cyclomatic_complexity: 2
-    calls_out: 0
-    calls_in: 4
-  src.nlp2uri.compile._compile_app_named:
-    name: _compile_app_named
-    module: src.nlp2uri.compile
-    line: 132
-    cyclomatic_complexity: 6
-    calls_out: 3
-    calls_in: 1
-  src.nlp2uri.systemmap.fallback.resolve_prompt_with_fallback:
-    name: resolve_prompt_with_fallback
-    module: src.nlp2uri.systemmap.fallback
-    line: 12
-    cyclomatic_complexity: 6
-    calls_out: 5
-    calls_in: 1
-  src.nlp2uri.systemmap.uri.uri_for_validation:
-    name: uri_for_validation
-    module: src.nlp2uri.systemmap.uri
-    line: 73
-    cyclomatic_complexity: 1
-    calls_out: 3
-    calls_in: 1
-  src.nlp2uri.systemmap.getv_load.load_profile_dict:
-    name: load_profile_dict
-    module: src.nlp2uri.systemmap.getv_load
-    line: 79
-    cyclomatic_complexity: 4
-    calls_out: 4
-    calls_in: 2
-  src.nlp2uri.config._parse_scalar:
-    name: _parse_scalar
-    module: src.nlp2uri.config
-    line: 94
-    cyclomatic_complexity: 8
-    calls_out: 5
-    calls_in: 1
-  src.nlp2uri.host.resource._decode:
-    name: _decode
-    module: src.nlp2uri.host.resource
-    line: 19
-    cyclomatic_complexity: 2
-    calls_out: 1
-    calls_in: 2
-  src.nlp2uri.systemmap.uri.uri_for_desktop_window_screenshot:
-    name: uri_for_desktop_window_screenshot
-    module: src.nlp2uri.systemmap.uri
-    line: 115
-    cyclomatic_complexity: 2
-    calls_out: 2
-    calls_in: 2
-  src.nlp2uri.systemmap.index.build_uri_index:
-    name: build_uri_index
-    module: src.nlp2uri.systemmap.index
-    line: 313
-    cyclomatic_complexity: 6
-    calls_out: 17
-    calls_in: 5
-  schemas.codegen.scaffold_scheme.openapi_yaml:
-    name: openapi_yaml
-    module: schemas.codegen.scaffold_scheme
-    line: 206
-    cyclomatic_complexity: 1
-    calls_out: 2
-    calls_in: 1
-  src.nlp2uri.compile._compile_app_settings:
-    name: _compile_app_settings
-    module: src.nlp2uri.compile
-    line: 95
-    cyclomatic_complexity: 5
-    calls_out: 3
-    calls_in: 1
-  src.nlp2uri.control_execute._execute_cli:
-    name: _execute_cli
-    module: src.nlp2uri.control_execute
-    line: 266
-    cyclomatic_complexity: 9
-    calls_out: 9
-    calls_in: 4
-  src.nlp2uri.adapters.mcp.McpAdapter._tool_compile_control:
-    name: _tool_compile_control
-    module: src.nlp2uri.adapters.mcp
-    line: 400
-    cyclomatic_complexity: 2
-    calls_out: 6
-    calls_in: 0
-  src.nlp2uri.compile._macos_window_move_actions:
-    name: _macos_window_move_actions
-    module: src.nlp2uri.compile
-    line: 441
-    cyclomatic_complexity: 1
-    calls_out: 1
-    calls_in: 1
-  src.nlp2uri.systemmap.resolve.resolve_prompt_against_system_map:
-    name: resolve_prompt_against_system_map
-    module: src.nlp2uri.systemmap.resolve
-    line: 172
-    cyclomatic_complexity: 4
-    calls_out: 6
-    calls_in: 2
-  src.nlp2uri.systemmap.uri.uri_for_process:
-    name: uri_for_process
-    module: src.nlp2uri.systemmap.uri
-    line: 68
-    cyclomatic_complexity: 1
-    calls_out: 1
-    calls_in: 0
-  src.nlp2uri.cqrs.drivers.resource_probe.ResourceProbeDriver.compile:
-    name: compile
-    module: src.nlp2uri.cqrs.drivers.resource_probe
-    line: 16
-    cyclomatic_complexity: 5
-    calls_out: 6
-    calls_in: 0
-  schemas.codegen.scaffold_scheme.api_proto:
-    name: api_proto
-    module: schemas.codegen.scaffold_scheme
-    line: 174
-    cyclomatic_complexity: 1
-    calls_out: 3
-    calls_in: 1
-  src.nlp2uri.integrators.mcp_server.main:
-    name: main
-    module: src.nlp2uri.integrators.mcp_server
-    line: 121
-    cyclomatic_complexity: 1
-    calls_out: 3
-    calls_in: 0
-  src.nlp2uri.platforms.registry.get_executor:
-    name: get_executor
-    module: src.nlp2uri.platforms.registry
-    line: 19
-    cyclomatic_complexity: 3
-    calls_out: 4
-    calls_in: 0
-  src.nlp2uri.adapters.mcp.McpAdapter._tool_resolve_system_map:
-    name: _tool_resolve_system_map
-    module: src.nlp2uri.adapters.mcp
-    line: 363
-    cyclomatic_complexity: 3
-    calls_out: 10
-    calls_in: 0
-  src.nlp2uri.compile.compile_uri_to_actions:
-    name: compile_uri_to_actions
-    module: src.nlp2uri.compile
-    line: 25
-    cyclomatic_complexity: 18
-    calls_out: 20
-    calls_in: 5
-  src.nlp2uri.service.NLP2URIService.list_system_uris:
-    name: list_system_uris
-    module: src.nlp2uri.service
-    line: 157
-    cyclomatic_complexity: 3
-    calls_out: 5
-    calls_in: 0
-  src.nlp2uri.config.default_config:
-    name: default_config
-    module: src.nlp2uri.config
-    line: 143
-    cyclomatic_complexity: 1
-    calls_out: 3
-    calls_in: 4
-  src.nlp2uri.integrators.mcp_server._handle_tools_list:
-    name: _handle_tools_list
-    module: src.nlp2uri.integrators.mcp_server
-    line: 48
-    cyclomatic_complexity: 1
-    calls_out: 0
-    calls_in: 1
-  src.nlp2uri.parse_nl._normalize_ide_name:
-    name: _normalize_ide_name
-    module: src.nlp2uri.parse_nl
-    line: 131
-    cyclomatic_complexity: 2
-    calls_out: 3
-    calls_in: 3
-  src.nlp2uri.systemmap.index._index_desktop:
-    name: _index_desktop
-    module: src.nlp2uri.systemmap.index
-    line: 261
-    cyclomatic_complexity: 7
-    calls_out: 10
-    calls_in: 1
-  schemas.codegen.scaffold_scheme.readme_md:
-    name: readme_md
-    module: schemas.codegen.scaffold_scheme
-    line: 279
-    cyclomatic_complexity: 2
-    calls_out: 13
-    calls_in: 1
-  src.nlp2uri.compile._open_uri:
-    name: _open_uri
-    module: src.nlp2uri.compile
-    line: 84
-    cyclomatic_complexity: 5
-    calls_out: 5
-    calls_in: 10
-  src.nlp2uri.config.save_config:
-    name: save_config
-    module: src.nlp2uri.config
-    line: 187
-    cyclomatic_complexity: 4
-    calls_out: 8
-    calls_in: 3
-  src.nlp2uri.systemmap.context._coerce_ir:
-    name: _coerce_ir
-    module: src.nlp2uri.systemmap.context
-    line: 42
-    cyclomatic_complexity: 2
-    calls_out: 2
-    calls_in: 1
-  src.nlp2uri.cli.main:
-    name: main
-    module: src.nlp2uri.cli
-    line: 179
-    cyclomatic_complexity: 1
-    calls_out: 3
-    calls_in: 0
-  src.nlp2uri.cqrs.drivers.container_docker.ContainerDockerDriver.compile:
-    name: compile
-    module: src.nlp2uri.cqrs.drivers.container_docker
-    line: 29
-    cyclomatic_complexity: 5
-    calls_out: 9
-    calls_in: 0
-  src.nlp2uri.compile._macos_window_capture:
-    name: _macos_window_capture
-    module: src.nlp2uri.compile
-    line: 377
-    cyclomatic_complexity: 2
-    calls_out: 2
-    calls_in: 1
-  schemas.codegen.scaffold_scheme.driver_proto:
-    name: driver_proto
-    module: schemas.codegen.scaffold_scheme
-    line: 152
-    cyclomatic_complexity: 1
-    calls_out: 5
-    calls_in: 1
-  src.nlp2uri.compile._compile_legacy_nlp2uri:
-    name: _compile_legacy_nlp2uri
-    module: src.nlp2uri.compile
-    line: 637
-    cyclomatic_complexity: 5
-    calls_out: 9
-    calls_in: 1
-  src.nlp2uri.host.artifact._decode:
-    name: _decode
-    module: src.nlp2uri.host.artifact
-    line: 19
-    cyclomatic_complexity: 2
-    calls_out: 1
-    calls_in: 2
-  src.nlp2uri.systemmap.uri.uri_for_resource:
-    name: uri_for_resource
-    module: src.nlp2uri.systemmap.uri
-    line: 38
-    cyclomatic_complexity: 2
-    calls_out: 4
-    calls_in: 1
-  schemas.codegen.scaffold_scheme.commands_proto:
-    name: commands_proto
-    module: schemas.codegen.scaffold_scheme
-    line: 52
-    cyclomatic_complexity: 1
-    calls_out: 3
-    calls_in: 1
-  src.nlp2uri.schemes.util.normalize_path:
-    name: normalize_path
-    module: src.nlp2uri.schemes.util
-    line: 33
-    cyclomatic_complexity: 2
-    calls_out: 5
-    calls_in: 4
-  src.nlp2uri.service.NLP2URIService.resolve:
-    name: resolve
-    module: src.nlp2uri.service
-    line: 57
-    cyclomatic_complexity: 3
-    calls_out: 5
-    calls_in: 0
-  src.nlp2uri.cqrs.dispatcher.CqrsDispatcher.execute_uri:
-    name: execute_uri
-    module: src.nlp2uri.cqrs.dispatcher
-    line: 65
-    cyclomatic_complexity: 4
-    calls_out: 10
-    calls_in: 1
-  src.nlp2uri.cqrs.registry.DriverRegistry.get_driver:
-    name: get_driver
-    module: src.nlp2uri.cqrs.registry
-    line: 69
-    cyclomatic_complexity: 8
-    calls_out: 8
-    calls_in: 0
-  src.nlp2uri.cli._run_shell:
-    name: _run_shell
-    module: src.nlp2uri.cli
-    line: 78
-    cyclomatic_complexity: 5
-    calls_out: 10
-    calls_in: 1
-  src.nlp2uri.systemmap.getv_uri.build_getv_uri_index:
-    name: build_getv_uri_index
-    module: src.nlp2uri.systemmap.getv_uri
-    line: 47
-    cyclomatic_complexity: 6
-    calls_out: 24
-    calls_in: 3
-  src.nlp2uri.cqrs.drivers.endpoint_curl.EndpointCurlDriver.compile:
-    name: compile
-    module: src.nlp2uri.cqrs.drivers.endpoint_curl
-    line: 15
-    cyclomatic_complexity: 2
-    calls_out: 4
-    calls_in: 0
-  src.nlp2uri.systemmap.koru_ide.merge_koru_ide_index:
-    name: merge_koru_ide_index
-    module: src.nlp2uri.systemmap.koru_ide
-    line: 175
-    cyclomatic_complexity: 3
-    calls_out: 5
-    calls_in: 0
-  src.nlp2uri.systemmap.getv_uri.uri_for_getv_var:
-    name: uri_for_getv_var
-    module: src.nlp2uri.systemmap.getv_uri
-    line: 30
-    cyclomatic_complexity: 1
-    calls_out: 3
     calls_in: 1
   src.nlp2uri.schemes.ide.build_ide_status:
     name: build_ide_status
@@ -1580,278 +971,117 @@ nodes:
     cyclomatic_complexity: 2
     calls_out: 4
     calls_in: 0
-  src.nlp2uri.systemmap.getv_uri._decode_segment:
-    name: _decode_segment
-    module: src.nlp2uri.systemmap.getv_uri
-    line: 43
-    cyclomatic_complexity: 2
-    calls_out: 1
-    calls_in: 6
-  src.nlp2uri.compile._linux_settings_actions:
-    name: _linux_settings_actions
+  src.nlp2uri.compile._legacy_nlp2uri_settings:
+    name: _legacy_nlp2uri_settings
     module: src.nlp2uri.compile
-    line: 283
-    cyclomatic_complexity: 3
-    calls_out: 3
-    calls_in: 1
-  src.nlp2uri.compile._first_available:
-    name: _first_available
-    module: src.nlp2uri.compile
-    line: 77
-    cyclomatic_complexity: 3
+    line: 610
+    cyclomatic_complexity: 1
     calls_out: 1
-    calls_in: 15
-  src.nlp2uri.cqrs.drivers.getv_cli.GetvCliDriver.compile:
-    name: compile
-    module: src.nlp2uri.cqrs.drivers.getv_cli
-    line: 16
-    cyclomatic_complexity: 2
-    calls_out: 4
     calls_in: 0
-  src.nlp2uri.config.get_effective_platform:
-    name: get_effective_platform
-    module: src.nlp2uri.config
-    line: 222
-    cyclomatic_complexity: 2
-    calls_out: 2
-    calls_in: 4
-  src.nlp2uri.cqrs.plugins.resolve_driver_class:
-    name: resolve_driver_class
-    module: src.nlp2uri.cqrs.plugins
-    line: 54
-    cyclomatic_complexity: 2
-    calls_out: 2
-    calls_in: 1
-  src.nlp2uri.systemmap.getv_load.discover_profiles:
-    name: discover_profiles
-    module: src.nlp2uri.systemmap.getv_load
-    line: 63
-    cyclomatic_complexity: 8
-    calls_out: 8
-    calls_in: 1
-  src.nlp2uri.cqrs.drivers.service_ops.ServiceSystemdDriver.compile:
-    name: compile
-    module: src.nlp2uri.cqrs.drivers.service_ops
-    line: 111
-    cyclomatic_complexity: 3
-    calls_out: 4
-    calls_in: 0
-  src.nlp2uri.systemmap.getv_uri.compile_getv_uri:
-    name: compile_getv_uri
-    module: src.nlp2uri.systemmap.getv_uri
-    line: 175
-    cyclomatic_complexity: 14
-    calls_out: 18
+  src.nlp2uri.control_cli._text_ref_from_payload:
+    name: _text_ref_from_payload
+    module: src.nlp2uri.control_cli
+    line: 236
+    cyclomatic_complexity: 13
+    calls_out: 15
     calls_in: 2
+  src.nlp2uri.host.resource._filesystem_probe_path:
+    name: _filesystem_probe_path
+    module: src.nlp2uri.host.resource
+    line: 23
+    cyclomatic_complexity: 5
+    calls_out: 12
+    calls_in: 1
   src.nlp2uri.compile._compile_screenshot:
     name: _compile_screenshot
     module: src.nlp2uri.compile
-    line: 406
+    line: 418
     cyclomatic_complexity: 4
     calls_out: 4
     calls_in: 2
-  src.nlp2uri.compile._linux_window_focus_actions:
-    name: _linux_window_focus_actions
-    module: src.nlp2uri.compile
-    line: 480
-    cyclomatic_complexity: 3
-    calls_out: 5
-    calls_in: 1
-  src.nlp2uri.systemmap.getv_load.mask_var_value:
-    name: mask_var_value
+  src.nlp2uri.systemmap.getv_load.load_profile_dict:
+    name: load_profile_dict
     module: src.nlp2uri.systemmap.getv_load
-    line: 88
-    cyclomatic_complexity: 2
-    calls_out: 2
+    line: 79
+    cyclomatic_complexity: 4
+    calls_out: 4
     calls_in: 2
-  src.nlp2uri.compile._compile_app:
-    name: _compile_app
-    module: src.nlp2uri.compile
-    line: 162
-    cyclomatic_complexity: 4
-    calls_out: 5
-    calls_in: 1
-  src.nlp2uri.systemmap.resolve._dedupe_hits:
-    name: _dedupe_hits
-    module: src.nlp2uri.systemmap.resolve
-    line: 163
-    cyclomatic_complexity: 4
-    calls_out: 3
-    calls_in: 1
-  src.nlp2uri.cli._run_adapter_command:
-    name: _run_adapter_command
-    module: src.nlp2uri.cli
-    line: 97
-    cyclomatic_complexity: 5
-    calls_out: 9
-    calls_in: 1
-  src.nlp2uri.integrators.mcp_server._log:
-    name: _log
-    module: src.nlp2uri.integrators.mcp_server
-    line: 36
-    cyclomatic_complexity: 1
-    calls_out: 1
-    calls_in: 2
-  src.nlp2uri.service.NLP2URIService.handle_prompt:
-    name: handle_prompt
-    module: src.nlp2uri.service
-    line: 92
-    cyclomatic_complexity: 13
-    calls_out: 14
-    calls_in: 0
-  src.nlp2uri.mcp.mcp_handoff_payload:
-    name: mcp_handoff_payload
-    module: src.nlp2uri.mcp
-    line: 57
-    cyclomatic_complexity: 2
-    calls_out: 4
-    calls_in: 1
-  src.nlp2uri.control_compile.compile_uri_to_control_plan:
-    name: compile_uri_to_control_plan
-    module: src.nlp2uri.control_compile
-    line: 56
-    cyclomatic_complexity: 25
-    calls_out: 51
-    calls_in: 3
-  src.nlp2uri.systemmap.resolve._name_variants:
-    name: _name_variants
-    module: src.nlp2uri.systemmap.resolve
-    line: 38
-    cyclomatic_complexity: 6
-    calls_out: 8
-    calls_in: 2
-  src.nlp2uri.schemes.desktop.build_settings:
-    name: build_settings
-    module: src.nlp2uri.schemes.desktop
-    line: 144
-    cyclomatic_complexity: 6
-    calls_out: 8
-    calls_in: 0
-  src.nlp2uri.parse_nl._normalize_aliases:
-    name: _normalize_aliases
-    module: src.nlp2uri.parse_nl
-    line: 176
-    cyclomatic_complexity: 2
-    calls_out: 3
-    calls_in: 1
-  src.nlp2uri.systemmap.index._index_access:
-    name: _index_access
-    module: src.nlp2uri.systemmap.index
-    line: 177
-    cyclomatic_complexity: 3
-    calls_out: 4
-    calls_in: 1
-  src.nlp2uri.systemmap.uri.uri_for_access:
-    name: uri_for_access
-    module: src.nlp2uri.systemmap.uri
-    line: 45
-    cyclomatic_complexity: 4
-    calls_out: 7
-    calls_in: 1
-  src.nlp2uri.host.endpoint.is_endpoint_uri:
-    name: is_endpoint_uri
-    module: src.nlp2uri.host.endpoint
-    line: 12
-    cyclomatic_complexity: 1
-    calls_out: 2
-    calls_in: 1
-  src.nlp2uri.systemmap.index._index_environment:
-    name: _index_environment
-    module: src.nlp2uri.systemmap.index
-    line: 119
-    cyclomatic_complexity: 2
-    calls_out: 5
-    calls_in: 1
-  src.nlp2uri.systemmap.uri.uri_for_artifact:
-    name: uri_for_artifact
-    module: src.nlp2uri.systemmap.uri
-    line: 57
-    cyclomatic_complexity: 1
-    calls_out: 4
-    calls_in: 1
-  src.nlp2uri.compile._legacy_nlp2uri_app_open:
-    name: _legacy_nlp2uri_app_open
-    module: src.nlp2uri.compile
-    line: 602
-    cyclomatic_complexity: 1
-    calls_out: 2
-    calls_in: 0
-  src.nlp2uri.compile._linux_launch_app_actions:
-    name: _linux_launch_app_actions
-    module: src.nlp2uri.compile
-    line: 298
-    cyclomatic_complexity: 4
-    calls_out: 5
-    calls_in: 1
-  src.nlp2uri.cqrs.drivers.service_ops.ServiceCurlDriver.compile:
-    name: compile
-    module: src.nlp2uri.cqrs.drivers.service_ops
-    line: 42
-    cyclomatic_complexity: 5
-    calls_out: 9
-    calls_in: 0
-  src.nlp2uri.host.endpoint.build_endpoint_actions:
-    name: build_endpoint_actions
-    module: src.nlp2uri.host.endpoint
-    line: 32
-    cyclomatic_complexity: 1
-    calls_out: 2
-    calls_in: 2
-  src.nlp2uri.cqrs.drivers.artifact_filesystem.ArtifactFilesystemDriver.compile:
-    name: compile
-    module: src.nlp2uri.cqrs.drivers.artifact_filesystem
-    line: 17
-    cyclomatic_complexity: 7
-    calls_out: 7
-    calls_in: 0
-  src.nlp2uri.systemmap.index._index_generated_services:
-    name: _index_generated_services
-    module: src.nlp2uri.systemmap.index
-    line: 233
-    cyclomatic_complexity: 3
-    calls_out: 4
-    calls_in: 1
-  src.nlp2uri.cqrs.drivers.endpoint_curl.EndpointCurlDriver.probe:
-    name: probe
-    module: src.nlp2uri.cqrs.drivers.endpoint_curl
-    line: 28
-    cyclomatic_complexity: 2
-    calls_out: 4
-    calls_in: 0
-  src.nlp2uri.systemmap.uri.uri_for_conversation:
-    name: uri_for_conversation
-    module: src.nlp2uri.systemmap.uri
-    line: 63
-    cyclomatic_complexity: 1
-    calls_out: 1
-    calls_in: 0
-  src.nlp2uri.compile._compile_launch_app:
-    name: _compile_launch_app
-    module: src.nlp2uri.compile
-    line: 315
-    cyclomatic_complexity: 4
-    calls_out: 4
-    calls_in: 3
-  src.nlp2uri.compile._windows_window_move_actions:
-    name: _windows_window_move_actions
-    module: src.nlp2uri.compile
-    line: 450
-    cyclomatic_complexity: 1
-    calls_out: 1
-    calls_in: 1
-  src.nlp2uri.control_execute.koruide_available:
-    name: koruide_available
+  src.nlp2uri.control_execute.execute_control_action:
+    name: execute_control_action
     module: src.nlp2uri.control_execute
-    line: 25
-    cyclomatic_complexity: 1
-    calls_out: 0
+    line: 96
+    cyclomatic_complexity: 9
+    calls_out: 8
     calls_in: 1
-  src.nlp2uri.mcp.tool_resolve_desktop_action:
-    name: tool_resolve_desktop_action
-    module: src.nlp2uri.mcp
-    line: 28
+  src.nlp2uri.cli._platform:
+    name: _platform
+    module: src.nlp2uri.cli
+    line: 23
     cyclomatic_complexity: 2
-    calls_out: 2
+    calls_out: 1
+    calls_in: 4
+  src.nlp2uri.schemes.util.file_uri:
+    name: file_uri
+    module: src.nlp2uri.schemes.util
+    line: 41
+    cyclomatic_complexity: 1
+    calls_out: 3
+    calls_in: 1
+  src.nlp2uri.schemes.file.build_file:
+    name: build_file
+    module: src.nlp2uri.schemes.file
+    line: 9
+    cyclomatic_complexity: 3
+    calls_out: 6
+    calls_in: 0
+  src.nlp2uri.compile.compile_uri_to_actions:
+    name: compile_uri_to_actions
+    module: src.nlp2uri.compile
+    line: 27
+    cyclomatic_complexity: 22
+    calls_out: 26
+    calls_in: 5
+  src.nlp2uri.integrators.rest_server.main:
+    name: main
+    module: src.nlp2uri.integrators.rest_server
+    line: 81
+    cyclomatic_complexity: 1
+    calls_out: 5
+    calls_in: 0
+  src.nlp2uri.cli._run_envmap:
+    name: _run_envmap
+    module: src.nlp2uri.cli
+    line: 114
+    cyclomatic_complexity: 4
+    calls_out: 9
+    calls_in: 1
+  src.nlp2uri.control_execute.compile_and_execute_control_uri:
+    name: compile_and_execute_control_uri
+    module: src.nlp2uri.control_execute
+    line: 186
+    cyclomatic_complexity: 5
+    calls_out: 6
+    calls_in: 2
+  src.nlp2uri.compile._compile_koru_control:
+    name: _compile_koru_control
+    module: src.nlp2uri.compile
+    line: 588
+    cyclomatic_complexity: 7
+    calls_out: 10
+    calls_in: 1
+  src.nlp2uri.adapters.mcp.McpAdapter._tool_resolve_system_map:
+    name: _tool_resolve_system_map
+    module: src.nlp2uri.adapters.mcp
+    line: 363
+    cyclomatic_complexity: 3
+    calls_out: 10
+    calls_in: 0
+  src.nlp2uri.systemmap.export._require_env2llm:
+    name: _require_env2llm
+    module: src.nlp2uri.systemmap.export
+    line: 16
+    cyclomatic_complexity: 2
+    calls_out: 3
     calls_in: 1
   schemas.codegen.scaffold_scheme.aggregate_proto:
     name: aggregate_proto
@@ -1860,60 +1090,60 @@ nodes:
     cyclomatic_complexity: 2
     calls_out: 4
     calls_in: 1
-  src.nlp2uri.host.artifact.resolve_artifact_path:
-    name: resolve_artifact_path
-    module: src.nlp2uri.host.artifact
-    line: 23
-    cyclomatic_complexity: 12
-    calls_out: 22
-    calls_in: 1
-  src.nlp2uri.schemes.build._build_navigate:
-    name: _build_navigate
-    module: src.nlp2uri.schemes.build
-    line: 61
-    cyclomatic_complexity: 4
-    calls_out: 5
-    calls_in: 2
-  src.nlp2uri.integrators.mcp_server._write_json:
-    name: _write_json
-    module: src.nlp2uri.integrators.mcp_server
-    line: 31
-    cyclomatic_complexity: 1
+  src.nlp2uri.compile._linux_settings_actions:
+    name: _linux_settings_actions
+    module: src.nlp2uri.compile
+    line: 295
+    cyclomatic_complexity: 3
     calls_out: 3
-    calls_in: 2
-  src.nlp2uri.compile._windows_terminal_actions:
-    name: _windows_terminal_actions
-    module: src.nlp2uri.compile
-    line: 248
+    calls_in: 1
+  schemas.codegen.export_mcp_schemas.main:
+    name: main
+    module: schemas.codegen.export_mcp_schemas
+    line: 34
     cyclomatic_complexity: 4
-    calls_out: 4
-    calls_in: 1
-  src.nlp2uri.runtime.execute_uri:
-    name: execute_uri
-    module: src.nlp2uri.runtime
-    line: 17
-    cyclomatic_complexity: 9
-    calls_out: 15
+    calls_out: 13
     calls_in: 0
-  src.nlp2uri.desktop_apps._exact_desktop_match:
-    name: _exact_desktop_match
-    module: src.nlp2uri.desktop_apps
-    line: 23
+  src.nlp2uri.parse_nl._parse_path:
+    name: _parse_path
+    module: src.nlp2uri.parse_nl
+    line: 468
+    cyclomatic_complexity: 2
+    calls_out: 4
+    calls_in: 0
+  src.nlp2uri.control_cli._with_instance_env:
+    name: _with_instance_env
+    module: src.nlp2uri.control_cli
+    line: 92
     cyclomatic_complexity: 3
-    calls_out: 1
+    calls_out: 2
     calls_in: 1
-  src.nlp2uri.compile._macos_window_focus_actions:
-    name: _macos_window_focus_actions
-    module: src.nlp2uri.compile
-    line: 491
+  src.nlp2uri.cqrs.registry.default_registry:
+    name: default_registry
+    module: src.nlp2uri.cqrs.registry
+    line: 96
     cyclomatic_complexity: 1
-    calls_out: 1
+    calls_out: 2
     calls_in: 1
-  src.nlp2uri.systemmap.index._index_runtimes:
-    name: _index_runtimes
-    module: src.nlp2uri.systemmap.index
-    line: 131
+  src.nlp2uri.platform_detect.detect_platform:
+    name: detect_platform
+    module: src.nlp2uri.platform_detect
+    line: 11
+    cyclomatic_complexity: 5
+    calls_out: 1
+    calls_in: 10
+  src.nlp2uri.schemes.desktop.build_app_open:
+    name: build_app_open
+    module: src.nlp2uri.schemes.desktop
+    line: 60
     cyclomatic_complexity: 3
+    calls_out: 5
+    calls_in: 0
+  src.nlp2uri.systemmap.compile._compile_access:
+    name: _compile_access
+    module: src.nlp2uri.systemmap.compile
+    line: 169
+    cyclomatic_complexity: 2
     calls_out: 5
     calls_in: 1
   src.nlp2uri.systemmap.context.load_ir_from_arguments:
@@ -1923,66 +1153,73 @@ nodes:
     cyclomatic_complexity: 8
     calls_out: 16
     calls_in: 2
-  src.nlp2uri.config.find_config_path:
-    name: find_config_path
-    module: src.nlp2uri.config
-    line: 136
-    cyclomatic_complexity: 3
-    calls_out: 2
-    calls_in: 3
-  src.nlp2uri.systemmap.getv_uri.is_getv_uri:
-    name: is_getv_uri
+  src.nlp2uri.systemmap.getv_uri.uri_for_getv_profile:
+    name: uri_for_getv_profile
     module: src.nlp2uri.systemmap.getv_uri
-    line: 39
+    line: 25
     cyclomatic_complexity: 1
-    calls_out: 2
-    calls_in: 2
-  src.nlp2uri.schemes.desktop.build_move:
-    name: build_move
-    module: src.nlp2uri.schemes.desktop
-    line: 102
-    cyclomatic_complexity: 1
-    calls_out: 5
-    calls_in: 0
-  src.nlp2uri.desktop_apps._fuzzy_desktop_match:
-    name: _fuzzy_desktop_match
-    module: src.nlp2uri.desktop_apps
-    line: 30
-    cyclomatic_complexity: 3
     calls_out: 2
     calls_in: 1
-  schemas.codegen.fix_proto_imports.main:
-    name: main
-    module: schemas.codegen.fix_proto_imports
+  src.nlp2uri.cli_parser.add_text_args:
+    name: add_text_args
+    module: src.nlp2uri.cli_parser
+    line: 25
+    cyclomatic_complexity: 1
+    calls_out: 3
+    calls_in: 7
+  src.nlp2uri.schemes.ide.build_ide_command:
+    name: build_ide_command
+    module: src.nlp2uri.schemes.ide
     line: 69
-    cyclomatic_complexity: 4
-    calls_out: 7
+    cyclomatic_complexity: 3
+    calls_out: 8
     calls_in: 0
-  src.nlp2uri.control_execute._execute_drive:
-    name: _execute_drive
-    module: src.nlp2uri.control_execute
-    line: 210
-    cyclomatic_complexity: 10
-    calls_out: 12
+  src.nlp2uri.compile._macos_launch_app_actions:
+    name: _macos_launch_app_actions
+    module: src.nlp2uri.compile
+    line: 319
+    cyclomatic_complexity: 1
+    calls_out: 1
     calls_in: 1
-  src.nlp2uri.parse_nl._parse_ide_project:
-    name: _parse_ide_project
+  src.nlp2uri.parse_nl._parse_fallback:
+    name: _parse_fallback
     module: src.nlp2uri.parse_nl
-    line: 213
-    cyclomatic_complexity: 2
-    calls_out: 6
-    calls_in: 0
-  src.nlp2uri.integrators.rest_server.run_server:
-    name: run_server
-    module: src.nlp2uri.integrators.rest_server
-    line: 62
-    cyclomatic_complexity: 2
-    calls_out: 7
+    line: 500
+    cyclomatic_complexity: 1
+    calls_out: 1
     calls_in: 1
-  src.nlp2uri.service.NLP2URIService.list_getv_uris:
-    name: list_getv_uris
-    module: src.nlp2uri.service
-    line: 197
+  schemas.codegen.fix_proto_imports.fix_api:
+    name: fix_api
+    module: schemas.codegen.fix_proto_imports
+    line: 17
+    cyclomatic_complexity: 1
+    calls_out: 3
+    calls_in: 1
+  src.nlp2uri.compile._windows_window_capture:
+    name: _windows_window_capture
+    module: src.nlp2uri.compile
+    line: 395
+    cyclomatic_complexity: 2
+    calls_out: 2
+    calls_in: 1
+  src.nlp2uri.systemmap.index._index_access:
+    name: _index_access
+    module: src.nlp2uri.systemmap.index
+    line: 177
+    cyclomatic_complexity: 3
+    calls_out: 4
+    calls_in: 1
+  src.nlp2uri.compile._linux_settings_panel_actions:
+    name: _linux_settings_panel_actions
+    module: src.nlp2uri.compile
+    line: 222
+    cyclomatic_complexity: 3
+    calls_out: 3
+    calls_in: 1
+  src.nlp2uri.systemmap.koru_ide.merge_koru_ide_index:
+    name: merge_koru_ide_index
+    module: src.nlp2uri.systemmap.koru_ide
+    line: 175
     cyclomatic_complexity: 3
     calls_out: 5
     calls_in: 0
@@ -1993,153 +1230,48 @@ nodes:
     cyclomatic_complexity: 1
     calls_out: 1
     calls_in: 3
-  examples.mcp.tool-handoff.main.main:
+  src.nlp2uri.platforms.registry.get_executor:
+    name: get_executor
+    module: src.nlp2uri.platforms.registry
+    line: 19
+    cyclomatic_complexity: 3
+    calls_out: 4
+    calls_in: 0
+  schemas.codegen.scaffold_scheme.main:
     name: main
-    module: examples.mcp.tool-handoff.main
-    line: 12
-    cyclomatic_complexity: 2
+    module: schemas.codegen.scaffold_scheme
+    line: 337
+    cyclomatic_complexity: 4
+    calls_out: 14
+    calls_in: 0
+  src.nlp2uri.config.NLP2URIConfig.resolved_platform:
+    name: resolved_platform
+    module: src.nlp2uri.config
+    line: 32
+    cyclomatic_complexity: 4
     calls_out: 8
     calls_in: 0
-  src.nlp2uri.cqrs.drivers.service_ops.ServiceSystemdDriver.probe:
-    name: probe
-    module: src.nlp2uri.cqrs.drivers.service_ops
-    line: 126
-    cyclomatic_complexity: 1
-    calls_out: 2
-    calls_in: 0
-  src.nlp2uri.compile._macos_settings_actions:
-    name: _macos_settings_actions
+  src.nlp2uri.compile._macos_screen_capture:
+    name: _macos_screen_capture
     module: src.nlp2uri.compile
-    line: 279
+    line: 353
     cyclomatic_complexity: 1
     calls_out: 1
     calls_in: 1
-  schemas.codegen.export_mcp_schemas.main:
-    name: main
-    module: schemas.codegen.export_mcp_schemas
-    line: 34
-    cyclomatic_complexity: 4
-    calls_out: 13
-    calls_in: 0
-  src.nlp2uri.compile._linux_settings_panel_actions:
-    name: _linux_settings_panel_actions
-    module: src.nlp2uri.compile
-    line: 210
-    cyclomatic_complexity: 3
-    calls_out: 3
-    calls_in: 1
-  src.nlp2uri.parse_nl._capture_target:
-    name: _capture_target
-    module: src.nlp2uri.parse_nl
-    line: 405
-    cyclomatic_complexity: 4
-    calls_out: 2
-    calls_in: 1
-  src.nlp2uri.host.artifact.build_artifact_actions:
-    name: build_artifact_actions
-    module: src.nlp2uri.host.artifact
-    line: 61
-    cyclomatic_complexity: 13
-    calls_out: 17
-    calls_in: 2
-  src.nlp2uri.compile._windows_screen_capture:
-    name: _windows_screen_capture
-    module: src.nlp2uri.compile
-    line: 345
-    cyclomatic_complexity: 1
-    calls_out: 1
-    calls_in: 1
-  src.nlp2uri.platforms.base.UriExecutor._desktop_id_for_app:
-    name: _desktop_id_for_app
-    module: src.nlp2uri.platforms.base
-    line: 103
-    cyclomatic_complexity: 7
-    calls_out: 7
-    calls_in: 1
-  src.nlp2uri.integrators.mcp_server._handle_tools_call:
-    name: _handle_tools_call
-    module: src.nlp2uri.integrators.mcp_server
-    line: 52
-    cyclomatic_complexity: 6
-    calls_out: 7
-    calls_in: 1
-  src.nlp2uri.systemmap.load.load_system_map_from_doql:
-    name: load_system_map_from_doql
-    module: src.nlp2uri.systemmap.load
-    line: 35
-    cyclomatic_complexity: 2
-    calls_out: 3
-    calls_in: 2
-  src.nlp2uri.parse_nl._normalize_app_name:
-    name: _normalize_app_name
-    module: src.nlp2uri.parse_nl
-    line: 448
-    cyclomatic_complexity: 2
-    calls_out: 1
-    calls_in: 2
-  src.nlp2uri.systemmap.resolve._match_command_entry:
-    name: _match_command_entry
-    module: src.nlp2uri.systemmap.resolve
-    line: 50
-    cyclomatic_complexity: 16
-    calls_out: 24
-    calls_in: 1
-  src.nlp2uri.systemmap.export._ir_field:
-    name: _ir_field
-    module: src.nlp2uri.systemmap.export
-    line: 21
-    cyclomatic_complexity: 2
-    calls_out: 3
-    calls_in: 5
-  src.nlp2uri.compile._compile_app_file_open:
-    name: _compile_app_file_open
-    module: src.nlp2uri.compile
-    line: 108
-    cyclomatic_complexity: 2
-    calls_out: 6
-    calls_in: 1
-  src.nlp2uri.desktop_apps.desktop_id_candidate_names:
-    name: desktop_id_candidate_names
-    module: src.nlp2uri.desktop_apps
-    line: 14
-    cyclomatic_complexity: 1
-    calls_out: 2
-    calls_in: 1
-  src.nlp2uri.compile._compile_window_capture:
-    name: _compile_window_capture
-    module: src.nlp2uri.compile
-    line: 390
-    cyclomatic_complexity: 4
-    calls_out: 6
-    calls_in: 1
-  src.nlp2uri.parse_nl._normalize_panel:
-    name: _normalize_panel
-    module: src.nlp2uri.parse_nl
-    line: 326
-    cyclomatic_complexity: 1
-    calls_out: 3
-    calls_in: 1
-  src.nlp2uri.control_execute.execute_control_plan:
-    name: execute_control_plan
-    module: src.nlp2uri.control_execute
-    line: 163
-    cyclomatic_complexity: 2
-    calls_out: 2
-    calls_in: 2
-  src.nlp2uri.systemmap.uri.uri_for_generated_service:
-    name: uri_for_generated_service
+  src.nlp2uri.systemmap.uri._get:
+    name: _get
     module: src.nlp2uri.systemmap.uri
-    line: 85
-    cyclomatic_complexity: 1
-    calls_out: 2
-    calls_in: 1
-  src.nlp2uri.compile._compile_window:
-    name: _compile_window
-    module: src.nlp2uri.compile
-    line: 516
-    cyclomatic_complexity: 5
+    line: 10
+    cyclomatic_complexity: 4
     calls_out: 5
-    calls_in: 2
+    calls_in: 15
+  src.nlp2uri.cli._run_shell:
+    name: _run_shell
+    module: src.nlp2uri.cli
+    line: 78
+    cyclomatic_complexity: 5
+    calls_out: 10
+    calls_in: 1
   src.nlp2uri.systemmap.getv_uri.resolve_prompt_against_getv:
     name: resolve_prompt_against_getv
     module: src.nlp2uri.systemmap.getv_uri
@@ -2147,41 +1279,6 @@ nodes:
     cyclomatic_complexity: 13
     calls_out: 18
     calls_in: 1
-  src.nlp2uri.control_execute._build_client:
-    name: _build_client
-    module: src.nlp2uri.control_execute
-    line: 83
-    cyclomatic_complexity: 3
-    calls_out: 2
-    calls_in: 2
-  src.nlp2uri.compile._windows_launch_app_actions:
-    name: _windows_launch_app_actions
-    module: src.nlp2uri.compile
-    line: 311
-    cyclomatic_complexity: 1
-    calls_out: 1
-    calls_in: 1
-  src.nlp2uri.schemes.util.abstract_url:
-    name: abstract_url
-    module: src.nlp2uri.schemes.util
-    line: 9
-    cyclomatic_complexity: 9
-    calls_out: 5
-    calls_in: 20
-  src.nlp2uri.service.NLP2URIService.read_getv_var:
-    name: read_getv_var
-    module: src.nlp2uri.service
-    line: 227
-    cyclomatic_complexity: 1
-    calls_out: 1
-    calls_in: 0
-  src.nlp2uri.service.NLP2URIService.list_koru_ide_uris:
-    name: list_koru_ide_uris
-    module: src.nlp2uri.service
-    line: 141
-    cyclomatic_complexity: 1
-    calls_out: 3
-    calls_in: 0
   examples.execute.dry-run.main.main:
     name: main
     module: examples.execute.dry-run.main
@@ -2189,54 +1286,110 @@ nodes:
     cyclomatic_complexity: 3
     calls_out: 7
     calls_in: 0
-  src.nlp2uri.systemmap.compile.is_system_map_uri:
-    name: is_system_map_uri
-    module: src.nlp2uri.systemmap.compile
-    line: 30
-    cyclomatic_complexity: 1
-    calls_out: 2
-    calls_in: 1
-  src.nlp2uri.compile._linux_window_capture:
-    name: _linux_window_capture
-    module: src.nlp2uri.compile
-    line: 363
-    cyclomatic_complexity: 4
-    calls_out: 5
-    calls_in: 1
-  src.nlp2uri.systemmap.export.apply_desktop_uri_mapping:
-    name: apply_desktop_uri_mapping
-    module: src.nlp2uri.systemmap.export
-    line: 27
-    cyclomatic_complexity: 9
-    calls_out: 11
-    calls_in: 1
-  src.nlp2uri.systemmap.index._get_id_field:
-    name: _get_id_field
-    module: src.nlp2uri.systemmap.index
-    line: 348
-    cyclomatic_complexity: 4
-    calls_out: 5
-    calls_in: 10
-  src.nlp2uri.systemmap.index._index_policies:
-    name: _index_policies
-    module: src.nlp2uri.systemmap.index
-    line: 203
-    cyclomatic_complexity: 3
-    calls_out: 5
-    calls_in: 1
-  src.nlp2uri.service.NLP2URIService.resolve_getv:
-    name: resolve_getv
-    module: src.nlp2uri.service
-    line: 207
-    cyclomatic_complexity: 4
-    calls_out: 3
+  src.nlp2uri.cqrs.drivers.container_docker.ContainerDockerDriver.compile:
+    name: compile
+    module: src.nlp2uri.cqrs.drivers.container_docker
+    line: 29
+    cyclomatic_complexity: 5
+    calls_out: 9
     calls_in: 0
-  src.nlp2uri.compile._compile_screen_capture:
-    name: _compile_screen_capture
-    module: src.nlp2uri.compile
-    line: 353
+  src.nlp2uri.control_cli.dispatch_control_action:
+    name: dispatch_control_action
+    module: src.nlp2uri.control_cli
+    line: 515
     cyclomatic_complexity: 4
     calls_out: 4
+    calls_in: 1
+  src.nlp2uri.schemes.desktop.build_move:
+    name: build_move
+    module: src.nlp2uri.schemes.desktop
+    line: 102
+    cyclomatic_complexity: 1
+    calls_out: 5
+    calls_in: 0
+  src.nlp2uri.compile._windows_screen_capture:
+    name: _windows_screen_capture
+    module: src.nlp2uri.compile
+    line: 357
+    cyclomatic_complexity: 1
+    calls_out: 1
+    calls_in: 1
+  src.nlp2uri.compile._macos_window_move_actions:
+    name: _macos_window_move_actions
+    module: src.nlp2uri.compile
+    line: 453
+    cyclomatic_complexity: 1
+    calls_out: 1
+    calls_in: 1
+  src.nlp2uri.parse_nl._parse_ide_chat_send:
+    name: _parse_ide_chat_send
+    module: src.nlp2uri.parse_nl
+    line: 229
+    cyclomatic_complexity: 6
+    calls_out: 13
+    calls_in: 0
+  src.nlp2uri.mcp.mcp_handoff_payload:
+    name: mcp_handoff_payload
+    module: src.nlp2uri.mcp
+    line: 57
+    cyclomatic_complexity: 2
+    calls_out: 4
+    calls_in: 1
+  src.nlp2uri.schemes.ide.build_ide_chat_send:
+    name: build_ide_chat_send
+    module: src.nlp2uri.schemes.ide
+    line: 38
+    cyclomatic_complexity: 3
+    calls_out: 9
+    calls_in: 0
+  src.nlp2uri.systemmap.uri.uri_for_runtime:
+    name: uri_for_runtime
+    module: src.nlp2uri.systemmap.uri
+    line: 24
+    cyclomatic_complexity: 1
+    calls_out: 4
+    calls_in: 1
+  src.nlp2uri.systemmap.resolve.resolve_prompt_against_system_map:
+    name: resolve_prompt_against_system_map
+    module: src.nlp2uri.systemmap.resolve
+    line: 172
+    cyclomatic_complexity: 4
+    calls_out: 6
+    calls_in: 2
+  src.nlp2uri.schemes.build.build_uri:
+    name: build_uri
+    module: src.nlp2uri.schemes.build
+    line: 12
+    cyclomatic_complexity: 19
+    calls_out: 22
+    calls_in: 2
+  src.nlp2uri.compile._compile_app_file_open:
+    name: _compile_app_file_open
+    module: src.nlp2uri.compile
+    line: 120
+    cyclomatic_complexity: 2
+    calls_out: 6
+    calls_in: 1
+  src.nlp2uri.control_execute.execute_control_plan:
+    name: execute_control_plan
+    module: src.nlp2uri.control_execute
+    line: 165
+    cyclomatic_complexity: 2
+    calls_out: 2
+    calls_in: 2
+  src.nlp2uri.host.endpoint.build_endpoint_actions:
+    name: build_endpoint_actions
+    module: src.nlp2uri.host.endpoint
+    line: 32
+    cyclomatic_complexity: 1
+    calls_out: 2
+    calls_in: 2
+  src.nlp2uri.compile._compile_app_named:
+    name: _compile_app_named
+    module: src.nlp2uri.compile
+    line: 144
+    cyclomatic_complexity: 6
+    calls_out: 3
     calls_in: 1
   src.nlp2uri.host.endpoint.build_endpoint_url:
     name: build_endpoint_url
@@ -2245,6 +1398,1014 @@ nodes:
     cyclomatic_complexity: 8
     calls_out: 10
     calls_in: 2
+  src.nlp2uri.parse_nl._bool_param:
+    name: _bool_param
+    module: src.nlp2uri.parse_nl
+    line: 141
+    cyclomatic_complexity: 2
+    calls_out: 0
+    calls_in: 3
+  src.nlp2uri.systemmap.getv_uri.compile_getv_uri:
+    name: compile_getv_uri
+    module: src.nlp2uri.systemmap.getv_uri
+    line: 175
+    cyclomatic_complexity: 14
+    calls_out: 18
+    calls_in: 2
+  src.nlp2uri.systemmap.export.apply_desktop_uri_mapping:
+    name: apply_desktop_uri_mapping
+    module: src.nlp2uri.systemmap.export
+    line: 27
+    cyclomatic_complexity: 9
+    calls_out: 11
+    calls_in: 1
+  src.nlp2uri.systemmap.compile._compile_runtime:
+    name: _compile_runtime
+    module: src.nlp2uri.systemmap.compile
+    line: 111
+    cyclomatic_complexity: 12
+    calls_out: 18
+    calls_in: 1
+  src.nlp2uri.systemmap.compile.compile_system_map_uri:
+    name: compile_system_map_uri
+    module: src.nlp2uri.systemmap.compile
+    line: 47
+    cyclomatic_complexity: 8
+    calls_out: 10
+    calls_in: 5
+  src.nlp2uri.systemmap.context._coerce_ir:
+    name: _coerce_ir
+    module: src.nlp2uri.systemmap.context
+    line: 42
+    cyclomatic_complexity: 2
+    calls_out: 2
+    calls_in: 1
+  src.nlp2uri.parse_nl._strip_quotes:
+    name: _strip_quotes
+    module: src.nlp2uri.parse_nl
+    line: 127
+    cyclomatic_complexity: 1
+    calls_out: 2
+    calls_in: 7
+  src.nlp2uri.compile._macos_settings_actions:
+    name: _macos_settings_actions
+    module: src.nlp2uri.compile
+    line: 291
+    cyclomatic_complexity: 1
+    calls_out: 1
+    calls_in: 1
+  src.nlp2uri.service.NLP2URIService.for_platform:
+    name: for_platform
+    module: src.nlp2uri.service
+    line: 36
+    cyclomatic_complexity: 2
+    calls_out: 4
+    calls_in: 0
+  src.nlp2uri.systemmap.index._index_validations:
+    name: _index_validations
+    module: src.nlp2uri.systemmap.index
+    line: 300
+    cyclomatic_complexity: 4
+    calls_out: 4
+    calls_in: 1
+  src.nlp2uri.control_cli._fetch_autopilot_status:
+    name: _fetch_autopilot_status
+    module: src.nlp2uri.control_cli
+    line: 138
+    cyclomatic_complexity: 6
+    calls_out: 9
+    calls_in: 1
+  src.nlp2uri.parse_nl._parse_settings_panel:
+    name: _parse_settings_panel
+    module: src.nlp2uri.parse_nl
+    line: 331
+    cyclomatic_complexity: 6
+    calls_out: 7
+    calls_in: 0
+  src.nlp2uri.systemmap.index._index_runtimes:
+    name: _index_runtimes
+    module: src.nlp2uri.systemmap.index
+    line: 131
+    cyclomatic_complexity: 3
+    calls_out: 5
+    calls_in: 1
+  src.nlp2uri.schemes.util.abstract_url:
+    name: abstract_url
+    module: src.nlp2uri.schemes.util
+    line: 9
+    cyclomatic_complexity: 9
+    calls_out: 5
+    calls_in: 21
+  src.nlp2uri.systemmap.load.env2llm_missing_message:
+    name: env2llm_missing_message
+    module: src.nlp2uri.systemmap.load
+    line: 26
+    cyclomatic_complexity: 2
+    calls_out: 0
+    calls_in: 4
+  schemas.codegen.scaffold_scheme.api_proto:
+    name: api_proto
+    module: schemas.codegen.scaffold_scheme
+    line: 174
+    cyclomatic_complexity: 1
+    calls_out: 3
+    calls_in: 1
+  src.nlp2uri.systemmap.resolve._name_variants:
+    name: _name_variants
+    module: src.nlp2uri.systemmap.resolve
+    line: 38
+    cyclomatic_complexity: 6
+    calls_out: 8
+    calls_in: 2
+  src.nlp2uri.compile._compile_app:
+    name: _compile_app
+    module: src.nlp2uri.compile
+    line: 174
+    cyclomatic_complexity: 4
+    calls_out: 5
+    calls_in: 1
+  src.nlp2uri.compile._compile_window_move:
+    name: _compile_window_move
+    module: src.nlp2uri.compile
+    line: 474
+    cyclomatic_complexity: 5
+    calls_out: 7
+    calls_in: 1
+  src.nlp2uri.host.artifact._decode:
+    name: _decode
+    module: src.nlp2uri.host.artifact
+    line: 19
+    cyclomatic_complexity: 2
+    calls_out: 1
+    calls_in: 2
+  src.nlp2uri.schemes.util.normalize_path:
+    name: normalize_path
+    module: src.nlp2uri.schemes.util
+    line: 33
+    cyclomatic_complexity: 2
+    calls_out: 5
+    calls_in: 4
+  src.nlp2uri.cqrs.drivers.service_ops.parse_service_name:
+    name: parse_service_name
+    module: src.nlp2uri.cqrs.drivers.service_ops
+    line: 22
+    cyclomatic_complexity: 4
+    calls_out: 4
+    calls_in: 6
+  src.nlp2uri.schemes.ide.build_koru_control_drive:
+    name: build_koru_control_drive
+    module: src.nlp2uri.schemes.ide
+    line: 97
+    cyclomatic_complexity: 3
+    calls_out: 9
+    calls_in: 0
+  src.nlp2uri.schemes.build._build_navigate:
+    name: _build_navigate
+    module: src.nlp2uri.schemes.build
+    line: 61
+    cyclomatic_complexity: 4
+    calls_out: 5
+    calls_in: 2
+  src.nlp2uri.systemmap.getv_uri._decode_segment:
+    name: _decode_segment
+    module: src.nlp2uri.systemmap.getv_uri
+    line: 43
+    cyclomatic_complexity: 2
+    calls_out: 1
+    calls_in: 6
+  src.nlp2uri.config.ensure_config:
+    name: ensure_config
+    module: src.nlp2uri.config
+    line: 201
+    cyclomatic_complexity: 4
+    calls_out: 9
+    calls_in: 5
+  src.nlp2uri.parse_nl._workspace_hint:
+    name: _workspace_hint
+    module: src.nlp2uri.parse_nl
+    line: 167
+    cyclomatic_complexity: 3
+    calls_out: 4
+    calls_in: 2
+  src.nlp2uri.systemmap.compile._compile_command:
+    name: _compile_command
+    module: src.nlp2uri.systemmap.compile
+    line: 76
+    cyclomatic_complexity: 4
+    calls_out: 8
+    calls_in: 1
+  src.nlp2uri.parse_nl._parse_terminal:
+    name: _parse_terminal
+    module: src.nlp2uri.parse_nl
+    line: 351
+    cyclomatic_complexity: 3
+    calls_out: 5
+    calls_in: 0
+  src.nlp2uri.host.artifact.build_artifact_actions:
+    name: build_artifact_actions
+    module: src.nlp2uri.host.artifact
+    line: 61
+    cyclomatic_complexity: 13
+    calls_out: 17
+    calls_in: 2
+  src.nlp2uri.control_execute._verification_status:
+    name: _verification_status
+    module: src.nlp2uri.control_execute
+    line: 66
+    cyclomatic_complexity: 12
+    calls_out: 5
+    calls_in: 1
+  src.nlp2uri.control_cli._submit_from_payload:
+    name: _submit_from_payload
+    module: src.nlp2uri.control_cli
+    line: 255
+    cyclomatic_complexity: 10
+    calls_out: 11
+    calls_in: 1
+  src.nlp2uri.systemmap.resolve._match_runtime_entry:
+    name: _match_runtime_entry
+    module: src.nlp2uri.systemmap.resolve
+    line: 134
+    cyclomatic_complexity: 5
+    calls_out: 2
+    calls_in: 1
+  src.nlp2uri.systemmap.getv_load.mask_var_value:
+    name: mask_var_value
+    module: src.nlp2uri.systemmap.getv_load
+    line: 88
+    cyclomatic_complexity: 2
+    calls_out: 2
+    calls_in: 2
+  src.nlp2uri.control_compile._query_params:
+    name: _query_params
+    module: src.nlp2uri.control_compile
+    line: 18
+    cyclomatic_complexity: 3
+    calls_out: 3
+    calls_in: 1
+  src.nlp2uri.service.NLP2URIService.compile:
+    name: compile
+    module: src.nlp2uri.service
+    line: 73
+    cyclomatic_complexity: 3
+    calls_out: 3
+    calls_in: 0
+  src.nlp2uri.systemmap.resolve._match_resource_entry:
+    name: _match_resource_entry
+    module: src.nlp2uri.systemmap.resolve
+    line: 112
+    cyclomatic_complexity: 7
+    calls_out: 5
+    calls_in: 1
+  src.nlp2uri.compile._legacy_nlp2uri_capture:
+    name: _legacy_nlp2uri_capture
+    module: src.nlp2uri.compile
+    line: 630
+    cyclomatic_complexity: 1
+    calls_out: 2
+    calls_in: 1
+  src.nlp2uri.integrators.mcp_server.handle_message:
+    name: handle_message
+    module: src.nlp2uri.integrators.mcp_server
+    line: 80
+    cyclomatic_complexity: 8
+    calls_out: 12
+    calls_in: 1
+  src.nlp2uri.systemmap.index._index_desktop:
+    name: _index_desktop
+    module: src.nlp2uri.systemmap.index
+    line: 261
+    cyclomatic_complexity: 7
+    calls_out: 10
+    calls_in: 1
+  src.nlp2uri.cqrs.drivers.service_ops.ServiceCurlDriver.compile:
+    name: compile
+    module: src.nlp2uri.cqrs.drivers.service_ops
+    line: 42
+    cyclomatic_complexity: 5
+    calls_out: 9
+    calls_in: 0
+  scripts.test-cqrs-smoke.print:
+    name: print
+    module: scripts.test-cqrs-smoke
+    line: 54
+    cyclomatic_complexity: 0
+    calls_out: 0
+    calls_in: 31
+  schemas.codegen.fix_proto_imports.main:
+    name: main
+    module: schemas.codegen.fix_proto_imports
+    line: 69
+    cyclomatic_complexity: 4
+    calls_out: 7
+    calls_in: 0
+  src.nlp2uri.cqrs.dispatcher.CqrsDispatcher.__init__:
+    name: __init__
+    module: src.nlp2uri.cqrs.dispatcher
+    line: 18
+    cyclomatic_complexity: 5
+    calls_out: 5
+    calls_in: 0
+  src.nlp2uri.service.NLP2URIService._cfg:
+    name: _cfg
+    module: src.nlp2uri.service
+    line: 41
+    cyclomatic_complexity: 2
+    calls_out: 1
+    calls_in: 0
+  src.nlp2uri.service.NLP2URIService.read_getv_var:
+    name: read_getv_var
+    module: src.nlp2uri.service
+    line: 227
+    cyclomatic_complexity: 1
+    calls_out: 1
+    calls_in: 0
+  src.nlp2uri.systemmap.uri.uri_for_desktop_window_screenshot:
+    name: uri_for_desktop_window_screenshot
+    module: src.nlp2uri.systemmap.uri
+    line: 115
+    cyclomatic_complexity: 2
+    calls_out: 2
+    calls_in: 2
+  src.nlp2uri.compile._compile_settings:
+    name: _compile_settings
+    module: src.nlp2uri.compile
+    line: 302
+    cyclomatic_complexity: 3
+    calls_out: 3
+    calls_in: 2
+  src.nlp2uri.control_cli._resolve_ide:
+    name: _resolve_ide
+    module: src.nlp2uri.control_cli
+    line: 80
+    cyclomatic_complexity: 8
+    calls_out: 7
+    calls_in: 4
+  src.nlp2uri.cqrs.drivers.resource_probe.ResourceProbeDriver.compile:
+    name: compile
+    module: src.nlp2uri.cqrs.drivers.resource_probe
+    line: 16
+    cyclomatic_complexity: 5
+    calls_out: 6
+    calls_in: 0
+  src.nlp2uri.config.get_effective_platform:
+    name: get_effective_platform
+    module: src.nlp2uri.config
+    line: 222
+    cyclomatic_complexity: 2
+    calls_out: 2
+    calls_in: 4
+  src.nlp2uri.parse_nl._parse_ide_status:
+    name: _parse_ide_status
+    module: src.nlp2uri.parse_nl
+    line: 254
+    cyclomatic_complexity: 2
+    calls_out: 4
+    calls_in: 0
+  src.nlp2uri.adapters.mcp.McpAdapter._tool_list_system_uris:
+    name: _tool_list_system_uris
+    module: src.nlp2uri.adapters.mcp
+    line: 353
+    cyclomatic_complexity: 2
+    calls_out: 7
+    calls_in: 0
+  src.nlp2uri.control_cli._resolve_workspace:
+    name: _resolve_workspace
+    module: src.nlp2uri.control_cli
+    line: 179
+    cyclomatic_complexity: 5
+    calls_out: 7
+    calls_in: 2
+  src.nlp2uri.systemmap.index._add_entry:
+    name: _add_entry
+    module: src.nlp2uri.systemmap.index
+    line: 96
+    cyclomatic_complexity: 3
+    calls_out: 4
+    calls_in: 24
+  src.nlp2uri.config.find_config_path:
+    name: find_config_path
+    module: src.nlp2uri.config
+    line: 136
+    cyclomatic_complexity: 3
+    calls_out: 2
+    calls_in: 3
+  src.nlp2uri.cqrs.drivers.endpoint_curl.EndpointCurlDriver.compile:
+    name: compile
+    module: src.nlp2uri.cqrs.drivers.endpoint_curl
+    line: 15
+    cyclomatic_complexity: 2
+    calls_out: 4
+    calls_in: 0
+  src.nlp2uri.service.NLP2URIService.handle_prompt:
+    name: handle_prompt
+    module: src.nlp2uri.service
+    line: 92
+    cyclomatic_complexity: 13
+    calls_out: 14
+    calls_in: 0
+  src.nlp2uri.systemmap.getv_uri.uri_for_getv_var:
+    name: uri_for_getv_var
+    module: src.nlp2uri.systemmap.getv_uri
+    line: 30
+    cyclomatic_complexity: 1
+    calls_out: 3
+    calls_in: 1
+  src.nlp2uri.control_compile.compile_uri_to_control_plan:
+    name: compile_uri_to_control_plan
+    module: src.nlp2uri.control_compile
+    line: 64
+    cyclomatic_complexity: 25
+    calls_out: 53
+    calls_in: 5
+  src.nlp2uri.config._parse_simple_yaml:
+    name: _parse_simple_yaml
+    module: src.nlp2uri.config
+    line: 107
+    cyclomatic_complexity: 5
+    calls_out: 6
+    calls_in: 1
+  src.nlp2uri.service.NLP2URIService.resolve_getv:
+    name: resolve_getv
+    module: src.nlp2uri.service
+    line: 207
+    cyclomatic_complexity: 4
+    calls_out: 3
+    calls_in: 0
+  src.nlp2uri.systemmap.getv_load.getv_home:
+    name: getv_home
+    module: src.nlp2uri.systemmap.getv_load
+    line: 39
+    cyclomatic_complexity: 1
+    calls_out: 4
+    calls_in: 4
+  schemas.codegen.scaffold_scheme._pascal:
+    name: _pascal
+    module: schemas.codegen.scaffold_scheme
+    line: 16
+    cyclomatic_complexity: 2
+    calls_out: 4
+    calls_in: 11
+  src.nlp2uri.parse_nl._parse_ide_project:
+    name: _parse_ide_project
+    module: src.nlp2uri.parse_nl
+    line: 213
+    cyclomatic_complexity: 2
+    calls_out: 6
+    calls_in: 0
+  src.nlp2uri.config._parse_scalar:
+    name: _parse_scalar
+    module: src.nlp2uri.config
+    line: 94
+    cyclomatic_complexity: 8
+    calls_out: 5
+    calls_in: 1
+  src.nlp2uri.cqrs.drivers.service_ops._compose_dir:
+    name: _compose_dir
+    module: src.nlp2uri.cqrs.drivers.service_ops
+    line: 31
+    cyclomatic_complexity: 3
+    calls_out: 5
+    calls_in: 2
+  schemas.codegen.fix_proto_imports.fix_driver:
+    name: fix_driver
+    module: schemas.codegen.fix_proto_imports
+    line: 49
+    cyclomatic_complexity: 1
+    calls_out: 3
+    calls_in: 1
+  src.nlp2uri.compile._linux_launch_app_actions:
+    name: _linux_launch_app_actions
+    module: src.nlp2uri.compile
+    line: 310
+    cyclomatic_complexity: 4
+    calls_out: 5
+    calls_in: 1
+  src.nlp2uri.cli._run_adapter_command:
+    name: _run_adapter_command
+    module: src.nlp2uri.cli
+    line: 97
+    cyclomatic_complexity: 5
+    calls_out: 9
+    calls_in: 1
+  src.nlp2uri.config.NLP2URIConfig.to_dict:
+    name: to_dict
+    module: src.nlp2uri.config
+    line: 45
+    cyclomatic_complexity: 2
+    calls_out: 2
+    calls_in: 0
+  src.nlp2uri.service.NLP2URIService._host:
+    name: _host
+    module: src.nlp2uri.service
+    line: 44
+    cyclomatic_complexity: 1
+    calls_out: 1
+    calls_in: 0
+  src.nlp2uri.cqrs.plugins.load_driver_plugins:
+    name: load_driver_plugins
+    module: src.nlp2uri.cqrs.plugins
+    line: 27
+    cyclomatic_complexity: 7
+    calls_out: 10
+    calls_in: 2
+  examples.resolve.nl-to-uri.main.main:
+    name: main
+    module: examples.resolve.nl-to-uri.main
+    line: 28
+    cyclomatic_complexity: 3
+    calls_out: 5
+    calls_in: 0
+  src.nlp2uri.systemmap.index._index_artifacts:
+    name: _index_artifacts
+    module: src.nlp2uri.systemmap.index
+    line: 190
+    cyclomatic_complexity: 4
+    calls_out: 4
+    calls_in: 1
+  src.nlp2uri.systemmap.resolve._entry_hits:
+    name: _entry_hits
+    module: src.nlp2uri.systemmap.resolve
+    line: 155
+    cyclomatic_complexity: 1
+    calls_out: 3
+    calls_in: 1
+  src.nlp2uri.control_cli._finalize_control_plan_payload:
+    name: _finalize_control_plan_payload
+    module: src.nlp2uri.control_cli
+    line: 267
+    cyclomatic_complexity: 12
+    calls_out: 19
+    calls_in: 2
+  src.nlp2uri.control_cli._resolve_socket_path:
+    name: _resolve_socket_path
+    module: src.nlp2uri.control_cli
+    line: 109
+    cyclomatic_complexity: 6
+    calls_out: 17
+    calls_in: 2
+  src.nlp2uri.systemmap.index._index_generated_services:
+    name: _index_generated_services
+    module: src.nlp2uri.systemmap.index
+    line: 233
+    cyclomatic_complexity: 3
+    calls_out: 4
+    calls_in: 1
+  src.nlp2uri.cqrs.drivers.runtime_curl.RuntimeCurlDriver.compile:
+    name: compile
+    module: src.nlp2uri.cqrs.drivers.runtime_curl
+    line: 16
+    cyclomatic_complexity: 2
+    calls_out: 4
+    calls_in: 0
+  src.nlp2uri.config._yaml_scalar:
+    name: _yaml_scalar
+    module: src.nlp2uri.config
+    line: 81
+    cyclomatic_complexity: 8
+    calls_out: 6
+    calls_in: 1
+  src.nlp2uri.control_cli._add_lane_args:
+    name: _add_lane_args
+    module: src.nlp2uri.control_cli
+    line: 25
+    cyclomatic_complexity: 1
+    calls_out: 6
+    calls_in: 3
+  src.nlp2uri.integrators.mcp_server._handle_initialize:
+    name: _handle_initialize
+    module: src.nlp2uri.integrators.mcp_server
+    line: 40
+    cyclomatic_complexity: 1
+    calls_out: 0
+    calls_in: 1
+  src.nlp2uri.systemmap.uri.uri_for_desktop_window_focus:
+    name: uri_for_desktop_window_focus
+    module: src.nlp2uri.systemmap.uri
+    line: 101
+    cyclomatic_complexity: 3
+    calls_out: 3
+    calls_in: 2
+  src.nlp2uri.systemmap.index._get_id_field:
+    name: _get_id_field
+    module: src.nlp2uri.systemmap.index
+    line: 348
+    cyclomatic_complexity: 4
+    calls_out: 5
+    calls_in: 10
+  src.nlp2uri.resolve.resolve_text:
+    name: resolve_text
+    module: src.nlp2uri.resolve
+    line: 13
+    cyclomatic_complexity: 2
+    calls_out: 3
+    calls_in: 2
+  src.nlp2uri.systemmap.uri.uri_for_resource:
+    name: uri_for_resource
+    module: src.nlp2uri.systemmap.uri
+    line: 38
+    cyclomatic_complexity: 2
+    calls_out: 4
+    calls_in: 1
+  src.nlp2uri.host.resource._decode:
+    name: _decode
+    module: src.nlp2uri.host.resource
+    line: 19
+    cyclomatic_complexity: 2
+    calls_out: 1
+    calls_in: 2
+  src.nlp2uri.cli_parser.add_common_args:
+    name: add_common_args
+    module: src.nlp2uri.cli_parser
+    line: 12
+    cyclomatic_complexity: 3
+    calls_out: 2
+    calls_in: 11
+  src.nlp2uri.parse_nl.parse_text:
+    name: parse_text
+    module: src.nlp2uri.parse_nl
+    line: 530
+    cyclomatic_complexity: 5
+    calls_out: 6
+    calls_in: 2
+  src.nlp2uri.systemmap.index.build_uri_index:
+    name: build_uri_index
+    module: src.nlp2uri.systemmap.index
+    line: 313
+    cyclomatic_complexity: 6
+    calls_out: 17
+    calls_in: 5
+  schemas.codegen.fix_proto_imports._pascal:
+    name: _pascal
+    module: schemas.codegen.fix_proto_imports
+    line: 13
+    cyclomatic_complexity: 2
+    calls_out: 4
+    calls_in: 2
+  src.nlp2uri.systemmap.encode.encode_path:
+    name: encode_path
+    module: src.nlp2uri.systemmap.encode
+    line: 13
+    cyclomatic_complexity: 1
+    calls_out: 2
+    calls_in: 1
+  schemas.codegen.scaffold_scheme.driver_proto:
+    name: driver_proto
+    module: schemas.codegen.scaffold_scheme
+    line: 152
+    cyclomatic_complexity: 1
+    calls_out: 5
+    calls_in: 1
+  src.nlp2uri.control_cli._load_status_json:
+    name: _load_status_json
+    module: src.nlp2uri.control_cli
+    line: 455
+    cyclomatic_complexity: 11
+    calls_out: 11
+    calls_in: 1
+  src.nlp2uri.systemmap.getv_uri.build_getv_uri_index:
+    name: build_getv_uri_index
+    module: src.nlp2uri.systemmap.getv_uri
+    line: 47
+    cyclomatic_complexity: 6
+    calls_out: 24
+    calls_in: 3
+  src.nlp2uri.cli._run_execute:
+    name: _run_execute
+    module: src.nlp2uri.cli
+    line: 139
+    cyclomatic_complexity: 6
+    calls_out: 11
+    calls_in: 1
+  src.nlp2uri.control_cli._plan_payload:
+    name: _plan_payload
+    module: src.nlp2uri.control_cli
+    line: 312
+    cyclomatic_complexity: 9
+    calls_out: 11
+    calls_in: 2
+  src.nlp2uri.systemmap.uri.uri_for_access:
+    name: uri_for_access
+    module: src.nlp2uri.systemmap.uri
+    line: 45
+    cyclomatic_complexity: 4
+    calls_out: 7
+    calls_in: 1
+  src.nlp2uri.compile._compile_window:
+    name: _compile_window
+    module: src.nlp2uri.compile
+    line: 528
+    cyclomatic_complexity: 5
+    calls_out: 5
+    calls_in: 2
+  src.nlp2uri.desktop_apps._fuzzy_desktop_match:
+    name: _fuzzy_desktop_match
+    module: src.nlp2uri.desktop_apps
+    line: 30
+    cyclomatic_complexity: 3
+    calls_out: 2
+    calls_in: 1
+  src.nlp2uri.service.NLP2URIService.execute:
+    name: execute
+    module: src.nlp2uri.service
+    line: 77
+    cyclomatic_complexity: 2
+    calls_out: 3
+    calls_in: 0
+  src.nlp2uri.integrators.mcp_server._handle_tools_call:
+    name: _handle_tools_call
+    module: src.nlp2uri.integrators.mcp_server
+    line: 52
+    cyclomatic_complexity: 6
+    calls_out: 7
+    calls_in: 1
+  src.nlp2uri.cqrs.drivers.command_curl.CommandCurlDriver.compile:
+    name: compile
+    module: src.nlp2uri.cqrs.drivers.command_curl
+    line: 17
+    cyclomatic_complexity: 5
+    calls_out: 6
+    calls_in: 0
+  schemas.codegen.scaffold_scheme.queries_proto:
+    name: queries_proto
+    module: schemas.codegen.scaffold_scheme
+    line: 137
+    cyclomatic_complexity: 1
+    calls_out: 3
+    calls_in: 1
+  src.nlp2uri.systemmap.getv_load.profile_manager:
+    name: profile_manager
+    module: src.nlp2uri.systemmap.getv_load
+    line: 94
+    cyclomatic_complexity: 4
+    calls_out: 4
+    calls_in: 0
+  src.nlp2uri.compile._windows_launch_app_actions:
+    name: _windows_launch_app_actions
+    module: src.nlp2uri.compile
+    line: 323
+    cyclomatic_complexity: 1
+    calls_out: 1
+    calls_in: 1
+  src.nlp2uri.compile._compile_screen_capture:
+    name: _compile_screen_capture
+    module: src.nlp2uri.compile
+    line: 365
+    cyclomatic_complexity: 4
+    calls_out: 4
+    calls_in: 1
+  src.nlp2uri.control_compile._truthy:
+    name: _truthy
+    module: src.nlp2uri.control_compile
+    line: 23
+    cyclomatic_complexity: 3
+    calls_out: 2
+    calls_in: 5
+  src.nlp2uri.control_cli._resolve_workspace_from_status:
+    name: _resolve_workspace_from_status
+    module: src.nlp2uri.control_cli
+    line: 156
+    cyclomatic_complexity: 10
+    calls_out: 19
+    calls_in: 1
+  src.nlp2uri.runtime.execute_uri:
+    name: execute_uri
+    module: src.nlp2uri.runtime
+    line: 17
+    cyclomatic_complexity: 9
+    calls_out: 15
+    calls_in: 1
+  src.nlp2uri.service.NLP2URIService.default:
+    name: default
+    module: src.nlp2uri.service
+    line: 31
+    cyclomatic_complexity: 1
+    calls_out: 2
+    calls_in: 0
+  src.nlp2uri.systemmap.uri.uri_for_desktop_session:
+    name: uri_for_desktop_session
+    module: src.nlp2uri.systemmap.uri
+    line: 96
+    cyclomatic_complexity: 1
+    calls_out: 0
+    calls_in: 1
+  src.nlp2uri.config._load_from_path:
+    name: _load_from_path
+    module: src.nlp2uri.config
+    line: 154
+    cyclomatic_complexity: 6
+    calls_out: 17
+    calls_in: 3
+  schemas.codegen.scaffold_scheme.events_proto:
+    name: events_proto
+    module: schemas.codegen.scaffold_scheme
+    line: 89
+    cyclomatic_complexity: 1
+    calls_out: 3
+    calls_in: 1
+  src.nlp2uri.systemmap.index._index_policies:
+    name: _index_policies
+    module: src.nlp2uri.systemmap.index
+    line: 203
+    cyclomatic_complexity: 3
+    calls_out: 5
+    calls_in: 1
+  src.nlp2uri.systemmap.uri.uri_for_validation:
+    name: uri_for_validation
+    module: src.nlp2uri.systemmap.uri
+    line: 73
+    cyclomatic_complexity: 1
+    calls_out: 3
+    calls_in: 1
+  src.nlp2uri.parse_nl._parse_app_open:
+    name: _parse_app_open
+    module: src.nlp2uri.parse_nl
+    line: 455
+    cyclomatic_complexity: 2
+    calls_out: 4
+    calls_in: 0
+  src.nlp2uri.systemmap.getv_uri.is_getv_uri:
+    name: is_getv_uri
+    module: src.nlp2uri.systemmap.getv_uri
+    line: 39
+    cyclomatic_complexity: 1
+    calls_out: 2
+    calls_in: 2
+  src.nlp2uri.parse_nl._normalize_ide_name:
+    name: _normalize_ide_name
+    module: src.nlp2uri.parse_nl
+    line: 131
+    cyclomatic_complexity: 2
+    calls_out: 3
+    calls_in: 3
+  src.nlp2uri.systemmap.compile._decode_segment:
+    name: _decode_segment
+    module: src.nlp2uri.systemmap.compile
+    line: 35
+    cyclomatic_complexity: 2
+    calls_out: 1
+    calls_in: 8
+  src.nlp2uri.integrators.mcp_server._jsonrpc_response:
+    name: _jsonrpc_response
+    module: src.nlp2uri.integrators.mcp_server
+    line: 20
+    cyclomatic_complexity: 1
+    calls_out: 0
+    calls_in: 3
+  src.nlp2uri.schemes.ide.build_ide:
+    name: build_ide
+    module: src.nlp2uri.schemes.ide
+    line: 17
+    cyclomatic_complexity: 4
+    calls_out: 10
+    calls_in: 0
+  src.nlp2uri.parse_nl._normalize_panel:
+    name: _normalize_panel
+    module: src.nlp2uri.parse_nl
+    line: 326
+    cyclomatic_complexity: 1
+    calls_out: 3
+    calls_in: 1
+  src.nlp2uri.host.resource.build_resource_actions:
+    name: build_resource_actions
+    module: src.nlp2uri.host.resource
+    line: 32
+    cyclomatic_complexity: 14
+    calls_out: 29
+    calls_in: 2
+  src.nlp2uri.systemmap.uri.uri_for_artifact:
+    name: uri_for_artifact
+    module: src.nlp2uri.systemmap.uri
+    line: 57
+    cyclomatic_complexity: 1
+    calls_out: 4
+    calls_in: 1
+  src.nlp2uri.schemes.desktop.build_capture:
+    name: build_capture
+    module: src.nlp2uri.schemes.desktop
+    line: 15
+    cyclomatic_complexity: 5
+    calls_out: 5
+    calls_in: 0
+  src.nlp2uri.cqrs.drivers.service_ops.ServiceCurlDriver.probe:
+    name: probe
+    module: src.nlp2uri.cqrs.drivers.service_ops
+    line: 61
+    cyclomatic_complexity: 2
+    calls_out: 4
+    calls_in: 0
+  src.nlp2uri.integrators.mcp_server.main:
+    name: main
+    module: src.nlp2uri.integrators.mcp_server
+    line: 121
+    cyclomatic_complexity: 1
+    calls_out: 3
+    calls_in: 0
+  schemas.codegen.scaffold_scheme.readme_md:
+    name: readme_md
+    module: schemas.codegen.scaffold_scheme
+    line: 279
+    cyclomatic_complexity: 2
+    calls_out: 13
+    calls_in: 1
+  src.nlp2uri.systemmap.load.load_system_map_from_doql:
+    name: load_system_map_from_doql
+    module: src.nlp2uri.systemmap.load
+    line: 35
+    cyclomatic_complexity: 2
+    calls_out: 3
+    calls_in: 2
+  schemas.codegen.export_driver_stubs.main:
+    name: main
+    module: schemas.codegen.export_driver_stubs
+    line: 57
+    cyclomatic_complexity: 11
+    calls_out: 23
+    calls_in: 0
+  src.nlp2uri.systemmap.index._index_deploy:
+    name: _index_deploy
+    module: src.nlp2uri.systemmap.index
+    line: 246
+    cyclomatic_complexity: 2
+    calls_out: 2
+    calls_in: 1
+  src.nlp2uri.compile._compile_legacy_nlp2uri:
+    name: _compile_legacy_nlp2uri
+    module: src.nlp2uri.compile
+    line: 649
+    cyclomatic_complexity: 5
+    calls_out: 9
+    calls_in: 1
+  src.nlp2uri.systemmap.index._index_environment:
+    name: _index_environment
+    module: src.nlp2uri.systemmap.index
+    line: 119
+    cyclomatic_complexity: 2
+    calls_out: 5
+    calls_in: 1
+  src.nlp2uri.compile._open_uri:
+    name: _open_uri
+    module: src.nlp2uri.compile
+    line: 96
+    cyclomatic_complexity: 5
+    calls_out: 5
+    calls_in: 10
+  src.nlp2uri.cli._dispatch_command:
+    name: _dispatch_command
+    module: src.nlp2uri.cli
+    line: 161
+    cyclomatic_complexity: 7
+    calls_out: 9
+    calls_in: 1
+  src.nlp2uri.compile._compile_window_focus:
+    name: _compile_window_focus
+    module: src.nlp2uri.compile
+    line: 516
+    cyclomatic_complexity: 5
+    calls_out: 5
+    calls_in: 1
+  src.nlp2uri.compile._capture_outfile:
+    name: _capture_outfile
+    module: src.nlp2uri.compile
+    line: 337
+    cyclomatic_complexity: 1
+    calls_out: 3
+    calls_in: 1
+  src.nlp2uri.systemmap.index._index_commands:
+    name: _index_commands
+    module: src.nlp2uri.systemmap.index
+    line: 147
+    cyclomatic_complexity: 6
+    calls_out: 6
+    calls_in: 1
+  src.nlp2uri.integrators.rest_server.run_server:
+    name: run_server
+    module: src.nlp2uri.integrators.rest_server
+    line: 62
+    cyclomatic_complexity: 2
+    calls_out: 7
+    calls_in: 1
+  src.nlp2uri.systemmap.index._ir_field:
+    name: _ir_field
+    module: src.nlp2uri.systemmap.index
+    line: 90
+    cyclomatic_complexity: 2
+    calls_out: 3
+    calls_in: 16
+  src.nlp2uri.systemmap.resolve._match_command_entry:
+    name: _match_command_entry
+    module: src.nlp2uri.systemmap.resolve
+    line: 50
+    cyclomatic_complexity: 16
+    calls_out: 24
+    calls_in: 1
+  src.nlp2uri.systemmap.compile._compile_artifact:
+    name: _compile_artifact
+    module: src.nlp2uri.systemmap.compile
+    line: 155
+    cyclomatic_complexity: 2
+    calls_out: 1
+    calls_in: 1
 edges:
 - caller: schemas.codegen.fix_proto_imports.fix_api
   callee: schemas.codegen.fix_proto_imports._pascal
@@ -2259,13 +2420,13 @@ edges:
   callee: schemas.codegen.fix_proto_imports.fix_driver
   call_type: resolved
 - caller: schemas.codegen.fix_proto_imports.main
-  callee: examples.resolve.new-intents.e2e.print
+  callee: scripts.test-cqrs-smoke.print
   call_type: resolved
 - caller: schemas.codegen.export_mcp_schemas.main
-  callee: examples.resolve.new-intents.e2e.print
+  callee: scripts.test-cqrs-smoke.print
   call_type: resolved
 - caller: schemas.codegen.export_driver_stubs.main
-  callee: examples.resolve.new-intents.e2e.print
+  callee: scripts.test-cqrs-smoke.print
   call_type: resolved
 - caller: schemas.codegen.scaffold_scheme.aggregate_proto
   callee: schemas.codegen.scaffold_scheme._proto_package
@@ -2334,10 +2495,10 @@ edges:
   callee: schemas.codegen.scaffold_scheme.readme_md
   call_type: resolved
 - caller: schemas.codegen.scaffold_scheme.main
-  callee: examples.resolve.new-intents.e2e.print
+  callee: scripts.test-cqrs-smoke.print
   call_type: resolved
 - caller: examples.mcp.tool-handoff.main.main
-  callee: examples.resolve.new-intents.e2e.print
+  callee: scripts.test-cqrs-smoke.print
   call_type: resolved
 - caller: examples.mcp.tool-handoff.main.main
   callee: src.nlp2uri.mcp.mcp_handoff_payload
@@ -2352,13 +2513,19 @@ edges:
   callee: src.nlp2uri.compile.compile_uri_to_actions
   call_type: resolved
 - caller: examples.execute.dry-run.main.main
-  callee: examples.resolve.new-intents.e2e.print
+  callee: scripts.test-cqrs-smoke.print
   call_type: resolved
 - caller: examples.resolve.nl-to-uri.main.main
   callee: src.nlp2uri.resolve.nlp2uri
   call_type: resolved
 - caller: examples.resolve.nl-to-uri.main.main
-  callee: examples.resolve.new-intents.e2e.print
+  callee: scripts.test-cqrs-smoke.print
+  call_type: resolved
+- caller: src.nlp2uri.runtime.execute_uri
+  callee: src.nlp2uri.config.get_effective_platform
+  call_type: resolved
+- caller: src.nlp2uri.runtime.execute_uri
+  callee: src.nlp2uri.compile.compile_uri_to_actions
   call_type: resolved
 - caller: src.nlp2uri.config.NLP2URIConfig.resolved_platform
   callee: src.nlp2uri.platform_detect.detect_platform
@@ -2414,6 +2581,66 @@ edges:
 - caller: src.nlp2uri.config.get_effective_platform
   callee: src.nlp2uri.config.load_config
   call_type: resolved
+- caller: src.nlp2uri.parse_nl._workspace_hint
+  callee: src.nlp2uri.parse_nl._strip_quotes
+  call_type: resolved
+- caller: src.nlp2uri.parse_nl._parse_ide_project
+  callee: src.nlp2uri.parse_nl._strip_quotes
+  call_type: resolved
+- caller: src.nlp2uri.parse_nl._parse_ide_chat_send
+  callee: src.nlp2uri.parse_nl._strip_quotes
+  call_type: resolved
+- caller: src.nlp2uri.parse_nl._parse_ide_chat_send
+  callee: src.nlp2uri.parse_nl._normalize_ide_name
+  call_type: resolved
+- caller: src.nlp2uri.parse_nl._parse_ide_chat_send
+  callee: src.nlp2uri.parse_nl._workspace_hint
+  call_type: resolved
+- caller: src.nlp2uri.parse_nl._parse_ide_chat_send
+  callee: src.nlp2uri.parse_nl._bool_param
+  call_type: resolved
+- caller: src.nlp2uri.parse_nl._parse_ide_status
+  callee: src.nlp2uri.parse_nl._normalize_ide_name
+  call_type: resolved
+- caller: src.nlp2uri.parse_nl._parse_ide_command
+  callee: src.nlp2uri.parse_nl._normalize_ide_name
+  call_type: resolved
+- caller: src.nlp2uri.parse_nl._parse_ide_command
+  callee: src.nlp2uri.parse_nl._workspace_hint
+  call_type: resolved
+- caller: src.nlp2uri.parse_nl._parse_ide_command
+  callee: src.nlp2uri.parse_nl._bool_param
+  call_type: resolved
+- caller: src.nlp2uri.parse_nl._parse_file_open
+  callee: src.nlp2uri.parse_nl._strip_quotes
+  call_type: resolved
+- caller: src.nlp2uri.parse_nl._parse_settings_panel
+  callee: src.nlp2uri.parse_nl._normalize_panel
+  call_type: resolved
+- caller: src.nlp2uri.parse_nl._parse_terminal
+  callee: src.nlp2uri.parse_nl._strip_quotes
+  call_type: resolved
+- caller: src.nlp2uri.parse_nl._parse_capture
+  callee: src.nlp2uri.parse_nl._strip_quotes
+  call_type: resolved
+- caller: src.nlp2uri.parse_nl._parse_capture
+  callee: src.nlp2uri.parse_nl._capture_target
+  call_type: resolved
+- caller: src.nlp2uri.parse_nl._parse_app_open
+  callee: src.nlp2uri.parse_nl._normalize_app_name
+  call_type: resolved
+- caller: src.nlp2uri.parse_nl._parse_path
+  callee: src.nlp2uri.parse_nl._strip_quotes
+  call_type: resolved
+- caller: src.nlp2uri.parse_nl._parse_open_prefix
+  callee: src.nlp2uri.parse_nl._normalize_app_name
+  call_type: resolved
+- caller: src.nlp2uri.parse_nl.parse_text
+  callee: src.nlp2uri.parse_nl._normalize_aliases
+  call_type: resolved
+- caller: src.nlp2uri.parse_nl.parse_text
+  callee: src.nlp2uri.parse_nl._parse_fallback
+  call_type: resolved
 - caller: src.nlp2uri.desktop_apps.find_desktop_id_in_dir
   callee: src.nlp2uri.desktop_apps._exact_desktop_match
   call_type: resolved
@@ -2426,6 +2653,27 @@ edges:
 - caller: src.nlp2uri.desktop_apps.desktop_id_for_app
   callee: src.nlp2uri.desktop_apps.find_desktop_id_in_dir
   call_type: resolved
+- caller: src.nlp2uri.resolve.resolve_text
+  callee: src.nlp2uri.parse_nl.parse_text
+  call_type: resolved
+- caller: src.nlp2uri.resolve.resolve_text
+  callee: src.nlp2uri.schemes.build.build_uri
+  call_type: resolved
+- caller: src.nlp2uri.resolve.resolve_text
+  callee: src.nlp2uri.config.get_effective_platform
+  call_type: resolved
+- caller: src.nlp2uri.resolve.nlp2uri
+  callee: src.nlp2uri.config.get_effective_platform
+  call_type: resolved
+- caller: src.nlp2uri.resolve.nlp2uri
+  callee: src.nlp2uri.parse_nl.parse_text
+  call_type: resolved
+- caller: src.nlp2uri.resolve.nlp2uri
+  callee: src.nlp2uri.schemes.build.build_uri
+  call_type: resolved
+- caller: src.nlp2uri.resolve.nlp2uri
+  callee: src.nlp2uri.control_compile.is_control_uri
+  call_type: resolved
 - caller: src.nlp2uri.integrators.rest_server.run_server
   callee: src.nlp2uri.config.ensure_config
   call_type: resolved
@@ -2433,13 +2681,13 @@ edges:
   callee: src.nlp2uri.config.load_config
   call_type: resolved
 - caller: src.nlp2uri.integrators.rest_server.run_server
-  callee: examples.resolve.new-intents.e2e.print
+  callee: scripts.test-cqrs-smoke.print
   call_type: resolved
 - caller: src.nlp2uri.integrators.rest_server.main
   callee: src.nlp2uri.integrators.rest_server.run_server
   call_type: resolved
 - caller: src.nlp2uri.integrators.mcp_server._log
-  callee: examples.resolve.new-intents.e2e.print
+  callee: scripts.test-cqrs-smoke.print
   call_type: resolved
 - caller: src.nlp2uri.integrators.mcp_server.handle_message
   callee: src.nlp2uri.integrators.mcp_server._jsonrpc_error
@@ -2492,8 +2740,44 @@ edges:
 - caller: src.nlp2uri.host.endpoint.build_endpoint_actions
   callee: src.nlp2uri.host.endpoint.build_endpoint_url
   call_type: resolved
+- caller: src.nlp2uri.adapters.mcp.McpAdapter._tool_list_system_uris
+  callee: src.nlp2uri.systemmap.context.load_ir_from_arguments
+  call_type: resolved
+- caller: src.nlp2uri.adapters.mcp.McpAdapter._tool_resolve_system_map
+  callee: src.nlp2uri.systemmap.context.load_ir_from_arguments
+  call_type: resolved
+- caller: src.nlp2uri.adapters.mcp.McpAdapter._tool_compile_control
+  callee: src.nlp2uri.control_compile.compile_uri_to_control_plan
+  call_type: resolved
+- caller: src.nlp2uri.adapters.mcp.McpAdapter._tool_execute_control
+  callee: src.nlp2uri.control_execute.compile_and_execute_control_uri
+  call_type: resolved
 - caller: src.nlp2uri.adapters.base.BaseAdapter.__init__
   callee: src.nlp2uri.config.load_config
+  call_type: resolved
+- caller: src.nlp2uri.schemes.build.build_uri
+  callee: src.nlp2uri.platform_detect.detect_platform
+  call_type: resolved
+- caller: src.nlp2uri.schemes.build.build_uri
+  callee: src.nlp2uri.schemes.build._build_navigate
+  call_type: resolved
+- caller: src.nlp2uri.schemes.ide.build_ide
+  callee: src.nlp2uri.schemes.util.normalize_path
+  call_type: resolved
+- caller: src.nlp2uri.schemes.ide.build_ide
+  callee: src.nlp2uri.schemes.util.abstract_url
+  call_type: resolved
+- caller: src.nlp2uri.schemes.ide.build_ide_chat_send
+  callee: src.nlp2uri.schemes.util.abstract_url
+  call_type: resolved
+- caller: src.nlp2uri.schemes.ide.build_ide_command
+  callee: src.nlp2uri.schemes.util.abstract_url
+  call_type: resolved
+- caller: src.nlp2uri.schemes.ide.build_koru_control_drive
+  callee: src.nlp2uri.schemes.util.abstract_url
+  call_type: resolved
+- caller: src.nlp2uri.schemes.ide.build_ide_status
+  callee: src.nlp2uri.schemes.util.abstract_url
   call_type: resolved
 - caller: src.nlp2uri.schemes.file.build_file
   callee: src.nlp2uri.schemes.util.normalize_path
@@ -2638,6 +2922,15 @@ edges:
   call_type: resolved
 - caller: src.nlp2uri.systemmap.export.write_environment_map
   callee: src.nlp2uri.systemmap.export._require_env2llm
+  call_type: resolved
+- caller: src.nlp2uri.systemmap.koru_ide.build_koru_ide_uri_index
+  callee: src.nlp2uri.schemes.util.abstract_url
+  call_type: resolved
+- caller: src.nlp2uri.systemmap.koru_ide.build_koru_ide_uri_index
+  callee: src.nlp2uri.systemmap.index._add_entry
+  call_type: resolved
+- caller: src.nlp2uri.systemmap.koru_ide.merge_koru_ide_index
+  callee: src.nlp2uri.systemmap.koru_ide.build_koru_ide_uri_index
   call_type: resolved
 - caller: src.nlp2uri.systemmap.uri.uri_for_runtime
   callee: src.nlp2uri.systemmap.uri._get
@@ -3014,14 +3307,8 @@ edges:
 - caller: src.nlp2uri.systemmap.getv_uri.get_getv_var_value
   callee: src.nlp2uri.systemmap.getv_load.load_profile_dict
   call_type: resolved
-- caller: src.nlp2uri.cli_parser.build_parser
-  callee: src.nlp2uri.cli_parser.add_common_args
-  call_type: resolved
-- caller: src.nlp2uri.cli_parser.build_parser
-  callee: src.nlp2uri.cli_parser.add_text_args
-  call_type: resolved
 - caller: src.nlp2uri.cli._emit
-  callee: examples.resolve.new-intents.e2e.print
+  callee: scripts.test-cqrs-smoke.print
   call_type: resolved
 - caller: src.nlp2uri.cli._request_from_args
   callee: src.nlp2uri.cli._payload_text
@@ -3045,7 +3332,7 @@ edges:
   callee: src.nlp2uri.config.save_config
   call_type: resolved
 - caller: src.nlp2uri.cli._run_config
-  callee: examples.resolve.new-intents.e2e.print
+  callee: scripts.test-cqrs-smoke.print
   call_type: resolved
 - caller: src.nlp2uri.cli._run_config
   callee: src.nlp2uri.config.default_config
@@ -3087,7 +3374,7 @@ edges:
   callee: src.nlp2uri.systemmap.load.load_system_map_from_doql
   call_type: resolved
 - caller: src.nlp2uri.cli._run_envmap
-  callee: examples.resolve.new-intents.e2e.print
+  callee: scripts.test-cqrs-smoke.print
   call_type: resolved
 - caller: src.nlp2uri.cli._run_execute
   callee: src.nlp2uri.cli._payload_text
@@ -3114,6 +3401,9 @@ edges:
   callee: src.nlp2uri.cli._run_envmap
   call_type: resolved
 - caller: src.nlp2uri.cli._dispatch_command
+  callee: src.nlp2uri.control_cli.dispatch_control_action
+  call_type: resolved
+- caller: src.nlp2uri.cli._dispatch_command
   callee: src.nlp2uri.cli._run_shell
   call_type: resolved
 - caller: src.nlp2uri.cli._dispatch_command
@@ -3127,93 +3417,6 @@ edges:
   call_type: resolved
 - caller: src.nlp2uri.cli.main
   callee: src.nlp2uri.cli_parser.build_parser
-  call_type: resolved
-- caller: src.nlp2uri.schemes.ide.build_ide
-  callee: src.nlp2uri.schemes.util.normalize_path
-  call_type: resolved
-- caller: src.nlp2uri.schemes.ide.build_ide
-  callee: src.nlp2uri.schemes.util.abstract_url
-  call_type: resolved
-- caller: src.nlp2uri.schemes.ide.build_ide_chat_send
-  callee: src.nlp2uri.schemes.util.abstract_url
-  call_type: resolved
-- caller: src.nlp2uri.schemes.ide.build_ide_command
-  callee: src.nlp2uri.schemes.util.abstract_url
-  call_type: resolved
-- caller: src.nlp2uri.schemes.ide.build_koru_control_drive
-  callee: src.nlp2uri.schemes.util.abstract_url
-  call_type: resolved
-- caller: src.nlp2uri.schemes.ide.build_ide_status
-  callee: src.nlp2uri.schemes.util.abstract_url
-  call_type: resolved
-- caller: src.nlp2uri.control_compile.compile_uri_to_control_plan
-  callee: src.nlp2uri.control_compile._query_params
-  call_type: resolved
-- caller: src.nlp2uri.control_compile.compile_uri_to_control_plan
-  callee: src.nlp2uri.control_compile._truthy
-  call_type: resolved
-- caller: src.nlp2uri.systemmap.koru_ide.build_koru_ide_uri_index
-  callee: src.nlp2uri.schemes.util.abstract_url
-  call_type: resolved
-- caller: src.nlp2uri.systemmap.koru_ide.build_koru_ide_uri_index
-  callee: src.nlp2uri.systemmap.index._add_entry
-  call_type: resolved
-- caller: src.nlp2uri.systemmap.koru_ide.merge_koru_ide_index
-  callee: src.nlp2uri.systemmap.koru_ide.build_koru_ide_uri_index
-  call_type: resolved
-- caller: src.nlp2uri.resolve.resolve_text
-  callee: src.nlp2uri.parse_nl.parse_text
-  call_type: resolved
-- caller: src.nlp2uri.resolve.resolve_text
-  callee: src.nlp2uri.schemes.build.build_uri
-  call_type: resolved
-- caller: src.nlp2uri.resolve.resolve_text
-  callee: src.nlp2uri.config.get_effective_platform
-  call_type: resolved
-- caller: src.nlp2uri.resolve.nlp2uri
-  callee: src.nlp2uri.config.get_effective_platform
-  call_type: resolved
-- caller: src.nlp2uri.resolve.nlp2uri
-  callee: src.nlp2uri.parse_nl.parse_text
-  call_type: resolved
-- caller: src.nlp2uri.resolve.nlp2uri
-  callee: src.nlp2uri.schemes.build.build_uri
-  call_type: resolved
-- caller: src.nlp2uri.resolve.nlp2uri
-  callee: src.nlp2uri.control_compile.is_control_uri
-  call_type: resolved
-- caller: src.nlp2uri.control_execute.execute_control_action
-  callee: src.nlp2uri.control_execute._execute_drive
-  call_type: resolved
-- caller: src.nlp2uri.control_execute.execute_control_action
-  callee: src.nlp2uri.control_execute._execute_status
-  call_type: resolved
-- caller: src.nlp2uri.control_execute.execute_control_plan
-  callee: src.nlp2uri.control_execute.execute_control_action
-  call_type: resolved
-- caller: src.nlp2uri.control_execute.compile_and_execute_control_uri
-  callee: src.nlp2uri.control_compile.compile_uri_to_control_plan
-  call_type: resolved
-- caller: src.nlp2uri.control_execute.compile_and_execute_control_uri
-  callee: src.nlp2uri.control_execute.execute_control_plan
-  call_type: resolved
-- caller: src.nlp2uri.control_execute.compile_and_execute_control_uri
-  callee: src.nlp2uri.control_execute.koruide_available
-  call_type: resolved
-- caller: src.nlp2uri.control_execute._execute_drive
-  callee: src.nlp2uri.control_execute._execute_cli
-  call_type: resolved
-- caller: src.nlp2uri.control_execute._execute_drive
-  callee: src.nlp2uri.control_execute._build_client
-  call_type: resolved
-- caller: src.nlp2uri.control_execute._execute_drive
-  callee: src.nlp2uri.control_execute._verification_status
-  call_type: resolved
-- caller: src.nlp2uri.control_execute._execute_status
-  callee: src.nlp2uri.control_execute._execute_cli
-  call_type: resolved
-- caller: src.nlp2uri.control_execute._execute_status
-  callee: src.nlp2uri.control_execute._build_client
   call_type: resolved
 - caller: src.nlp2uri.compile.compile_uri_to_actions
   callee: src.nlp2uri.compile._query_params
@@ -3229,12 +3432,6 @@ edges:
   call_type: resolved
 - caller: src.nlp2uri.compile.compile_uri_to_actions
   callee: src.nlp2uri.platform_detect.detect_platform
-  call_type: resolved
-- caller: src.nlp2uri.compile.compile_uri_to_actions
-  callee: src.nlp2uri.compile._compile_app
-  call_type: resolved
-- caller: src.nlp2uri.compile.compile_uri_to_actions
-  callee: src.nlp2uri.compile._compile_screenshot
   call_type: resolved
 - caller: src.nlp2uri.compile._open_uri
   callee: src.nlp2uri.compile._first_available
@@ -3437,89 +3634,50 @@ edges:
 - caller: src.nlp2uri.compile._compile_legacy_nlp2uri
   callee: src.nlp2uri.compile._legacy_nlp2uri_capture
   call_type: resolved
-- caller: src.nlp2uri.runtime.execute_uri
-  callee: src.nlp2uri.config.get_effective_platform
+- caller: src.nlp2uri.control_compile.compile_uri_to_control_plan
+  callee: src.nlp2uri.control_compile._query_params
   call_type: resolved
-- caller: src.nlp2uri.runtime.execute_uri
-  callee: src.nlp2uri.compile.compile_uri_to_actions
+- caller: src.nlp2uri.control_compile.compile_uri_to_control_plan
+  callee: src.nlp2uri.control_compile._truthy
   call_type: resolved
-- caller: src.nlp2uri.parse_nl._workspace_hint
-  callee: src.nlp2uri.parse_nl._strip_quotes
+- caller: src.nlp2uri.cli_parser.build_parser
+  callee: src.nlp2uri.cli_parser.add_common_args
   call_type: resolved
-- caller: src.nlp2uri.parse_nl._parse_ide_project
-  callee: src.nlp2uri.parse_nl._strip_quotes
+- caller: src.nlp2uri.cli_parser.build_parser
+  callee: src.nlp2uri.cli_parser.add_text_args
   call_type: resolved
-- caller: src.nlp2uri.parse_nl._parse_ide_chat_send
-  callee: src.nlp2uri.parse_nl._strip_quotes
+- caller: src.nlp2uri.control_execute.execute_control_action
+  callee: src.nlp2uri.control_execute._execute_drive
   call_type: resolved
-- caller: src.nlp2uri.parse_nl._parse_ide_chat_send
-  callee: src.nlp2uri.parse_nl._normalize_ide_name
+- caller: src.nlp2uri.control_execute.execute_control_action
+  callee: src.nlp2uri.control_execute._execute_status
   call_type: resolved
-- caller: src.nlp2uri.parse_nl._parse_ide_chat_send
-  callee: src.nlp2uri.parse_nl._workspace_hint
+- caller: src.nlp2uri.control_execute.execute_control_plan
+  callee: src.nlp2uri.control_execute.execute_control_action
   call_type: resolved
-- caller: src.nlp2uri.parse_nl._parse_ide_chat_send
-  callee: src.nlp2uri.parse_nl._bool_param
-  call_type: resolved
-- caller: src.nlp2uri.parse_nl._parse_ide_status
-  callee: src.nlp2uri.parse_nl._normalize_ide_name
-  call_type: resolved
-- caller: src.nlp2uri.parse_nl._parse_ide_command
-  callee: src.nlp2uri.parse_nl._normalize_ide_name
-  call_type: resolved
-- caller: src.nlp2uri.parse_nl._parse_ide_command
-  callee: src.nlp2uri.parse_nl._workspace_hint
-  call_type: resolved
-- caller: src.nlp2uri.parse_nl._parse_ide_command
-  callee: src.nlp2uri.parse_nl._bool_param
-  call_type: resolved
-- caller: src.nlp2uri.parse_nl._parse_file_open
-  callee: src.nlp2uri.parse_nl._strip_quotes
-  call_type: resolved
-- caller: src.nlp2uri.parse_nl._parse_settings_panel
-  callee: src.nlp2uri.parse_nl._normalize_panel
-  call_type: resolved
-- caller: src.nlp2uri.parse_nl._parse_terminal
-  callee: src.nlp2uri.parse_nl._strip_quotes
-  call_type: resolved
-- caller: src.nlp2uri.parse_nl._parse_capture
-  callee: src.nlp2uri.parse_nl._strip_quotes
-  call_type: resolved
-- caller: src.nlp2uri.parse_nl._parse_capture
-  callee: src.nlp2uri.parse_nl._capture_target
-  call_type: resolved
-- caller: src.nlp2uri.parse_nl._parse_app_open
-  callee: src.nlp2uri.parse_nl._normalize_app_name
-  call_type: resolved
-- caller: src.nlp2uri.parse_nl._parse_path
-  callee: src.nlp2uri.parse_nl._strip_quotes
-  call_type: resolved
-- caller: src.nlp2uri.parse_nl._parse_open_prefix
-  callee: src.nlp2uri.parse_nl._normalize_app_name
-  call_type: resolved
-- caller: src.nlp2uri.parse_nl.parse_text
-  callee: src.nlp2uri.parse_nl._normalize_aliases
-  call_type: resolved
-- caller: src.nlp2uri.parse_nl.parse_text
-  callee: src.nlp2uri.parse_nl._parse_fallback
-  call_type: resolved
-- caller: src.nlp2uri.schemes.build.build_uri
-  callee: src.nlp2uri.platform_detect.detect_platform
-  call_type: resolved
-- caller: src.nlp2uri.schemes.build.build_uri
-  callee: src.nlp2uri.schemes.build._build_navigate
-  call_type: resolved
-- caller: src.nlp2uri.adapters.mcp.McpAdapter._tool_list_system_uris
-  callee: src.nlp2uri.systemmap.context.load_ir_from_arguments
-  call_type: resolved
-- caller: src.nlp2uri.adapters.mcp.McpAdapter._tool_resolve_system_map
-  callee: src.nlp2uri.systemmap.context.load_ir_from_arguments
-  call_type: resolved
-- caller: src.nlp2uri.adapters.mcp.McpAdapter._tool_compile_control
+- caller: src.nlp2uri.control_execute.compile_and_execute_control_uri
   callee: src.nlp2uri.control_compile.compile_uri_to_control_plan
   call_type: resolved
-- caller: src.nlp2uri.adapters.mcp.McpAdapter._tool_execute_control
-  callee: src.nlp2uri.control_execute.compile_and_execute_control_uri
+- caller: src.nlp2uri.control_execute.compile_and_execute_control_uri
+  callee: src.nlp2uri.control_execute.execute_control_plan
+  call_type: resolved
+- caller: src.nlp2uri.control_execute.compile_and_execute_control_uri
+  callee: src.nlp2uri.control_execute.koruide_available
+  call_type: resolved
+- caller: src.nlp2uri.control_execute._execute_drive
+  callee: src.nlp2uri.control_execute._execute_cli
+  call_type: resolved
+- caller: src.nlp2uri.control_execute._execute_drive
+  callee: src.nlp2uri.control_execute._build_client
+  call_type: resolved
+- caller: src.nlp2uri.control_execute._execute_drive
+  callee: src.nlp2uri.control_execute._verification_status
+  call_type: resolved
+- caller: src.nlp2uri.control_execute._execute_status
+  callee: src.nlp2uri.control_execute._execute_cli
+  call_type: resolved
+- caller: src.nlp2uri.control_execute._execute_status
+  callee: src.nlp2uri.control_execute._build_client
   call_type: resolved
 - caller: src.nlp2uri.service.NLP2URIService.default
   callee: src.nlp2uri.config.ensure_config
@@ -3543,7 +3701,7 @@ edges:
   callee: src.nlp2uri.compile.compile_uri_to_actions
   call_type: resolved
 - caller: src.nlp2uri.service.NLP2URIService.execute
-  callee: src.nlp2uri.cqrs.dispatcher.CqrsDispatcher.execute_uri
+  callee: src.nlp2uri.runtime.execute_uri
   call_type: resolved
 - caller: src.nlp2uri.service.NLP2URIService.handle_prompt
   callee: src.nlp2uri.control_compile.is_control_uri
@@ -3578,13 +3736,140 @@ edges:
 - caller: src.nlp2uri.service.NLP2URIService.read_getv_var
   callee: src.nlp2uri.systemmap.getv_uri.get_getv_var_value
   call_type: resolved
+- caller: src.nlp2uri.control_cli.add_control_parser
+  callee: src.nlp2uri.cli_parser.add_text_args
+  call_type: resolved
+- caller: src.nlp2uri.control_cli.add_control_parser
+  callee: src.nlp2uri.control_cli._add_lane_args
+  call_type: resolved
+- caller: src.nlp2uri.control_cli._print_json
+  callee: scripts.test-cqrs-smoke.print
+  call_type: resolved
+- caller: src.nlp2uri.control_cli._resolve_socket_path
+  callee: src.nlp2uri.control_cli._socket_basename
+  call_type: resolved
+- caller: src.nlp2uri.control_cli._client_factory
+  callee: src.nlp2uri.control_cli._resolve_socket_path
+  call_type: resolved
+- caller: src.nlp2uri.control_cli._fetch_autopilot_status
+  callee: src.nlp2uri.control_cli._client_factory
+  call_type: resolved
+- caller: src.nlp2uri.control_cli._fetch_autopilot_status
+  callee: src.nlp2uri.control_execute.koruide_available
+  call_type: resolved
+- caller: src.nlp2uri.control_cli._fetch_autopilot_status
+  callee: src.nlp2uri.control_execute.koruide_missing_message
+  call_type: resolved
+- caller: src.nlp2uri.control_cli._resolve_workspace
+  callee: src.nlp2uri.control_cli._fetch_autopilot_status
+  call_type: resolved
+- caller: src.nlp2uri.control_cli._resolve_workspace
+  callee: src.nlp2uri.control_cli._resolve_workspace_from_status
+  call_type: resolved
+- caller: src.nlp2uri.control_cli._control_uri
+  callee: src.nlp2uri.control_cli._default_strategy_hint
+  call_type: resolved
+- caller: src.nlp2uri.control_cli._control_uri
+  callee: src.nlp2uri.schemes.util.abstract_url
+  call_type: resolved
+- caller: src.nlp2uri.control_cli._apply_runtime_overrides
+  callee: src.nlp2uri.control_cli._default_strategy_hint
+  call_type: resolved
+- caller: src.nlp2uri.control_cli._finalize_control_plan_payload
+  callee: src.nlp2uri.control_cli._apply_runtime_overrides
+  call_type: resolved
+- caller: src.nlp2uri.control_cli._finalize_control_plan_payload
+  callee: src.nlp2uri.control_compile.compile_uri_to_control_plan
+  call_type: resolved
+- caller: src.nlp2uri.control_cli._finalize_control_plan_payload
+  callee: src.nlp2uri.control_compile.is_control_uri
+  call_type: resolved
+- caller: src.nlp2uri.control_cli._finalize_control_plan_payload
+  callee: src.nlp2uri.control_cli._submit_from_payload
+  call_type: resolved
+- caller: src.nlp2uri.control_cli._plan_payload
+  callee: src.nlp2uri.resolve.nlp2uri
+  call_type: resolved
+- caller: src.nlp2uri.control_cli._plan_payload
+  callee: src.nlp2uri.control_cli._finalize_control_plan_payload
+  call_type: resolved
+- caller: src.nlp2uri.control_cli._plan_payload
+  callee: src.nlp2uri.control_cli._control_uri
+  call_type: resolved
+- caller: src.nlp2uri.control_cli._plan_payload
+  callee: src.nlp2uri.control_compile.compile_uri_to_control_plan
+  call_type: resolved
+- caller: src.nlp2uri.control_cli.action_control_plan
+  callee: src.nlp2uri.control_cli._resolve_ide
+  call_type: resolved
+- caller: src.nlp2uri.control_cli.action_control_plan
+  callee: src.nlp2uri.control_cli._resolve_workspace
+  call_type: resolved
+- caller: src.nlp2uri.control_cli.action_control_plan
+  callee: src.nlp2uri.control_cli._plan_payload
+  call_type: resolved
+- caller: src.nlp2uri.control_cli.action_control_plan
+  callee: src.nlp2uri.control_cli._print_json
+  call_type: resolved
+- caller: src.nlp2uri.control_cli.action_control_plan
+  callee: scripts.test-cqrs-smoke.print
+  call_type: resolved
+- caller: src.nlp2uri.control_cli.action_control_execute
+  callee: src.nlp2uri.control_cli._resolve_ide
+  call_type: resolved
+- caller: src.nlp2uri.control_cli.action_control_execute
+  callee: src.nlp2uri.control_cli._resolve_workspace
+  call_type: resolved
+- caller: src.nlp2uri.control_cli.action_control_execute
+  callee: src.nlp2uri.control_cli._plan_payload
+  call_type: resolved
+- caller: src.nlp2uri.control_cli.action_control_execute
+  callee: src.nlp2uri.control_execute.koruide_available
+  call_type: resolved
+- caller: src.nlp2uri.control_cli.action_control_execute
+  callee: src.nlp2uri.control_execute.compile_and_execute_control_uri
+  call_type: resolved
+- caller: src.nlp2uri.control_cli.action_control_execute
+  callee: src.nlp2uri.control_cli._text_ref_from_payload
+  call_type: resolved
+- caller: src.nlp2uri.control_cli.action_control_execute
+  callee: src.nlp2uri.control_cli._client_factory
+  call_type: resolved
+- caller: src.nlp2uri.control_cli._load_status_json
+  callee: src.nlp2uri.control_cli._resolve_ide
+  call_type: resolved
+- caller: src.nlp2uri.control_cli._load_status_json
+  callee: src.nlp2uri.control_cli._with_instance_env
+  call_type: resolved
+- caller: src.nlp2uri.control_cli.action_control_list_uris
+  callee: src.nlp2uri.control_cli._load_status_json
+  call_type: resolved
+- caller: src.nlp2uri.control_cli.action_control_list_uris
+  callee: src.nlp2uri.control_cli._resolve_ide
+  call_type: resolved
+- caller: src.nlp2uri.control_cli.action_control_list_uris
+  callee: scripts.test-cqrs-smoke.print
+  call_type: resolved
+- caller: src.nlp2uri.control_cli.action_control_list_uris
+  callee: src.nlp2uri.control_cli._print_json
+  call_type: resolved
+- caller: src.nlp2uri.control_cli.dispatch_control_action
+  callee: scripts.test-cqrs-smoke.print
+  call_type: resolved
+- caller: src.nlp2uri.control_cli.dispatch_control_action
+  callee: src.nlp2uri.control_cli.action_control_plan
+  call_type: resolved
+- caller: src.nlp2uri.control_cli.dispatch_control_action
+  callee: src.nlp2uri.control_cli.action_control_execute
+  call_type: resolved
+- caller: src.nlp2uri.control_cli.dispatch_control_action
+  callee: src.nlp2uri.control_cli.action_control_list_uris
+  call_type: resolved
 modules:
   examples.execute.dry-run.main:
   - examples.execute.dry-run.main.main
   examples.mcp.tool-handoff.main:
   - examples.mcp.tool-handoff.main.main
-  examples.resolve.new-intents.e2e:
-  - examples.resolve.new-intents.e2e.print
   examples.resolve.nl-to-uri.main:
   - examples.resolve.nl-to-uri.main.main
   schemas.codegen.export_driver_stubs:
@@ -3609,6 +3894,8 @@ modules:
   - schemas.codegen.scaffold_scheme.queries_proto
   - schemas.codegen.scaffold_scheme.readme_md
   - schemas.codegen.scaffold_scheme.scaffold_scheme
+  scripts.test-cqrs-smoke:
+  - scripts.test-cqrs-smoke.print
   src.nlp2uri.adapters.base:
   - src.nlp2uri.adapters.base.BaseAdapter.__init__
   src.nlp2uri.adapters.mcp:
@@ -3704,6 +3991,30 @@ modules:
   - src.nlp2uri.config.load_config
   - src.nlp2uri.config.payload_keys
   - src.nlp2uri.config.save_config
+  src.nlp2uri.control_cli:
+  - src.nlp2uri.control_cli._add_lane_args
+  - src.nlp2uri.control_cli._apply_runtime_overrides
+  - src.nlp2uri.control_cli._client_factory
+  - src.nlp2uri.control_cli._control_uri
+  - src.nlp2uri.control_cli._default_strategy_hint
+  - src.nlp2uri.control_cli._fetch_autopilot_status
+  - src.nlp2uri.control_cli._finalize_control_plan_payload
+  - src.nlp2uri.control_cli._load_status_json
+  - src.nlp2uri.control_cli._plan_payload
+  - src.nlp2uri.control_cli._print_json
+  - src.nlp2uri.control_cli._resolve_ide
+  - src.nlp2uri.control_cli._resolve_socket_path
+  - src.nlp2uri.control_cli._resolve_workspace
+  - src.nlp2uri.control_cli._resolve_workspace_from_status
+  - src.nlp2uri.control_cli._socket_basename
+  - src.nlp2uri.control_cli._submit_from_payload
+  - src.nlp2uri.control_cli._text_ref_from_payload
+  - src.nlp2uri.control_cli._with_instance_env
+  - src.nlp2uri.control_cli.action_control_execute
+  - src.nlp2uri.control_cli.action_control_list_uris
+  - src.nlp2uri.control_cli.action_control_plan
+  - src.nlp2uri.control_cli.add_control_parser
+  - src.nlp2uri.control_cli.dispatch_control_action
   src.nlp2uri.control_compile:
   - src.nlp2uri.control_compile._query_params
   - src.nlp2uri.control_compile._truthy
@@ -3719,9 +4030,9 @@ modules:
   - src.nlp2uri.control_execute.execute_control_action
   - src.nlp2uri.control_execute.execute_control_plan
   - src.nlp2uri.control_execute.koruide_available
+  - src.nlp2uri.control_execute.koruide_missing_message
   src.nlp2uri.cqrs.dispatcher:
   - src.nlp2uri.cqrs.dispatcher.CqrsDispatcher.__init__
-  - src.nlp2uri.cqrs.dispatcher.CqrsDispatcher.execute_uri
   src.nlp2uri.cqrs.drivers.artifact_filesystem:
   - src.nlp2uri.cqrs.drivers.artifact_filesystem.ArtifactFilesystemDriver.compile
   src.nlp2uri.cqrs.drivers.command_curl:
@@ -3961,12 +4272,12 @@ modules:
 entry_points:
 - examples.execute.dry-run.main.main
 - examples.mcp.tool-handoff.main.main
+- examples.resolve.new-intents.e2e.print
 - examples.resolve.nl-to-uri.main.main
 - schemas.codegen.export_driver_stubs.main
 - schemas.codegen.export_mcp_schemas.main
 - schemas.codegen.fix_proto_imports.main
 - schemas.codegen.scaffold_scheme.main
-- scripts.test-cqrs-smoke.print
 - scripts.test-live-registry.check
 - scripts.test-live-registry.print
 - src.nlp2uri.adapters.base.AdapterResponse.to_dict
@@ -4012,13 +4323,13 @@ entry_points:
 - src.nlp2uri.config.NLP2URIConfig.to_yaml
 - src.nlp2uri.config.reset_config_cache
 - src.nlp2uri.control_execute.ControlExecutionResult.to_dict
-- src.nlp2uri.control_execute.koruide_missing_message
 - src.nlp2uri.cqrs.base.UriDriver.capabilities
 - src.nlp2uri.cqrs.base.UriDriver.compile
 - src.nlp2uri.cqrs.base.UriDriver.execute
 - src.nlp2uri.cqrs.base.UriDriver.probe
 - src.nlp2uri.cqrs.dispatcher.CqrsDispatcher.__init__
 - src.nlp2uri.cqrs.dispatcher.CqrsDispatcher.compile_uri
+- src.nlp2uri.cqrs.dispatcher.CqrsDispatcher.execute_uri
 - src.nlp2uri.cqrs.dispatcher.CqrsDispatcher.probe_uri
 - src.nlp2uri.cqrs.drivers.artifact_filesystem.ArtifactFilesystemDriver.compile
 - src.nlp2uri.cqrs.drivers.command_curl.CommandCurlDriver.compile
@@ -4030,7 +4341,9 @@ entry_points:
 - src.nlp2uri.cqrs.drivers.delegate.DelegateCompileDriver.compile
 - src.nlp2uri.cqrs.drivers.endpoint_curl.EndpointCurlDriver.compile
 - src.nlp2uri.cqrs.drivers.endpoint_curl.EndpointCurlDriver.probe
+- src.nlp2uri.cqrs.drivers.env_uri2env.EnvUri2envDriver.compile
 - src.nlp2uri.cqrs.drivers.getv_cli.GetvCliDriver.compile
+- src.nlp2uri.cqrs.drivers.hillm_uri2hillm.HillmUri2hillmDriver.compile
 - src.nlp2uri.cqrs.drivers.resource_probe.ResourceProbeDriver.compile
 - src.nlp2uri.cqrs.drivers.resource_probe.ResourceProbeDriver.probe
 - src.nlp2uri.cqrs.drivers.runtime_curl.RuntimeCurlDriver.compile
@@ -4120,7 +4433,6 @@ entry_points:
 - src.nlp2uri.platforms.windows.WindowsExecutor._open_app
 - src.nlp2uri.platforms.windows.WindowsExecutor._start
 - src.nlp2uri.platforms.windows.WindowsExecutor.execute
-- src.nlp2uri.runtime.execute_uri
 - src.nlp2uri.runtime.get_executor
 - src.nlp2uri.schemes.desktop.build_app_open
 - src.nlp2uri.schemes.desktop.build_capture
@@ -4149,8 +4461,10 @@ entry_points:
 - src.nlp2uri.service.NLP2URIService.list_getv_uris
 - src.nlp2uri.service.NLP2URIService.list_koru_ide_uris
 - src.nlp2uri.service.NLP2URIService.list_system_uris
+- src.nlp2uri.service.NLP2URIService.materialize_env
 - src.nlp2uri.service.NLP2URIService.read_getv_var
 - src.nlp2uri.service.NLP2URIService.resolve
+- src.nlp2uri.service.NLP2URIService.resolve_env
 - src.nlp2uri.service.NLP2URIService.resolve_getv
 - src.nlp2uri.service.NLP2URIService.resolve_system_map
 - src.nlp2uri.systemmap.getv_load.getv_available
