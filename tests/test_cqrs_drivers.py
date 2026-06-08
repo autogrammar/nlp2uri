@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import pytest
+
 from nlp2uri.compile import compile_uri_to_actions
 from nlp2uri.cqrs import CqrsDispatcher, DriverRegistry, InMemoryEventStore
 from nlp2uri.host.endpoint import build_endpoint_url
@@ -30,6 +32,16 @@ def test_getv_driver_compile() -> None:
     result = d.compile_uri("getv://llm/groq/GROQ_API_KEY")
     assert result["ok"] is True
     assert result["actions"][0]["command"].endswith("getv")
+
+
+def test_hillm_driver_compile() -> None:
+    pytest.importorskip("uri2hillm")
+    d = CqrsDispatcher(platform=HostPlatform.LINUX)
+    uri = "hillm://cmd/HEALTH"
+    result = d.compile_uri(uri, target="uri2hillm")
+    assert result["ok"] is True
+    assert result["actions"][0]["command"].endswith("uri2hillm")
+    assert result["actions"][0]["args"][0] == uri
 
 
 def test_endpoint_driver_compile() -> None:
