@@ -81,6 +81,14 @@ schemes:
     package_alias: koru_control
     ir_ref: null
 
+  vql:
+    layer: control
+    uri_pattern: "vql://{selector}?file={path}"
+    version: v1
+    drivers: [uri2vql, dsl2vql]
+    package_alias: vql_control
+    ir_ref: null
+
   # --- env layer ---
   getv:
     layer: env

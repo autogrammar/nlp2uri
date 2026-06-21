@@ -18,6 +18,7 @@ from nlp2uri.systemmap.getv_uri import compile_getv_uri, is_getv_uri
 from nlp2uri.systemmap.gillm_uri import compile_gillm_uri, is_gillm_uri
 from nlp2uri.systemmap.hillm_uri import compile_hillm_uri, is_hillm_uri
 from nlp2uri.systemmap.tillm_uri import compile_tillm_uri, is_tillm_uri
+from nlp2uri.systemmap.vql_uri import compile_vql_uri, is_vql_uri
 
 
 _OPEN_URI_SCHEMES = frozenset(
@@ -76,6 +77,9 @@ def compile_uri_to_actions(
 
     if is_tillm_uri(uri):
         return compile_tillm_uri(uri, host)
+
+    if is_vql_uri(uri):
+        return compile_vql_uri(uri, host)
 
     if is_endpoint_uri(uri):
         return build_endpoint_actions(uri, host)

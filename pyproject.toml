@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "nlp2uri"
-version = "0.4.15"
+version = "0.4.16"
 description = "Natural language to URI resolution and cross-platform local URI execution"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -24,6 +24,9 @@ full = ["psutil>=6.0"]
 envmap = ["env2llm>=0.1.4", "getv>=0.2.0", "nlp2env>=0.1.2"]
 # uri2hillm / dsl2hillm / hillm are not on PyPI yet (see semcod/hillm monorepo).
 # Install from source when needed: pip install ../hillm/packages/uri2hillm
+# uri2vql / nlp2vql / dsl2vql are not on PyPI yet (see oqlos/vql monorepo).
+# Install from source when needed: pip install ../../oqlos/vql/packages/uri2vql
+vql = ["uri2vql>=0.1.0", "nlp2vql>=0.1.0", "dsl2vql>=0.1.0"]
 koru = []
 codegen = ["pyyaml>=6.0", "grpcio-tools>=1.60", "protobuf>=4.25"]
 
@@ -42,6 +45,7 @@ env-uri2env = "nlp2uri.cqrs.drivers.env_uri2env:EnvUri2envDriver"
 hillm-uri2hillm = "nlp2uri.cqrs.drivers.hillm_uri2hillm:HillmUri2hillmDriver"
 gillm-uri2gillm = "nlp2uri.cqrs.drivers.gillm_uri2gillm:GillmUri2gillmDriver"
 tillm-uri2tillm = "nlp2uri.cqrs.drivers.tillm_uri2tillm:TillmUri2tillmDriver"
+vql-uri2vql = "nlp2uri.cqrs.drivers.vql_uri2vql:VqlUri2vqlDriver"
 resource-probe = "nlp2uri.cqrs.drivers.resource_probe:ResourceProbeDriver"
 runtime-curl = "nlp2uri.cqrs.drivers.runtime_curl:RuntimeCurlDriver"
 service-curl = "nlp2uri.cqrs.drivers.service_ops:ServiceCurlDriver"

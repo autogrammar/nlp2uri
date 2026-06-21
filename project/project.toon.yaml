@@ -1,54 +1,54 @@
-# nlp2uri | 478 func | 76f | 17917L | proto | 2026-06-08
+# nlp2uri | 524 func | 93f | 19102L | proto | 2026-06-21
 # generated in 0.00s
 
 HEALTH:
-  CC̄=3.6  critical=28 (limit:10)  dup=0  cycles=0
+  CC̄=3.7  critical=32 (limit:10)  dup=0  cycles=0
 
 ALERTS[20]:
+  !!! high_fan_out     compile_uri_to_actions = 30 (limit:10)
   !!! high_fan_out     write_environment_map = 27 (limit:10)
   !!! cc_exceeded      compile_uri_to_control_plan = 25 (limit:15)
-  !!! high_fan_out     compile_uri_to_actions = 24 (limit:10)
   !!! high_fan_out     build_parser = 22 (limit:10)
   !!! high_fan_out     main = 21 (limit:10)
   !!! high_fan_out     build_getv_uri_index = 20 (limit:10)
+  !!  cc_exceeded      compile_uri_to_actions = 24 (limit:15)
+  !!  cc_exceeded      build_uri = 23 (limit:15)
   !!  cc_exceeded      build_koru_ide_uri_index = 22 (limit:15)
-  !!  cc_exceeded      compile_uri_to_actions = 22 (limit:15)
-  !!  high_fan_out     build_uri = 17 (limit:10)
-  !!  high_fan_out     action_control_execute = 17 (limit:10)
+  !!  high_fan_out     build_uri = 19 (limit:10)
 
-MODULES[303] (top by size):
+MODULES[324] (top by size):
   M[planfile.yaml] 1319L C:0 F:0 CC↑0 D:0 (yaml)
-  M[src/nlp2uri/compile.py] 662L C:0 F:54 CC↑22 D:5 (python)
-  M[src/nlp2uri/parse_nl.py] 540L C:0 F:30 CC↑7 D:1 (python)
+  M[src/nlp2uri/compile.py] 672L C:0 F:54 CC↑24 D:7 (python)
+  M[src/nlp2uri/parse_nl.py] 611L C:0 F:32 CC↑7 D:1 (python)
   M[src/nlp2uri/control_cli.py] 523L C:0 F:23 CC↑18 D:2 (python)
   M[goal.yaml] 511L C:0 F:0 CC↑0 D:0 (yaml)
   M[src/nlp2uri/adapters/mcp.py] 462L C:1 F:21 CC↑6 D:0 (python)
   M[schemas/codegen/scaffold_scheme.py] 357L C:0 F:13 CC↑4 D:0 (python)
   M[src/nlp2uri/systemmap/index.py] 351L C:2 F:23 CC↑7 D:6 (python)
+  M[src/nlp2uri/delegates/llm_bridge.py] 343L C:0 F:20 CC↑17 D:1 (python)
   M[src/nlp2uri/control_execute.py] 341L C:1 F:11 CC↑12 D:3 (python)
-  M[src/nlp2uri/models.py] 272L C:10 F:10 CC↑15 D:0 (python)
+  M[src/nlp2uri/models.py] 280L C:10 F:10 CC↑15 D:0 (python)
   M[src/nlp2uri/service.py] 258L C:1 F:18 CC↑13 D:0 (python)
   M[src/nlp2uri/control_compile.py] 244L C:0 F:7 CC↑25 D:5 (python)
   M[src/nlp2uri/config.py] 230L C:1 F:17 CC↑8 D:7 (python)
-  M[src/nlp2uri/systemmap/getv_uri.py] 225L C:1 F:9 CC↑14 D:3 (python)
-  M[schemas/registry.yaml] 218L C:0 F:0 CC↑0 D:0 (yaml)
-  LANGS: proto:162/python:84/yaml:36/shell:15/other:2/json:2/yml:1/toml:1
+  M[schemas/registry.yaml] 226L C:0 F:0 CC↑0 D:0 (yaml)
+  LANGS: proto:162/python:99/yaml:36/shell:21/other:2/json:2/yml:1/toml:1
 
 HOTSPOTS[10]:
+  ★ compile_uri_to_actions fan=30  // Orchestrates 30 calls
   ★ write_environment_map fan=27  // Generate ``.nlp2dsl/registry/environment.*`` with desktop URI mapping.
 
 Same pip
-  ★ compile_uri_to_actions fan=24  // Orchestrates 24 calls
   ★ build_parser fan=22  // Orchestrates 22 calls
   ★ main fan=21  // Orchestrates 21 calls
   ★ build_getv_uri_index fan=20  // Build UriMap from ~/.getv profile tree.
 
 REFACTOR[15]:
   [1] H/L Split compile_uri_to_control_plan (CC=25)
-  [2] H/H Split god module src/nlp2uri/compile.py (662L, 0 classes)
+  [2] H/H Split god module src/nlp2uri/compile.py (672L, 0 classes)
   [3] H/H Split god module src/nlp2uri/control_cli.py (523L, 0 classes)
-  [4] H/H Split god module src/nlp2uri/parse_nl.py (540L, 0 classes)
+  [4] H/H Split god module src/nlp2uri/parse_nl.py (611L, 0 classes)
   [5] H/H Split god module goal.yaml (511L, 0 classes)
 
 EVOLUTION:
-  2026-06-08 CC̄=3.6 crit=28 17917L // Automated analysis
+  2026-06-21 CC̄=3.7 crit=32 19102L // Automated analysis

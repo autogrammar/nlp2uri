@@ -13,7 +13,7 @@ _IDE_NAME = r"(?:cursor|vscode|code|windsurf|jetbrains|pycharm|zed|ide)"
 _ABSOLUTE_URI_RE = re.compile(
     r"^(?:https?|file|mailto|tel|sms|cursor|vscode|vscode-insiders|"
     r"ms-settings|x-apple\.systempreferences|nlp2uri|app|desktop-screenshot|desktop-window|"
-    r"ide-chat|ide-command|koru-control|hillm|gillm|tillm)://\S+",
+    r"ide-chat|ide-command|koru-control|hillm|gillm|tillm|vql)://\S+",
     re.IGNORECASE,
 )
 _PATH_RE = re.compile(r"(?:^|[\s'\"])(/?(?:[\w.\-~]+/)+[\w.\-~]+)")
@@ -189,11 +189,12 @@ def _parse_absolute_uri(raw: str, _lowered: str) -> UriIntent | None:
         return None
     parsed = urlparse(raw)
     scheme = parsed.scheme.lower()
-    if scheme in {"hillm", "gillm", "tillm"}:
+    if scheme in {"hillm", "gillm", "tillm", "vql"}:
         kind_map = {
             "hillm": IntentKind.HILLM,
             "gillm": IntentKind.GILLM,
             "tillm": IntentKind.TILLM,
+            "vql": IntentKind.VQL,
         }
         return UriIntent(
             kind=kind_map[scheme],
@@ -511,6 +512,29 @@ def _parse_open_prefix(raw: str, lowered: str) -> UriIntent | None:
     )
 
 
+def _parse_vql_delegate(raw: str, _lowered: str) -> UriIntent | None:
+    from nlp2uri.delegates.vql_bridge import resolve_vql_prompt
+
+    hit = resolve_vql_prompt(raw)
+    if not hit:
+        return None
+    mode, payload = hit
+    params: dict[str, str] = {"domain": "vql", "mode": mode}
+    if mode == "uri":
+        params["uri"] = payload
+        target = payload
+    else:
+        params["dsl"] = payload
+        target = f"vql://dsl?line={payload}"
+    return UriIntent(
+        kind=IntentKind.VQL,
+        target=target,
+        params=params,
+        raw_text=raw,
+        confidence=0.88,
+    )
+
+
 def _parse_llm_delegate(raw: str, _lowered: str) -> UriIntent | None:
     from nlp2uri.delegates.llm_bridge import resolve_llm_prompt
 
@@ -563,6 +587,7 @@ _PARSERS: tuple[Callable[[str, str], UriIntent | None], ...] = (
     _parse_settings_panel,
     _parse_settings,
     _parse_window_move,
+    _parse_vql_delegate,
     _parse_active_window,
     _parse_capture,
     _parse_focus,

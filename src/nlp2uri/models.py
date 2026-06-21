@@ -28,6 +28,7 @@ class IntentKind(str, Enum):
     HILLM = "hillm"
     GILLM = "gillm"
     TILLM = "tillm"
+    VQL = "vql"
 
 
 INTENT_NAMES: dict[IntentKind, str] = {
@@ -44,6 +45,7 @@ INTENT_NAMES: dict[IntentKind, str] = {
     IntentKind.HILLM: "hillm_control",
     IntentKind.GILLM: "gillm_control",
     IntentKind.TILLM: "tillm_control",
+    IntentKind.VQL: "vql_control",
 }
 
 CONTROL_COMMAND_VERSION = "koru.control.v1"

@@ -6,7 +6,7 @@ from urllib.parse import urlparse
 
 from nlp2uri.models import HostPlatform, IntentKind, UriIntent, UriSpec
 from nlp2uri.platform_detect import detect_platform
-from nlp2uri.schemes import desktop, file as file_scheme, http as http_scheme, ide, llm_control
+from nlp2uri.schemes import desktop, file as file_scheme, http as http_scheme, ide, llm_control, vql_control
 
 
 def build_uri(intent: UriIntent, *, platform: HostPlatform | None = None) -> UriSpec:
@@ -44,6 +44,9 @@ def build_uri(intent: UriIntent, *, platform: HostPlatform | None = None) -> Uri
 
     if intent.kind == IntentKind.TILLM:
         return llm_control.build_llm_control(intent, domain="tillm")
+
+    if intent.kind == IntentKind.VQL:
+        return vql_control.build_vql_control(intent)
 
     if intent.kind == IntentKind.IDE_OPEN:
         return ide.build_ide(intent.with_params(path=intent.params.get("path") or intent.target))

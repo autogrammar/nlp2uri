@@ -2,7 +2,7 @@
 
 app {
   name: nlp2uri;
-  version: 0.4.14;
+  version: 0.4.15;
 }
 
 dependencies {
@@ -12,6 +12,7 @@ dependencies {
   windows: "pywin32>=306; sys_platform == 'win32'";
   full: psutil>=6.0;
   envmap: "env2llm>=0.1.4, getv>=0.2.0, nlp2env>=0.1.2";
+  vql: "uri2vql>=0.1.0, nlp2vql>=0.1.0, dsl2vql>=0.1.0";
   codegen: "pyyaml>=6.0, grpcio-tools>=1.60, protobuf>=4.25";
 }
 
@@ -27,6 +28,11 @@ interface[type="cli"] {
 }
 interface[type="cli"] page[name="nlp2uri"] {
   entry: nlp2uri.cli:main;
+}
+
+interface[type="web"] {
+  type: spa;
+  framework: static;
 }
 
 integration[name="email"] {

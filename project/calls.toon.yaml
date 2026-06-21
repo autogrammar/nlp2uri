@@ -1,7 +1,7 @@
 # code2llm call graph | /home/tom/github/semcod/nlp2uri
 # generated in 0.24s
-# nodes: 343 | edges: 486 | modules: 60
-# CC̄=3.6
+# nodes: 356 | edges: 500 | modules: 70
+# CC̄=3.7
 
 HUBS[20]:
   src.nlp2uri.control_compile.compile_uri_to_control_plan
@@ -10,16 +10,20 @@ HUBS[20]:
     CC=1  in:1  out:52  total:53
   src.nlp2uri.systemmap.koru_ide.build_koru_ide_uri_index
     CC=22  in:2  out:50  total:52
+  examples.resolve.new-intents.e2e.print
+    CC=0  in:49  out:0  total:49
   src.nlp2uri.compile.compile_uri_to_actions
-    CC=22  in:5  out:26  total:31
-  scripts.test-cqrs-smoke.print
-    CC=0  in:31  out:0  total:31
+    CC=24  in:7  out:31  total:38
+  examples.vql.screenshot-describe.main.main
+    CC=5  in:0  out:37  total:37
   src.nlp2uri.host.resource.build_resource_actions
     CC=14  in:2  out:29  total:31
   src.nlp2uri.control_cli.action_control_execute
     CC=18  in:1  out:29  total:30
   src.nlp2uri.systemmap.export.write_environment_map
     CC=9  in:1  out:29  total:30
+  src.nlp2uri.schemes.build.build_uri
+    CC=23  in:2  out:26  total:28
   src.nlp2uri.systemmap.index._add_entry
     CC=3  in:24  out:4  total:28
   src.nlp2uri.systemmap.getv_uri.build_getv_uri_index
@@ -28,8 +32,6 @@ HUBS[20]:
     CC=9  in:21  out:5  total:26
   src.nlp2uri.systemmap.resolve._match_command_entry
     CC=16  in:1  out:24  total:25
-  src.nlp2uri.schemes.build.build_uri
-    CC=19  in:2  out:22  total:24
   src.nlp2uri.systemmap.encode.encode_segment
     CC=1  in:22  out:1  total:23
   src.nlp2uri.host.artifact.resolve_artifact_path
@@ -38,20 +40,29 @@ HUBS[20]:
     CC=11  in:0  out:23  total:23
   src.nlp2uri.systemmap.index.build_uri_index
     CC=6  in:5  out:17  total:22
-  src.nlp2uri.control_cli.add_control_parser
-    CC=1  in:1  out:20  total:21
   src.nlp2uri.control_cli._finalize_control_plan_payload
     CC=12  in:2  out:19  total:21
-  src.nlp2uri.systemmap.uri._get
-    CC=4  in:15  out:5  total:20
+  src.nlp2uri.control_cli.add_control_parser
+    CC=1  in:1  out:20  total:21
 
 MODULES:
+  examples.delegate.llm-control.main  [1 funcs]
+    main  CC=3  out:5
   examples.execute.dry-run.main  [1 funcs]
     main  CC=3  out:7
+  examples.hillm.compile-uri.main  [1 funcs]
+    main  CC=3  out:11
+  examples.hillm.dry-run.main  [1 funcs]
+    main  CC=3  out:5
   examples.mcp.tool-handoff.main  [1 funcs]
     main  CC=2  out:8
+  examples.resolve.new-intents.e2e  [1 funcs]
+    print  CC=0  out:0
   examples.resolve.nl-to-uri.main  [1 funcs]
     main  CC=3  out:5
+  examples.vql.screenshot-describe.main  [2 funcs]
+    _write_test_image  CC=3  out:5
+    main  CC=5  out:37
   schemas.codegen.export_driver_stubs  [1 funcs]
     main  CC=11  out:23
   schemas.codegen.export_mcp_schemas  [1 funcs]
@@ -72,8 +83,6 @@ MODULES:
     main  CC=4  out:14
     openapi_yaml  CC=1  out:2
     queries_proto  CC=1  out:3
-  scripts.test-cqrs-smoke  [1 funcs]
-    print  CC=0  out:0
   src.nlp2uri.adapters.base  [1 funcs]
     __init__  CC=2  out:2
   src.nlp2uri.adapters.mcp  [4 funcs]
@@ -162,6 +171,8 @@ MODULES:
     probe  CC=2  out:4
   src.nlp2uri.cqrs.drivers.getv_cli  [1 funcs]
     compile  CC=2  out:4
+  src.nlp2uri.cqrs.drivers.gillm_uri2gillm  [1 funcs]
+    compile  CC=3  out:6
   src.nlp2uri.cqrs.drivers.resource_probe  [1 funcs]
     compile  CC=5  out:6
   src.nlp2uri.cqrs.drivers.runtime_curl  [1 funcs]
@@ -183,6 +194,10 @@ MODULES:
     __init__  CC=2  out:3
     get_driver  CC=8  out:8
     default_registry  CC=1  out:2
+  src.nlp2uri.delegates.llm_bridge  [1 funcs]
+    resolve_llm_prompt  CC=3  out:1
+  src.nlp2uri.delegates.vql_bridge  [1 funcs]
+    resolve_vql_prompt  CC=5  out:4
   src.nlp2uri.desktop_apps  [5 funcs]
     _exact_desktop_match  CC=3  out:1
     _fuzzy_desktop_match  CC=3  out:2
@@ -218,7 +233,7 @@ MODULES:
   src.nlp2uri.mcp  [2 funcs]
     mcp_handoff_payload  CC=2  out:4
     tool_resolve_desktop_action  CC=2  out:2
-  src.nlp2uri.parse_nl  [21 funcs]
+  src.nlp2uri.parse_nl  [23 funcs]
     _bool_param  CC=2  out:0
     _capture_target  CC=4  out:2
     _normalize_aliases  CC=2  out:3
@@ -227,7 +242,7 @@ MODULES:
     _normalize_panel  CC=1  out:3
     _parse_app_open  CC=2  out:4
     _parse_capture  CC=6  out:8
-    _parse_fallback  CC=1  out:1
+    _parse_fallback  CC=4  out:5
     _parse_file_open  CC=2  out:4
   src.nlp2uri.platform_detect  [1 funcs]
     detect_platform  CC=5  out:1
@@ -242,7 +257,7 @@ MODULES:
     execute_uri  CC=9  out:15
   src.nlp2uri.schemes.build  [2 funcs]
     _build_navigate  CC=4  out:5
-    build_uri  CC=19  out:22
+    build_uri  CC=23  out:26
   src.nlp2uri.schemes.desktop  [6 funcs]
     build_app_open  CC=3  out:5
     build_capture  CC=5  out:5
@@ -273,7 +288,7 @@ MODULES:
     handle_prompt  CC=13  out:14
     list_getv_uris  CC=3  out:5
     list_koru_ide_uris  CC=1  out:3
-  src.nlp2uri.systemmap.compile  [10 funcs]
+  src.nlp2uri.systemmap.compile  [9 funcs]
     _backend_url  CC=1  out:2
     _compile_access  CC=2  out:5
     _compile_artifact  CC=2  out:1
@@ -283,7 +298,6 @@ MODULES:
     _compile_runtime  CC=12  out:18
     _decode_segment  CC=2  out:1
     compile_system_map_uri  CC=8  out:10
-    is_system_map_uri  CC=1  out:2
   src.nlp2uri.systemmap.context  [2 funcs]
     _coerce_ir  CC=2  out:2
     load_ir_from_arguments  CC=8  out:16
@@ -314,6 +328,11 @@ MODULES:
     resolve_prompt_against_getv  CC=13  out:18
     uri_for_getv_profile  CC=1  out:2
     uri_for_getv_var  CC=1  out:3
+  src.nlp2uri.systemmap.gillm_uri  [2 funcs]
+    compile_gillm_uri  CC=3  out:4
+    is_gillm_uri  CC=2  out:3
+  src.nlp2uri.systemmap.hillm_uri  [1 funcs]
+    is_hillm_uri  CC=2  out:3
   src.nlp2uri.systemmap.index  [18 funcs]
     _add_entry  CC=3  out:4
     _get_id  CC=1  out:1
@@ -342,6 +361,8 @@ MODULES:
     _name_variants  CC=6  out:8
     _normalize_token  CC=1  out:5
     resolve_prompt_against_system_map  CC=4  out:6
+  src.nlp2uri.systemmap.tillm_uri  [1 funcs]
+    is_tillm_uri  CC=2  out:3
   src.nlp2uri.systemmap.uri  [16 funcs]
     _get  CC=4  out:5
     _get_list  CC=5  out:4
@@ -359,9 +380,9 @@ EDGES:
   schemas.codegen.fix_proto_imports.fix_driver → schemas.codegen.fix_proto_imports._pascal
   schemas.codegen.fix_proto_imports.main → schemas.codegen.fix_proto_imports.fix_api
   schemas.codegen.fix_proto_imports.main → schemas.codegen.fix_proto_imports.fix_driver
-  schemas.codegen.fix_proto_imports.main → scripts.test-cqrs-smoke.print
-  schemas.codegen.export_mcp_schemas.main → scripts.test-cqrs-smoke.print
-  schemas.codegen.export_driver_stubs.main → scripts.test-cqrs-smoke.print
+  schemas.codegen.fix_proto_imports.main → examples.resolve.new-intents.e2e.print
+  schemas.codegen.export_mcp_schemas.main → examples.resolve.new-intents.e2e.print
+  schemas.codegen.export_driver_stubs.main → examples.resolve.new-intents.e2e.print
   schemas.codegen.scaffold_scheme.aggregate_proto → schemas.codegen.scaffold_scheme._proto_package
   schemas.codegen.scaffold_scheme.aggregate_proto → schemas.codegen.scaffold_scheme._pascal
   schemas.codegen.scaffold_scheme.commands_proto → schemas.codegen.scaffold_scheme._proto_package
@@ -384,15 +405,15 @@ EDGES:
   schemas.codegen.scaffold_scheme.scaffold_scheme → schemas.codegen.scaffold_scheme.api_proto
   schemas.codegen.scaffold_scheme.scaffold_scheme → schemas.codegen.scaffold_scheme.openapi_yaml
   schemas.codegen.scaffold_scheme.scaffold_scheme → schemas.codegen.scaffold_scheme.readme_md
-  schemas.codegen.scaffold_scheme.main → scripts.test-cqrs-smoke.print
-  examples.mcp.tool-handoff.main.main → scripts.test-cqrs-smoke.print
+  schemas.codegen.scaffold_scheme.main → examples.resolve.new-intents.e2e.print
+  examples.mcp.tool-handoff.main.main → examples.resolve.new-intents.e2e.print
   examples.mcp.tool-handoff.main.main → src.nlp2uri.mcp.mcp_handoff_payload
   examples.mcp.tool-handoff.main.main → src.nlp2uri.mcp.tool_resolve_desktop_action
   examples.execute.dry-run.main.main → src.nlp2uri.resolve.nlp2uri
   examples.execute.dry-run.main.main → src.nlp2uri.compile.compile_uri_to_actions
-  examples.execute.dry-run.main.main → scripts.test-cqrs-smoke.print
+  examples.execute.dry-run.main.main → examples.resolve.new-intents.e2e.print
   examples.resolve.nl-to-uri.main.main → src.nlp2uri.resolve.nlp2uri
-  examples.resolve.nl-to-uri.main.main → scripts.test-cqrs-smoke.print
+  examples.resolve.nl-to-uri.main.main → examples.resolve.new-intents.e2e.print
   src.nlp2uri.runtime.execute_uri → src.nlp2uri.config.get_effective_platform
   src.nlp2uri.runtime.execute_uri → src.nlp2uri.compile.compile_uri_to_actions
   src.nlp2uri.config.NLP2URIConfig.resolved_platform → src.nlp2uri.platform_detect.detect_platform

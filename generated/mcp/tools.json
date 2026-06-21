@@ -288,6 +288,38 @@
     }
   },
   {
+    "name": "nlp2uri_vql_handle",
+    "description": "CQRS handle for vql:// URIs (vql://{selector}?file={path})",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "description": "vql://\u2026"
+        },
+        "prompt": {
+          "type": "string",
+          "description": "NL resolve alternative"
+        },
+        "platform": {
+          "type": "string",
+          "enum": [
+            "linux",
+            "darwin",
+            "windows"
+          ]
+        },
+        "dry_run": {
+          "type": "boolean",
+          "default": true
+        },
+        "config": {
+          "type": "object"
+        }
+      }
+    }
+  },
+  {
     "name": "nlp2uri_getv_handle",
     "description": "CQRS handle for getv:// URIs (getv://{category}/{profile}/{var})",
     "inputSchema": {

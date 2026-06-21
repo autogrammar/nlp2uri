@@ -1,20 +1,21 @@
-# code2llm | 303f 17917L | proto:162,python:84,yaml:36,shell:15,json:2,yml:1,toml:1 | 2026-06-08
-# generated in 0.14s
-# CC̅=3.6 | critical:7/478 | dups:0 | cycles:0
+# code2llm | 324f 19102L | proto:162,python:99,yaml:36,shell:21,json:2,yml:1,toml:1 | 2026-06-21
+# generated in 0.07s
+# CC̅=3.7 | critical:8/524 | dups:0 | cycles:0
 
-HEALTH[7]:
-  🟡 CC    to_slots CC=15 (limit:15)
-  🟡 CC    build_uri CC=19 (limit:15)
-  🟡 CC    build_koru_ide_uri_index CC=22 (limit:15)
-  🟡 CC    _match_command_entry CC=16 (limit:15)
-  🟡 CC    compile_uri_to_actions CC=22 (limit:15)
+HEALTH[8]:
   🟡 CC    compile_uri_to_control_plan CC=25 (limit:15)
   🟡 CC    action_control_execute CC=18 (limit:15)
+  🟡 CC    build_koru_ide_uri_index CC=22 (limit:15)
+  🟡 CC    _match_command_entry CC=16 (limit:15)
+  🟡 CC    compile_uri_to_actions CC=24 (limit:15)
+  🟡 CC    to_slots CC=15 (limit:15)
+  🟡 CC    build_uri CC=23 (limit:15)
+  🟡 CC    _fallback_hillm_to_dsl CC=17 (limit:15)
 
 REFACTOR[1]:
-  1. split 7 high-CC methods  (CC>15)
+  1. split 8 high-CC methods  (CC>15)
 
-PIPELINES[190]:
+PIPELINES[206]:
   [1] Src [main]: main → fix_api → _pascal
       PURITY: 100% pure
   [2] Src [main]: main → print
@@ -43,94 +44,95 @@ PIPELINES[190]:
       PURITY: 100% pure
   [14] Src [tool_execute_desktop_uri]: tool_execute_desktop_uri
       PURITY: 100% pure
-  [15] Src [_parse_absolute_uri]: _parse_absolute_uri
+  [15] Src [main]: main → _dispatch_command → ensure_config → find_config_path → ...(1 more)
       PURITY: 100% pure
-  [16] Src [_parse_http_url]: _parse_http_url
+  [16] Src [desktop_id_for_app]: desktop_id_for_app → desktop_id_candidate_names
       PURITY: 100% pure
-  [17] Src [_parse_ide_project]: _parse_ide_project → _strip_quotes
+  [17] Src [default]: default → ensure_config → find_config_path → config_search_paths
       PURITY: 100% pure
-  [18] Src [_parse_ide_chat_send]: _parse_ide_chat_send → _strip_quotes
+  [18] Src [for_platform]: for_platform → load_config → find_config_path → config_search_paths
       PURITY: 100% pure
-  [19] Src [_parse_ide_status]: _parse_ide_status → _normalize_ide_name
+  [19] Src [_cfg]: _cfg → load_config → find_config_path → config_search_paths
       PURITY: 100% pure
-  [20] Src [_parse_ide_command]: _parse_ide_command → _normalize_ide_name
+  [20] Src [_host]: _host → get_effective_platform → load_config → find_config_path → ...(1 more)
       PURITY: 100% pure
-  [21] Src [_parse_file_open]: _parse_file_open → _strip_quotes
+  [21] Src [from_prompt]: from_prompt → nlp2uri → get_effective_platform → load_config → ...(2 more)
       PURITY: 100% pure
-  [22] Src [_parse_settings_panel]: _parse_settings_panel → _normalize_panel
+  [22] Src [resolve]: resolve → resolve_text → parse_text → _normalize_aliases
       PURITY: 100% pure
-  [23] Src [_parse_terminal]: _parse_terminal → _strip_quotes
+  [23] Src [compile]: compile → compile_uri_to_actions → _query_params
       PURITY: 100% pure
-  [24] Src [_parse_window_move]: _parse_window_move
+  [24] Src [execute]: execute → execute_uri → get_effective_platform → load_config → ...(2 more)
       PURITY: 100% pure
-  [25] Src [_parse_settings]: _parse_settings
+  [25] Src [handle_prompt]: handle_prompt → is_control_uri
       PURITY: 100% pure
-  [26] Src [_parse_active_window]: _parse_active_window
+  [26] Src [handle_uri]: handle_uri
       PURITY: 100% pure
-  [27] Src [_parse_capture]: _parse_capture → _strip_quotes
+  [27] Src [list_koru_ide_uris]: list_koru_ide_uris → build_koru_ide_uri_index → abstract_url
       PURITY: 100% pure
-  [28] Src [_parse_focus]: _parse_focus
+  [28] Src [list_system_uris]: list_system_uris → build_uri_index → _index_runtimes → _ir_field
       PURITY: 100% pure
-  [29] Src [_parse_app_open]: _parse_app_open → _normalize_app_name
+  [29] Src [resolve_system_map]: resolve_system_map → resolve_prompt_against_system_map → _normalize_token
       PURITY: 100% pure
-  [30] Src [_parse_path]: _parse_path → _strip_quotes
+  [30] Src [list_getv_uris]: list_getv_uris → build_getv_uri_index → getv_home
       PURITY: 100% pure
-  [31] Src [_parse_open_prefix]: _parse_open_prefix → _normalize_app_name
+  [31] Src [resolve_getv]: resolve_getv → resolve_prompt_against_getv → build_getv_uri_index → getv_home
       PURITY: 100% pure
-  [32] Src [desktop_id_for_app]: desktop_id_for_app → desktop_id_candidate_names
+  [32] Src [read_getv_var]: read_getv_var → get_getv_var_value → _decode_segment
       PURITY: 100% pure
-  [33] Src [with_params]: with_params
+  [33] Src [resolve_env]: resolve_env
       PURITY: 100% pure
-  [34] Src [to_slots]: to_slots
+  [34] Src [materialize_env]: materialize_env
       PURITY: 100% pure
-  [35] Src [to_dict]: to_dict
+  [35] Src [__getattr__]: __getattr__
       PURITY: 100% pure
-  [36] Src [to_dict]: to_dict
+  [36] Src [_read_json]: _read_json
       PURITY: 100% pure
-  [37] Src [to_dict]: to_dict
+  [37] Src [_send]: _send
       PURITY: 100% pure
-  [38] Src [to_dict]: to_dict
+  [38] Src [do_GET]: do_GET
       PURITY: 100% pure
-  [39] Src [to_dict]: to_dict
+  [39] Src [do_POST]: do_POST
       PURITY: 100% pure
-  [40] Src [to_dict]: to_dict
+  [40] Src [main]: main → run_server → ensure_config → find_config_path → ...(1 more)
       PURITY: 100% pure
-  [41] Src [__getattr__]: __getattr__
+  [41] Src [main]: main → run_stdio → ensure_config → find_config_path → ...(1 more)
       PURITY: 100% pure
-  [42] Src [_read_json]: _read_json
+  [42] Src [_result]: _result
       PURITY: 100% pure
-  [43] Src [_send]: _send
+  [43] Src [_dry]: _dry
       PURITY: 100% pure
-  [44] Src [do_GET]: do_GET
+  [44] Src [_run]: _run
       PURITY: 100% pure
-  [45] Src [do_POST]: do_POST
+  [45] Src [_first_available]: _first_available
       PURITY: 100% pure
-  [46] Src [main]: main → run_server → ensure_config → find_config_path → ...(1 more)
+  [46] Src [_open_with_browser]: _open_with_browser
       PURITY: 100% pure
-  [47] Src [main]: main → run_stdio → ensure_config → find_config_path → ...(1 more)
+  [47] Src [_parse_nlp2uri]: _parse_nlp2uri
       PURITY: 100% pure
-  [48] Src [_result]: _result
+  [48] Src [slugify_app_name]: slugify_app_name
       PURITY: 100% pure
-  [49] Src [_dry]: _dry
+  [49] Src [execute]: execute
       PURITY: 100% pure
-  [50] Src [_run]: _run
+  [50] Src [_open_generic]: _open_generic
       PURITY: 100% pure
 
 LAYERS:
-  src/                            CC̄=3.7    ←in:0  →out:0
-  │ !! compile                    662L  0C   54m  CC=22     ←5
-  │ !! parse_nl                   540L  0C   30m  CC=7      ←1
+  src/                            CC̄=3.8    ←in:0  →out:0
+  │ !! compile                    672L  0C   54m  CC=24     ←7
+  │ !! parse_nl                   611L  0C   32m  CC=7      ←1
   │ !! control_cli                523L  0C   23m  CC=18     ←2
   │ mcp                        462L  1C   21m  CC=6      ←0
   │ index                      351L  2C   23m  CC=7      ←6
+  │ !! llm_bridge                 343L  0C   20m  CC=17     ←1
   │ control_execute            341L  1C   11m  CC=12     ←3
-  │ !! models                     272L  10C   10m  CC=15     ←0
+  │ !! models                     280L  10C   10m  CC=15     ←0
   │ service                    258L  1C   18m  CC=13     ←0
   │ !! control_compile            244L  0C    7m  CC=25     ←5
   │ config                     230L  1C   17m  CC=8      ←7
   │ getv_uri                   225L  1C    9m  CC=14     ←3
-  │ !! resolve                    189L  1C    9m  CC=16     ←2
   │ cli                        189L  0C   12m  CC=7      ←0
+  │ !! resolve                    189L  1C    9m  CC=16     ←2
   │ !! koru_ide                   182L  0C    3m  CC=22     ←1
   │ compile                    179L  0C   11m  CC=12     ←5
   │ desktop                    166L  0C    6m  CC=6      ←0
@@ -150,25 +152,30 @@ LAYERS:
   │ windows                     94L  1C    5m  CC=7      ←0
   │ artifact                    94L  0C    4m  CC=13     ←2
   │ runtime                     93L  0C    2m  CC=9      ←1
+  │ !! build                       91L  0C    2m  CC=23     ←1
   │ rest_server                 90L  1C    7m  CC=4      ←0
   │ container_docker            88L  1C    4m  CC=14     ←0
   │ rest                        87L  1C    4m  CC=14     ←0
+  │ vql_bridge                  85L  0C    4m  CC=12     ←1
   │ mcp                         81L  0C    5m  CC=2      ←1
   │ __init__                    80L  0C    0m  CC=0.0    ←0
-  │ !! build                       79L  0C    2m  CC=19     ←1
   │ resource                    69L  0C    4m  CC=14     ←2
   │ event_store                 67L  2C    5m  CC=3      ←0
   │ shell                       66L  1C    2m  CC=11     ←0
   │ plugins                     64L  0C    3m  CC=7      ←1
   │ desktop_apps                60L  0C    5m  CC=3      ←0
-  │ resolve                     60L  0C    2m  CC=13     ←5
+  │ resolve                     60L  0C    2m  CC=13     ←7
   │ base                        59L  3C    5m  CC=2      ←0
+  │ vql_uri                     56L  0C    2m  CC=8      ←0
   │ cli                         53L  1C    1m  CC=12     ←0
   │ http_store                  52L  1C    3m  CC=3      ←0
   │ fallback                    52L  0C    1m  CC=6      ←1
   │ util                        47L  0C    5m  CC=9      ←6
   │ context                     47L  0C    2m  CC=8      ←1
   │ load                        46L  0C    4m  CC=3      ←3
+  │ hillm_uri                   46L  0C    2m  CC=2      ←2
+  │ tillm_uri                   44L  0C    2m  CC=3      ←2
+  │ gillm_uri                   42L  0C    2m  CC=3      ←2
   │ env_uri                     42L  0C    0m  CC=0.0    ←0
   │ command_curl                39L  1C    2m  CC=5      ←0
   │ resource_probe              35L  1C    2m  CC=5      ←0
@@ -177,19 +184,24 @@ LAYERS:
   │ endpoint_curl               33L  1C    2m  CC=2      ←0
   │ artifact_filesystem         32L  1C    1m  CC=7      ←0
   │ hillm_uri2hillm             31L  1C    1m  CC=3      ←0
+  │ gillm_uri2gillm             31L  1C    1m  CC=3      ←0
+  │ tillm_uri2tillm             31L  1C    1m  CC=3      ←0
+  │ vql_uri2vql                 31L  1C    1m  CC=3      ←0
   │ env_uri2env                 30L  1C    1m  CC=3      ←0
+  │ vql_control                 30L  0C    1m  CC=5      ←0
   │ delegate                    29L  1C    2m  CC=2      ←0
   │ __init__                    29L  0C    0m  CC=0.0    ←0
   │ __init__                    28L  0C    0m  CC=0.0    ←0
   │ getv_cli                    27L  1C    1m  CC=2      ←0
   │ file                        25L  0C    1m  CC=3      ←0
   │ registry                    24L  0C    1m  CC=3      ←0
-  │ hillm_uri                   24L  0C    0m  CC=0.0    ←0
   │ __init__                    22L  0C    1m  CC=3      ←0
   │ http                        22L  0C    1m  CC=4      ←0
+  │ llm_control                 19L  0C    1m  CC=3      ←0
   │ platform_detect             18L  0C    1m  CC=5      ←5
   │ __init__                    17L  0C    0m  CC=0.0    ←0
   │ encode                      15L  0C    2m  CC=1      ←2
+  │ __init__                    15L  0C    0m  CC=0.0    ←0
   │ __init__                    15L  0C    0m  CC=0.0    ←0
   │ __main__                     9L  0C    0m  CC=0.0    ←0
   │ __init__                     8L  0C    0m  CC=0.0    ←0
@@ -198,7 +210,7 @@ LAYERS:
   │
   schemas/                        CC̄=2.4    ←in:0  →out:0
   │ scaffold_scheme            357L  0C   13m  CC=4      ←0
-  │ registry.yaml              218L  0C    0m  CC=0.0    ←0
+  │ registry.yaml              226L  0C    0m  CC=0.0    ←0
   │ export_driver_stubs         97L  0C    1m  CC=11     ←0
   │ fix_proto_imports           83L  0C    4m  CC=4      ←0
   │ driver.proto                70L  0C    0m  CC=0.0    ←0
@@ -395,14 +407,24 @@ LAYERS:
   │ queries.proto               10L  0C    0m  CC=0.0    ←0
   │ queries.proto               10L  0C    0m  CC=0.0    ←0
   │
-  examples/                       CC̄=2.0    ←in:0  →out:0
+  examples/                       CC̄=2.3    ←in:0  →out:0
+  │ main                        71L  0C    2m  CC=5      ←0
   │ main                        46L  0C    1m  CC=3      ←0
-  │ run-e2e.sh                  40L  0C    0m  CC=0.0    ←0
+  │ run-e2e.sh                  43L  0C    0m  CC=0.0    ←0
+  │ main                        41L  0C    1m  CC=3      ←0
+  │ _ensure_vql.sh              38L  0C    1m  CC=0.0    ←0
+  │ main                        37L  0C    1m  CC=3      ←0
+  │ main                        33L  0C    1m  CC=3      ←0
   │ main                        29L  0C    1m  CC=3      ←0
   │ main                        27L  0C    1m  CC=2      ←0
-  │ e2e.sh                      25L  0C    1m  CC=0.0    ←0
+  │ e2e.sh                      25L  0C    1m  CC=0.0    ←15
+  │ e2e.sh                      25L  0C    0m  CC=0.0    ←0
+  │ _ensure_uri2hillm.sh        23L  0C    1m  CC=0.0    ←0
   │ e2e.sh                      23L  0C    0m  CC=0.0    ←0
+  │ e2e.sh                      19L  0C    0m  CC=0.0    ←0
+  │ e2e.sh                      19L  0C    0m  CC=0.0    ←0
   │ e2e.sh                      15L  0C    0m  CC=0.0    ←0
+  │ e2e.sh                      12L  0C    0m  CC=0.0    ←0
   │ e2e.sh                      12L  0C    0m  CC=0.0    ←0
   │ mcp-config.cursor.json      11L  0C    0m  CC=0.0    ←0
   │ e2e.sh                      11L  0C    0m  CC=0.0    ←0
@@ -410,17 +432,17 @@ LAYERS:
   │ e2e.sh                      11L  0C    0m  CC=0.0    ←0
   │ mcp-config.json             10L  0C    0m  CC=0.0    ←0
   │
-  scripts/                        CC̄=0.0    ←in:31  →out:0
+  scripts/                        CC̄=0.0    ←in:0  →out:0
   │ test-live-registry.sh       72L  0C    2m  CC=0.0    ←0
-  │ test-cqrs-smoke.sh          55L  0C    1m  CC=0.0    ←11
+  │ test-cqrs-smoke.sh          55L  0C    1m  CC=0.0    ←0
   │ install-editable.sh         22L  0C    0m  CC=0.0    ←0
   │ testapp-handler.sh           6L  0C    0m  CC=0.0    ←0
   │
   ./                              CC̄=0.0    ←in:0  →out:0
   │ !! planfile.yaml             1319L  0C    0m  CC=0.0    ←0
   │ !! goal.yaml                  511L  0C    0m  CC=0.0    ←0
+  │ pyproject.toml              95L  0C    0m  CC=0.0    ←0
   │ prefact.yaml                94L  0C    0m  CC=0.0    ←0
-  │ pyproject.toml              89L  0C    0m  CC=0.0    ←0
   │ project.sh                  59L  0C    0m  CC=0.0    ←0
   │ Dockerfile                  29L  0C    0m  CC=0.0    ←0
   │ nlp2uri.yaml                 8L  0C    0m  CC=0.0    ←0
@@ -434,16 +456,20 @@ LAYERS:
   │
 
 COUPLING:
-                             scripts       src.nlp2uri  examples.execute      examples.mcp   schemas.codegen  examples.resolve
-           scripts                ──               ←16                ←4                ←4                ←5                ←2  hub
-       src.nlp2uri                16                ──                ←2                ←2                                  ←1  hub
-  examples.execute                 4                 2                ──                                                      
-      examples.mcp                 4                 2                                  ──                                    
-   schemas.codegen                 5                                                                      ──                  
-  examples.resolve                 2                 1                                                                      ──
+                      examples.resolve        src.nlp2uri       examples.vql     examples.hillm   examples.execute       examples.mcp    schemas.codegen  examples.delegate
+   examples.resolve                 ──                  1                ←10                 ←6                 ←4                 ←4                 ←5                 ←2  hub
+        src.nlp2uri                 16                 ──                 ←3                 ←2                 ←2                 ←2                                    ←1  hub
+       examples.vql                 10                  3                 ──                                                                                                 !! fan-out
+     examples.hillm                  6                  2                                    ──                                                                              !! fan-out
+   examples.execute                  4                  2                                                       ──                                                         
+       examples.mcp                  4                  2                                                                          ──                                      
+    schemas.codegen                  5                                                                                                                ──                   
+  examples.delegate                  2                  1                                                                                                                ──
   CYCLES: none
-  HUB: scripts/ (fan-in=31)
-  HUB: src.nlp2uri/ (fan-in=5)
+  HUB: examples.resolve/ (fan-in=47)
+  HUB: src.nlp2uri/ (fan-in=11)
+  SMELL: examples.vql/ fan-out=13 → split needed
+  SMELL: examples.hillm/ fan-out=8 → split needed
   SMELL: src.nlp2uri/ fan-out=16 → split needed
 
 EXTERNAL:
