@@ -4,15 +4,13 @@ from __future__ import annotations
 
 import re
 
-_VQL_RE = re.compile(
-    r"\b("
-    r"vql|vector|narysuj|draw|render|validate|waliduj|wygeneruj|generate|"
-    r"compile|skompiluj|obiekty|objects|scena|scene|program|"
-    r"opisz|opis|describe|summary|podsumowanie|przeanalizuj|analizuj|"
-    r"zrzut|screenshot|capture|przechwyć|przechwyc|adopt|adoptuj"
-    r")\b",
-    re.IGNORECASE,
-)
+# The vql domain is only entered when the prompt explicitly names it (``vql`` or
+# ``vector``). Action words like ``screenshot``/``capture``/``draw``/``describe``
+# decide *which* vql URI is built (see ``_fallback_prompt_to_vql_uri`` / ``best_uri``),
+# but on their own they are plain desktop intents (screenshot, draw, …) and must not
+# be hijacked into vql — otherwise "capture screen" resolves to vql://window/analyze
+# instead of desktop-screenshot://.
+_VQL_RE = re.compile(r"\b(vql|vector)\b", re.IGNORECASE)
 
 
 def prompt_to_vql_uri(prompt: str, *, file: str | None = None) -> str | None:

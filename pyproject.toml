@@ -52,6 +52,14 @@ service-curl = "nlp2uri.cqrs.drivers.service_ops:ServiceCurlDriver"
 service-docker = "nlp2uri.cqrs.drivers.service_ops:ServiceDockerDriver"
 service-systemd = "nlp2uri.cqrs.drivers.service_ops:ServiceSystemdDriver"
 
+# Local monorepo sources for the vql extra (not on PyPI yet — see oqlos/vql).
+# Lets `uv sync`/`goal -au` resolve nlp2uri[vql] from source. Ignored by
+# downstream installs from PyPI, where the >=0.1.0 version specifiers apply.
+[tool.uv.sources]
+uri2vql = { path = "../../oqlos/vql/packages/uri2vql", editable = true }
+nlp2vql = { path = "../../oqlos/vql/packages/nlp2vql", editable = true }
+dsl2vql = { path = "../../oqlos/vql/packages/dsl2vql", editable = true }
+
 [tool.setuptools]
 package-dir = { "" = "src" }
 
