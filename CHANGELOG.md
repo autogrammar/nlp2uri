@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Fixed
+- vql delegation no longer hijacks plain desktop screenshot/capture prompts. The
+  `vql_bridge` gate now requires the explicit `vql`/`vector` domain token, so
+  "capture screen", "zrób screenshot okna Edge", etc. resolve to
+  `desktop-screenshot://` again, while prompts that name vql ("zrób zrzut ekranu
+  vql") still route to `vql://window/...`. Fixes 8 failing resolver/intent tests.
+
+## [0.4.18] - 2026-06-22
+
+### Docs
+- Update CHANGELOG.md
+- Update README.md
+
 ## [0.1.10] - 2026-06-06
 
 ### Fixed
