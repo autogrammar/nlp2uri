@@ -14,6 +14,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `desktop-screenshot://` again, while prompts that name vql ("zrób zrzut ekranu
   vql") still route to `vql://window/...`. Fixes 8 failing resolver/intent tests.
 
+## [0.4.19] - 2026-06-29
+
+### Docs
+- Update README.md
+
 ## [0.4.18] - 2026-06-22
 
 ### Docs
