@@ -3,11 +3,27 @@
 from __future__ import annotations
 
 import json
+import os
 from typing import Any, Callable
 
 from nlp2uri.adapters.base import AdapterRequest, AdapterResponse, BaseAdapter
 from nlp2uri.models import HostPlatform
 from nlp2uri.systemmap.context import load_ir_from_arguments
+
+_EXECUTION_TOOLS = frozenset(
+    {
+        "nlp2uri_execute",
+        "nlp2uri_handle",
+        "nlp2uri_execute_control",
+        "nlp2uri_cqrs_execute",
+    }
+)
+_MCP_EXECUTION_ENV = "NLP2URI_MCP_ALLOW_EXECUTE"
+
+
+def _execution_enabled() -> bool:
+    return os.getenv(_MCP_EXECUTION_ENV, "").strip().lower() in {"1", "true", "yes", "on"}
+
 
 MCP_TOOLS: list[dict[str, Any]] = [
     {
@@ -53,13 +69,13 @@ MCP_TOOLS: list[dict[str, Any]] = [
     },
     {
         "name": "nlp2uri_execute",
-        "description": "Execute a URI on the host (use dry_run in CI).",
+        "description": "Plan URI execution by default; host execution requires server permission.",
         "inputSchema": {
             "type": "object",
             "properties": {
                 "uri": {"type": "string"},
                 "platform": {"type": "string", "enum": ["linux", "darwin", "windows"]},
-                "dry_run": {"type": "boolean", "default": False},
+                "dry_run": {"type": "boolean", "default": True},
             },
             "required": ["uri"],
         },
@@ -99,6 +115,12 @@ MCP_TOOLS: list[dict[str, Any]] = [
                     "description": "nlp2dsl example directory for env2llm introspection.",
                 },
                 "example_id": {"type": "string"},
+                "limit": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 1000,
+                    "default": 100,
+                },
             },
         },
     },
@@ -130,6 +152,12 @@ MCP_TOOLS: list[dict[str, Any]] = [
                 "getv_home": {
                     "type": "string",
                     "description": "Override GETV_HOME (default ~/.getv).",
+                },
+                "limit": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 1000,
+                    "default": 100,
                 },
             },
         },
@@ -214,6 +242,12 @@ MCP_TOOLS: list[dict[str, Any]] = [
                     "description": "Payload from `koru autopilot status --format json`.",
                 },
                 "socket_path": {"type": "string"},
+                "limit": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 1000,
+                    "default": 100,
+                },
             },
             "required": ["status"],
         },
@@ -247,6 +281,20 @@ class McpAdapter(BaseAdapter):
         handler = self.tool_dispatch().get(tool_name)
         if handler is None:
             return AdapterResponse(ok=False, error=f"unknown tool: {tool_name}", status_code=404)
+        if (
+            tool_name in _EXECUTION_TOOLS
+            and not bool(arguments.get("dry_run", True))
+            and not _execution_enabled()
+        ):
+            return AdapterResponse(
+                ok=False,
+                error=(
+                    "MCP host execution is disabled. Use dry_run=true or set "
+                    f"{_MCP_EXECUTION_ENV}=1 before starting the server."
+                ),
+                status_code=403,
+                data={"required_env": _MCP_EXECUTION_ENV},
+            )
         req = self._args_to_request(tool_name, arguments)
         return handler(self, req)
 
@@ -293,15 +341,23 @@ class McpAdapter(BaseAdapter):
             prompt=str(arguments.get("prompt") or ""),
             uri=str(arguments.get("uri") or ""),
             platform=host,
-            dry_run=bool(arguments.get("dry_run", tool_name == "nlp2uri_handle")),
+            dry_run=bool(arguments.get("dry_run", tool_name in _EXECUTION_TOOLS)),
             locale=arguments.get("locale"),
             extra=arguments,
         )
 
     @staticmethod
-    def mcp_content(payload: dict[str, Any], *, uri: str | None = None) -> list[dict[str, Any]]:
+    def mcp_content(
+        payload: dict[str, Any],
+        *,
+        uri: str | None = None,
+        max_chars: int = 50_000,
+    ) -> list[dict[str, Any]]:
+        text = json.dumps(payload, ensure_ascii=False, indent=2)
+        if len(text) > max_chars:
+            text = text[:max_chars] + "\n... MCP response truncated ..."
         content: list[dict[str, Any]] = [
-            {"type": "text", "text": json.dumps(payload, ensure_ascii=False, indent=2)},
+            {"type": "text", "text": text},
         ]
         resolved = uri or payload.get("uri")
         if resolved:
@@ -313,6 +369,36 @@ class McpAdapter(BaseAdapter):
                 }
             )
         return content
+
+    @staticmethod
+    def _limit_index_payload(payload: dict[str, Any], raw_limit: Any) -> dict[str, Any]:
+        limit = max(1, min(int(raw_limit or 100), 1000))
+        total = int(payload.get("count") or 0)
+        entries = payload.get("entries")
+        allowed_uris: set[str] = set()
+        if isinstance(entries, list):
+            payload["entries"] = entries[:limit]
+            allowed_uris = {
+                str(item.get("uri"))
+                for item in payload["entries"]
+                if isinstance(item, dict) and item.get("uri")
+            }
+        elif isinstance(entries, dict):
+            selected = list(entries.items())[:limit]
+            payload["entries"] = dict(selected)
+            allowed_uris = {str(uri) for uri, _item in selected}
+
+        by_name = payload.get("by_name")
+        if isinstance(by_name, dict) and allowed_uris:
+            payload["by_name"] = {
+                name: [uri for uri in uris if uri in allowed_uris]
+                for name, uris in by_name.items()
+                if isinstance(uris, list) and any(uri in allowed_uris for uri in uris)
+            }
+        returned = len(payload.get("entries") or [])
+        payload["returned_count"] = returned
+        payload["truncated"] = total > returned
+        return payload
 
     def _tool_plan(self, req: AdapterRequest) -> AdapterResponse:
         svc = self._service_for(req)
@@ -357,6 +443,7 @@ class McpAdapter(BaseAdapter):
             return AdapterResponse(ok=False, error=str(exc), status_code=400)
         svc = self._service_for(req)
         payload = svc.list_system_uris(ir)
+        self._limit_index_payload(payload, req.extra.get("limit"))
         payload["mcp_content"] = self.mcp_content(payload)
         return AdapterResponse(ok=True, data=payload)
 
@@ -378,6 +465,7 @@ class McpAdapter(BaseAdapter):
     def _tool_list_getv_uris(self, req: AdapterRequest) -> AdapterResponse:
         svc = self._service_for(req)
         payload = svc.list_getv_uris(getv_home=req.extra.get("getv_home"))
+        self._limit_index_payload(payload, req.extra.get("limit"))
         payload["mcp_content"] = self.mcp_content(payload)
         return AdapterResponse(ok=True, data=payload)
 
@@ -428,6 +516,7 @@ class McpAdapter(BaseAdapter):
             status,
             socket_path=str(req.extra.get("socket_path") or ""),
         )
+        self._limit_index_payload(payload, req.extra.get("limit"))
         payload["mcp_content"] = self.mcp_content(payload)
         return AdapterResponse(ok=True, data=payload)
 

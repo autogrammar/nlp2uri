@@ -84,7 +84,9 @@ URI → komendy OS.
 
 ### `nlp2uri_execute`
 
-Wykonaj URI (w CI używaj `dry_run: true`).
+Zaplanuj wykonanie URI. `dry_run` domyślnie wynosi `true`; wykonanie na hoście
+z `dry_run: false` wymaga uruchomienia serwera z
+`NLP2URI_MCP_ALLOW_EXECUTE=1`.
 
 ```json
 {
@@ -200,7 +202,8 @@ Te same operacje przez `koru_desktop_uri_*` gdy agent ma tylko serwer koru:
 
 1. Agent woła `nlp2uri_plan` → dostaje `desktop-screenshot://window?title=Edge&mode=active`
 2. Host przekazuje URI do `mcp-desktop-pro` lub lokalnego executora
-3. Alternatywnie `nlp2uri_execute` z `dry_run: false` na zaufanym hoście
+3. Alternatywnie `nlp2uri_execute` z `dry_run: false` na zaufanym hoście,
+   jeśli serwer ma `NLP2URI_MCP_ALLOW_EXECUTE=1`
 
 ## Smoke test
 

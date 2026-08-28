@@ -167,6 +167,10 @@ curl -s -X POST http://127.0.0.1:8766/v1/plan \
 
 Tools: `nlp2uri_plan`, `nlp2uri_resolve`, `nlp2uri_compile`, `nlp2uri_execute`, `nlp2uri_handle`.
 
+Narzędzia wykonawcze MCP domyślnie tylko planują operacje (`dry_run: true`).
+Uruchom serwer z `NLP2URI_MCP_ALLOW_EXECUTE=1`, aby zezwolić zaufanym klientom
+na jawne wywołania z `dry_run: false`.
+
 ### Shell
 
 ```bash

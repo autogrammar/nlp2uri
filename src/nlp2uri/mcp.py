@@ -41,7 +41,7 @@ def tool_execute_desktop_uri(
     uri: str,
     *,
     platform: HostPlatform | None = None,
-    dry_run: bool = False,
+    dry_run: bool = True,
 ) -> dict[str, Any]:
     args = {"uri": uri, "dry_run": dry_run}
     if platform is not None:

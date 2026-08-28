@@ -10,7 +10,7 @@ from typing import Any
 
 from nlp2uri import __version__
 from nlp2uri.adapters.mcp import MCP_TOOLS, McpAdapter
-from nlp2uri.config import ensure_config, load_config
+from nlp2uri.config import load_config
 
 _PROTOCOL_VERSION = "2024-11-05"
 _SERVER_NAME = "nlp2uri"
@@ -66,11 +66,13 @@ def _handle_tools_call(params: dict[str, Any], *, adapter: McpAdapter) -> dict[s
             ),
         }
     except Exception as exc:
+        _log(f"nlp2uri tool error in {tool_name}: {type(exc).__name__}: {exc}")
+        traceback.print_exc(file=sys.stderr)
         return {
             "content": [
                 {
                     "type": "text",
-                    "text": f"Error in {tool_name}: {exc}\n{traceback.format_exc()}",
+                    "text": f"Error in {tool_name}: {type(exc).__name__}: {exc}",
                 }
             ],
             "isError": True,
@@ -98,7 +100,6 @@ def handle_message(msg: dict[str, Any], *, adapter: McpAdapter) -> dict[str, Any
 
 
 def run_stdio(*, adapter: McpAdapter | None = None) -> int:
-    ensure_config()
     adapter = adapter or McpAdapter()
     cfg = load_config()
     _log(f"nlp2uri mcp-server: started (stdio, platform={cfg.resolved_platform().value})")
