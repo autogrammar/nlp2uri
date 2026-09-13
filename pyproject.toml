@@ -24,8 +24,8 @@ full = ["psutil>=6.0"]
 envmap = ["env2llm>=0.1.4", "getv>=0.2.0", "nlp2env>=0.1.2"]
 # uri2hillm / dsl2hillm / hillm are not on PyPI yet (see semcod/hillm monorepo).
 # Install from source when needed: pip install ../hillm/packages/uri2hillm
-# uri2vql / nlp2vql / dsl2vql are not on PyPI yet (see oqlos/vql monorepo).
-# Install from source when needed: pip install ../../oqlos/vql/packages/uri2vql
+# uri2vql / nlp2vql / dsl2vql are not on PyPI yet (see autogrammar/vql monorepo).
+# Install from source when needed: pip install ../vql/packages/uri2vql
 vql = ["uri2vql>=0.1.0", "nlp2vql>=0.1.0", "dsl2vql>=0.1.0"]
 koru = []
 codegen = ["pyyaml>=6.0", "grpcio-tools>=1.60", "protobuf>=4.25"]
@@ -52,13 +52,13 @@ service-curl = "nlp2uri.cqrs.drivers.service_ops:ServiceCurlDriver"
 service-docker = "nlp2uri.cqrs.drivers.service_ops:ServiceDockerDriver"
 service-systemd = "nlp2uri.cqrs.drivers.service_ops:ServiceSystemdDriver"
 
-# Local monorepo sources for the vql extra (not on PyPI yet — see oqlos/vql).
+# Local monorepo sources for the vql extra (not on PyPI yet — see autogrammar/vql).
 # Lets `uv sync`/`goal -au` resolve nlp2uri[vql] from source. Ignored by
 # downstream installs from PyPI, where the >=0.1.0 version specifiers apply.
 [tool.uv.sources]
-uri2vql = { path = "../../oqlos/vql/packages/uri2vql", editable = true }
-nlp2vql = { path = "../../oqlos/vql/packages/nlp2vql", editable = true }
-dsl2vql = { path = "../../oqlos/vql/packages/dsl2vql", editable = true }
+uri2vql = { path = "../vql/packages/uri2vql", editable = true }
+nlp2vql = { path = "../vql/packages/nlp2vql", editable = true }
+dsl2vql = { path = "../vql/packages/dsl2vql", editable = true }
 
 [tool.setuptools]
 package-dir = { "" = "src" }
