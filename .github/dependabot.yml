@@ -1,0 +1,37 @@
+version: 2
+updates:
+- package-ecosystem: uv
+  directory: /
+  schedule:
+    interval: cron
+    cronjob: 34 4 * * *
+    timezone: Europe/Warsaw
+  open-pull-requests-limit: 1
+  versioning-strategy: increase-if-necessary
+  allow:
+  - dependency-name: costs
+    dependency-type: all
+  - dependency-name: dsl2vql
+    dependency-type: all
+  - dependency-name: env2llm
+    dependency-type: all
+  - dependency-name: goal
+    dependency-type: all
+  - dependency-name: nlp2env
+    dependency-type: all
+  - dependency-name: nlp2vql
+    dependency-type: all
+  - dependency-name: uri2vql
+    dependency-type: all
+  groups:
+    internal-packages:
+      patterns:
+      - costs
+      - dsl2vql
+      - env2llm
+      - goal
+      - nlp2env
+      - nlp2vql
+      - uri2vql
+  commit-message:
+    prefix: "chore(deps)"
