@@ -54,7 +54,7 @@ def test_resolve_prompt_env_key(getv_home: Path) -> None:
 
 def test_get_var_masked(getv_home: Path) -> None:
     uri = uri_for_getv_var("llm", "groq", "GROQ_API_KEY")
-    out = get_getv_var_value(uri)
+    out = get_getv_var_value(uri, home=getv_home)
     assert out["found"] is True
     assert "gsk_" in out["value_masked"]
     assert "test123456789" not in out["value_masked"]

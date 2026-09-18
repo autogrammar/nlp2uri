@@ -201,7 +201,7 @@ def compile_getv_uri(uri: str, host: HostPlatform) -> list[OSAction]:
     return [OSAction(host, getv_bin, ["export", category, profile, "--format", "env"])]
 
 
-def get_getv_var_value(uri: str) -> dict[str, Any]:
+def get_getv_var_value(uri: str, *, home: Path | None = None) -> dict[str, Any]:
     """Read a getv:// var URI — returns masked value metadata (not raw secrets in logs)."""
     parsed = urlparse(uri)
     category = _decode_segment(parsed.netloc)
@@ -211,7 +211,7 @@ def get_getv_var_value(uri: str) -> dict[str, Any]:
     if not category or not profile or not var_name:
         raise ValueError(f"getv var uri requires category/profile/VAR: {uri}")
 
-    value = load_profile_dict(category, profile).get(var_name)
+    value = load_profile_dict(category, profile, home=home).get(var_name)
     if value is None:
         return {"uri": uri, "found": False, "key": var_name}
 
