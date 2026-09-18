@@ -569,6 +569,13 @@ def _parse_fallback(raw: str, lowered: str) -> UriIntent:
             raw_text=raw,
             confidence=0.3,
         )
+
+    # NL -> DSL -> LLM Intent Compiler (STARTER-022)
+    from nlp2uri.llm_intent import compile_nl_to_intent_llm, parse_intent_grammar_fallback
+    extracted = compile_nl_to_intent_llm(raw) or parse_intent_grammar_fallback(raw)
+    if extracted is not None:
+        return extracted
+
     raise ValueError(
         f"could not resolve prompt to a known intent: {raw!r}. "
         "Try explicit URIs (hillm://, app://, ide-chat://) or rephrase."
