@@ -1,0 +1,23 @@
+{
+  "repository": "autogrammar/nlp2uri",
+  "requiredChecks": [
+    {
+      "name": "test-linux",
+      "workflowFile": ".github/workflows/ci.yml"
+    },
+    {
+      "name": "test-dry-run-matrix",
+      "workflowFile": ".github/workflows/ci.yml"
+    },
+    {
+      "name": "governance / remote lifecycle",
+      "workflowFile": ".github/workflows/new-project-governance.yml"
+    },
+    {
+      "name": "governance / enforce",
+      "workflowFile": ".github/workflows/new-project-governance.yml"
+    }
+  ],
+  "schema": "new-project.required-checks/v1",
+  "version": 1
+}

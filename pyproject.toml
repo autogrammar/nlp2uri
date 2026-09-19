@@ -67,7 +67,7 @@ where = ["src"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-addopts = "-q"
+addopts = "-p wellmanifest_governance -q"
 markers = [
     "integration: Linux x-scheme-handler tests (set NLP2URI_INTEGRATION=1)",
 ]
@@ -84,3 +84,8 @@ max_commits = 500
 
 # Cost thresholds for badge colors (USD)
 badge_color_thresholds = { low = 1.0, medium = 5.0, high = 10.0, critical = 50.0 }
+
+[tool.wellmanifest]
+standard = "0.20.35"
+revision = "cfaa0bf0ea6b0e7349fed0bb62b5ce15792d687d"
+gate = "project/governance-check.sh"
