@@ -1,6 +1,6 @@
 services:
   nlp2uri-test:
     build: .
-    image: nlp2uri:test
+    image: nlp2uri:test@sha256:dbb722b716c6ae245bcd668c83d4187c878c071a85fd1b59d2fb6439a394d550
     environment:
       NLP2URI_CAPTURE_DIR: /tmp/nlp2uri-captures
