@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from pathlib import Path
+
 import pytest
 
 from nlp2uri.compile import compile_uri_to_actions
@@ -106,12 +108,14 @@ def test_service_curl_driver_maps_todomat_health() -> None:
     assert "8083" in result["actions"][0]["args"][1]
 
 
-def test_service_docker_driver_compose_ps() -> None:
+def test_service_docker_driver_compose_ps(tmp_path: Path) -> None:
+    compose_file = tmp_path / "docker-compose.yml"
+    compose_file.write_text("version: '3'\n", encoding="utf-8")
     d = CqrsDispatcher(platform=HostPlatform.LINUX)
     result = d.compile_uri(
         "service://generated/trigger-gateway",
         target="docker",
-        config={"compose_dir": "/home/tom/github/wronai/todomat"},
+        config={"compose_dir": str(tmp_path)},
     )
     assert result["ok"] is True
     argv = result["actions"][0]["argv"]

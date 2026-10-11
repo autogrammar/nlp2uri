@@ -60,18 +60,20 @@ def test_xdg_custom_scheme_handler(tmp_path):
     env["XDG_CONFIG_HOME"] = str(config_home)
     env["NLP2URI_HANDLER_LOG"] = str(log_file)
 
-    subprocess.run(
-        ["xdg-mime", "default", "nlp2uri-testapp.desktop", "x-scheme-handler/testapp"],
-        check=False,
-        env=env,
-        capture_output=True,
-    )
-    subprocess.run(
-        ["update-desktop-database", str(apps_home)],
-        check=False,
-        env=env,
-        capture_output=True,
-    )
+    if shutil.which("xdg-mime"):
+        subprocess.run(
+            ["xdg-mime", "default", "nlp2uri-testapp.desktop", "x-scheme-handler/testapp"],
+            check=False,
+            env=env,
+            capture_output=True,
+        )
+    if shutil.which("update-desktop-database"):
+        subprocess.run(
+            ["update-desktop-database", str(apps_home)],
+            check=False,
+            env=env,
+            capture_output=True,
+        )
 
     uri = "testapp://something?from=nlp2uri-test"
 
