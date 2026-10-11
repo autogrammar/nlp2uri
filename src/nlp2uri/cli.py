@@ -182,6 +182,11 @@ def _dispatch_command(args) -> int:
 
 
 def main(argv: list[str] | None = None) -> int:
+    try:
+        from .autoupdate import check_for_updates
+        check_for_updates("nlp2uri")
+    except Exception:
+        pass
     return _dispatch_command(build_parser().parse_args(argv))
 
 
